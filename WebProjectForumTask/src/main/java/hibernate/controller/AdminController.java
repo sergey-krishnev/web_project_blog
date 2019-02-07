@@ -44,7 +44,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/comments/{commentId}", method = RequestMethod.PUT)
-    public ResponseEntity updateCommentDTO(@RequestBody CommentDTO commentDTO, @PathVariable int commentId) {
+    public ResponseEntity updateCommentDTO(@Valid @RequestBody CommentDTO commentDTO, Errors errors, @PathVariable int commentId) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.updateComment(commentId, commentDTO);
         return ResponseEntity.ok(commentDTO);
     }
