@@ -1,9 +1,11 @@
 package hibernate.fileReader;
 
 import org.apache.log4j.Logger;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -19,7 +21,10 @@ public class ScvReader {
     public ScvReader(String nameFile) throws RuntimeException {
         List<String> dataSubject = null;
         try {
-            dataSubject = Files.readAllLines(Paths.get(getDirectoryPath() + nameFile), StandardCharsets.UTF_8);
+            URL fileUrl = getClass().getResource("/" + nameFile);
+            String stringUrl = fileUrl.getPath();
+            stringUrl = stringUrl.substring(1);
+            dataSubject = Files.readAllLines(Paths.get(stringUrl), StandardCharsets.UTF_8);
 
         } catch (IOException | NumberFormatException e) {
             logger.error("JPA error : " + e.getMessage(), e);
@@ -33,13 +38,4 @@ public class ScvReader {
         public void setBadWords (List<String> badWords) {
             this.badWords = badWords;
         }
-
-    public String getDirectoryPath() {
-        String fullPath = this.getClass().getClassLoader().getResource("").getPath();
-        int index=fullPath.lastIndexOf("target/");
-        fullPath = fullPath.substring(0,index);
-        fullPath = fullPath.substring(1);
-        return fullPath;
-    }
-
 }
