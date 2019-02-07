@@ -12,6 +12,12 @@
 
     <title class="Pathname">Dashboard</title>
 
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
+
     <!-- Bootstrap core CSS-->
     <link href="admin/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
@@ -32,6 +38,7 @@
 
 <a hidden name="url" id="url" href="${pageContext.request.contextPath}/"></a>
 <a type="hidden" id="default-path" href="admin/comments"></a>
+<input type="hidden" id ="lang" value="${pageContext.response.locale}"/>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -40,6 +47,12 @@
         <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
+
+        <span style="float: left">
+        <a href="?lang=en_US">English</a>
+        |
+        <a href="?lang=ru">Russian</a>
+        </span>
 
         <!-- Navbar Search -->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -57,7 +70,7 @@
         <!-- Navbar -->
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle fa-fw"></i>
                 </a>
@@ -307,6 +320,8 @@
                         <label for="messageUpdateCommentsModal">Comment</label>
                         <input name="message" id="messageUpdateCommentsModal" class="form-control updateCommentsData"
                                placeholder="Comment" type="text">
+                        <div class="error NotEmpty-commentDTO-message"></div>
+                        <div class="error BadWords-commentDTO-message"></div>
                     </div>
                     <div class="form-group">
                         <label for="userNameUpdateCommentsModal">Username</label>
@@ -327,7 +342,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateCommentsModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="updateCommentsModalButton" type="button">
                         Update
                     </button>
                 </div>
@@ -350,30 +365,35 @@
                         <label for="messageAddCommentsModal">Comment</label>
                         <input name="message" id="messageAddCommentsModal" class="form-control addCommentsData"
                                placeholder="Comment" type="text">
+                        <div class="error NotEmpty-commentDTO-message"></div>
+                        <div class="error BadWords-commentDTO-message"></div>
                     </div>
                     <div class="form-group">
                         <label for="userNameAddCommentsModal">Username</label>
                         <select name="userName" id="userNameAddCommentsModal"
                                 class="form-control addCommentsData usersSelectUpdate">
                         </select>
+                        <div class="error NotEmpty-commentDTO-userName"></div>
                     </div>
                     <div class="form-group">
                         <label for="topicNameAddCommentsModal">Topic name:</label>
                         <select name="topicName" id="topicNameAddCommentsModal"
                                 class="form-control addCommentsData topicsSelectUpdate">
                         </select>
+                        <div class="error NotEmpty-commentDTO-topicName"></div>
                     </div>
                     <div class="form-group">
                         <label for="subjectNameAddCommentsModal">Subject name:</label>
                         <select name="subjectName" id="subjectNameAddCommentsModal"
                                 class="form-control addCommentsData subjectsSelectUpdate">
                         </select>
+                        <div class="error NotEmpty-commentDTO-subjectName"></div>
                     </div>
                     <input id="dateAddCommentsModal" name="date" type="hidden" class="addCommentsData" value="">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="addCommentsModalButton" type="button" data-dismiss="modal">Add
+                    <button class="btn btn-primary" id="addCommentsModalButton" type="button">Add
                     </button>
                 </div>
             </div>
@@ -691,7 +711,7 @@
 
     <!-- Templates -->
     <script id="commentsTemplate" type="text/x-jQuery-tmpl">
-        <tr>
+        <tr id = "column\${id}">
             <td>\${message}</td>
             <td>\${userName}</td>
             <td>\${topicName}</td>
@@ -706,7 +726,7 @@
     </script>
 
     <script id="subjectsTemplate" type="text/x-jQuery-tmpl">
-        <tr>
+        <tr id = "column\${id}">
             <td>\${subjectName}</td>
             <td>\${text}</td>
             <td>\${userName}</td>
@@ -720,7 +740,7 @@
     </script>
 
     <script id="usersTemplate" type="text/x-jQuery-tmpl">
-        <tr>
+        <tr id = "column\${id}">
             <td>\${userName}</td>
             <td>\${password}</td>
             <td>\${email}</td>
@@ -733,7 +753,7 @@
     </script>
 
     <script id="topicsTemplate" type="text/x-jQuery-tmpl">
-        <tr>
+        <tr id = "column\${id}">
             <td>\${topicName}</td>
             <td><button type="button" class = "btn btn-primary updateTopics" id ="\${id}" data-toggle="modal" data-target="#updateTopicsModal">Update</button></td>
             <td><button type="button" class = "btn btn-danger deleteTopics" id ="\${id}" data-toggle="modal" data-target="#deleteTopicsModal">Delete</button></td>
@@ -760,6 +780,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="admin/vendor/jquery/jquery.min.js"></script>
     <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="admin/vendor/jquery-i18n-properties/jquery.i18n.properties.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>

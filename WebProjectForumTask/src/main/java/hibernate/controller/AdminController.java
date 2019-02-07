@@ -8,8 +8,10 @@ import hibernate.service.interfaces.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/comments", method = RequestMethod.POST)
-    public ResponseEntity addCommentDTO(@RequestBody CommentDTO commentDTO) {
+    public ResponseEntity addCommentDTO(@Valid @RequestBody CommentDTO commentDTO, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.insertComment(commentDTO);
         return ResponseEntity.ok(commentDTO);
     }

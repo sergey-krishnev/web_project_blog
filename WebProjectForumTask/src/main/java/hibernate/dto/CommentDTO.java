@@ -1,11 +1,19 @@
 package hibernate.dto;
 
+import hibernate.annotations.BadWords;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class CommentDTO {
 
     private int id;
+    @NotEmpty(message = "NotEmpty-commentDTO-userName")
     private String userName;
+    @NotEmpty(message = "NotEmpty-commentDTO-topicName")
     private String topicName;
+    @NotEmpty(message = "NotEmpty-commentDTO-subjectName")
     private String subjectName;
+    @NotEmpty(message = "NotEmpty-commentDTO-message")
+    @BadWords
     private String message;
     private String date;
 
