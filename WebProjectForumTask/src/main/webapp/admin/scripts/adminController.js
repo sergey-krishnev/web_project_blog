@@ -10,9 +10,7 @@ var glob = {
 // var id;
 // var pathname = path.toString().replace("admin/","");
 // var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-
 $(document).ready(function () {
-
     $('.nav-link').click(function(event) {
         event.preventDefault();
         glob.path = $(this).attr("href");
