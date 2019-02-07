@@ -10,6 +10,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScvReader {
@@ -18,17 +19,15 @@ public class ScvReader {
     private final static Logger logger = Logger.getLogger(ScvReader.class);
 
 
-    public ScvReader(String nameFile) throws RuntimeException {
+    public ScvReader(String nameFile) throws RuntimeException, IOException {
         List<String> dataSubject = null;
-        try {
-            URL fileUrl = getClass().getResource("/" + nameFile);
+       URL fileUrl = getClass().getResource("/" + nameFile);
+        if (fileUrl != null) {
             String stringUrl = fileUrl.getPath();
             stringUrl = stringUrl.substring(1);
             dataSubject = Files.readAllLines(Paths.get(stringUrl), StandardCharsets.UTF_8);
+        } else dataSubject = new ArrayList<>();
 
-        } catch (IOException | NumberFormatException e) {
-            logger.error("JPA error : " + e.getMessage(), e);
-        }
         this.badWords = dataSubject;
     }
         public List<String> getBadWords () {
