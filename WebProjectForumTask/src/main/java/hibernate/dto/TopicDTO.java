@@ -8,7 +8,7 @@ import java.util.List;
 public class TopicDTO {
 
     private int id;
-    @NotEmpty(message = "NotEmpty-commentDTO-topicName")
+    @NotEmpty(message = "NotEmpty-topicDTO-topicName")
     @BadWords(message = "BadWords-topicDTO-topicName")
     private String topicName;
     private List<SubjectDTO> subjects;

@@ -92,22 +92,22 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item changePathname" id=commentsNavItem>
-                <a class="nav-link changeLink" href="/admin/comments">
+                <a class="nav-link changeLink" data-url="admin/comments" href="#">
                     <i class="fas fa-fw fa-comments"></i>
                     <span>Comments</span></a>
             </li>
             <li class="nav-item changePathname" id=subjectsNavItem>
-                <a class="nav-link changeLink" href="/admin/subjects">
+                <a class="nav-link changeLink" data-url="admin/subjects" href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span>Subjects</span></a>
             </li>
             <li class="nav-item changePathname" id=usersNavItem>
-                <a class="nav-link changeLink" href="/admin/users">
+                <a class="nav-link changeLink" data-url="admin/users" href="#">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users</span></a>
             </li>
             <li class="nav-item changePathname" id=topicsNavItem>
-                <a class="nav-link changeLink" href="/admin/topics">
+                <a class="nav-link changeLink" data-url="admin/topics" href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span>Topics</span></a>
             </li>
@@ -147,7 +147,7 @@
                                         </thead>
                                         <tbody id="commentsBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info addComments" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addComments" data-toggle="modal"
                                             data-target="#addCommentsModal">Add new comment
                                     </button>
                                 </div>
@@ -176,7 +176,7 @@
                                         </thead>
                                         <tbody id="subjectsBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info addSubjects" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addSubjects" data-toggle="modal"
                                             data-target="#addSubjectsModal">Add new subject
                                     </button>
                                 </div>
@@ -205,7 +205,7 @@
                                         </thead>
                                         <tbody id="usersBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info addUsers" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addUsers" data-toggle="modal"
                                             data-target="#addUsersModal">Add new user
                                     </button>
                                 </div>
@@ -230,7 +230,7 @@
                                         </thead>
                                         <tbody id="topicsBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info addTopics" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addTopics" data-toggle="modal"
                                             data-target="#addTopicsModal">Add new topic
                                     </button>
                                 </div>
@@ -436,6 +436,8 @@
                         <label for="subjectNameUpdateSubjectsModal">Subject name:</label>
                         <input name="subjectName" id="subjectNameUpdateSubjectsModal" type="text"
                                class="form-control updateSubjectsData" value="" placeholder="Subject name">
+                        <div class="error NotEmpty-subjectDTO-subjectName"></div>
+                        <div class="error BadWords-subjectDTO-subjectName"></div>
                     </div>
                     <div class="form-group">
                         <label for="userNameUpdateSubjectsModal">Username:</label>
@@ -452,11 +454,13 @@
                         <label for="textUpdateSubjectsModal">Text</label>
                         <textarea name="text" id="textUpdateSubjectsModal" type="text"
                                   class="form-control updateSubjectsData" placeholder="Text" rows=5></textarea>
+                        <div class="error NotEmpty-subjectDTO-text"></div>
+                        <div class="error BadWords-subjectDTO-text"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateSubjectsModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="updateSubjectsModalButton" type="button">
                         Update
                     </button>
                 </div>
@@ -479,27 +483,33 @@
                         <label for="subjectNameAddSubjectsModal">Subject name:</label>
                         <input name="subjectName" id="subjectNameAddSubjectsModal" type="text"
                                class="form-control addSubjectsData" value="" placeholder="Subject name">
+                        <div class="error NotEmpty-subjectDTO-subjectName"></div>
+                        <div class="error BadWords-subjectDTO-subjectName"></div>
                     </div>
                     <div class="form-group">
                         <label for="userNameAddSubjectsModal">Username:</label>
                         <select name="userName" id="userNameAddSubjectsModal"
                                 class="form-control usersSelectUpdate addSubjectsData"></select>
+                        <div class="error NotEmpty-subjectDTO-userName"></div>
                     </div>
                     <div class="form-group">
                         <label for="topicNameAddSubjectsModal">Topic name:</label>
                         <select name="topicName" id="topicNameAddSubjectsModal"
                                 class="form-control topicsSelectUpdate addSubjectsData"></select>
+                        <div class="error NotEmpty-subjectDTO-topicName"></div>
                     </div>
                     <input id="dateAddSubjectsModal" name="date" type="hidden" class="addSubjectsData" value="">
                     <div class="form-group">
                         <label for="textAddSubjectsModal">Text</label>
                         <textarea name="text" id="textAddSubjectsModal" type="text" class="form-control addSubjectsData"
                                   placeholder="Text" rows=5></textarea>
+                        <div class="error NotEmpty-subjectDTO-text"></div>
+                        <div class="error BadWords-subjectDTO-text"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="addSubjectsModalButton" type="button" data-dismiss="modal">Add
+                    <button class="btn btn-primary" id="addSubjectsModalButton" type="button">Add
                     </button>
                 </div>
             </div>
@@ -558,32 +568,41 @@
                         <label for="userNameUpdateUsersModal">Username:</label>
                         <input name="userName" id="userNameUpdateUsersModal" type="text"
                                class="form-control updateUsersData" value="" placeholder="Username"/>
+                        <div class="error NotEmpty-userDTO-userName"></div>
+                        <div class="error BadWords-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
                         <label for="passwordUpdateUsersModal">Password:</label>
                         <input name="password" id="passwordUpdateUsersModal" type="text"
                                class="form-control updateUsersData" value="" placeholder="Password"
                                required="required"/>
+                        <div class="error NotEmpty-userDTO-password"></div>
                     </div>
                     <div class="form-group">
                         <label for="emailUpdateUsersModal">E-mail:</label>
                         <input name="email" type="text" id="emailUpdateUsersModal" class="form-control updateUsersData"
                                value="" placeholder="E-mail"/>
+                        <div class="error NotEmpty-userDTO-email"></div>
+                        <div class="error Email-userDTO-email"></div>
                     </div>
                     <div class="form-group">
                         <label for="firstNameUpdateUsersModal">First name:</label>
                         <input name="firstName" type="text" id="firstNameUpdateUsersModal"
                                class="form-control updateUsersData" value="" placeholder="First name"/>
+                        <div class="error NotEmpty-userDTO-firstName"></div>
+                        <div class="error BadWords-userDTO-firstName"></div>
                     </div>
                     <div class="form-group">
                         <label for="lastNameUpdateUsersModal">Last name:</label>
                         <input name="lastName" type="text" id="lastNameUpdateUsersModal"
                                class="form-control updateUsersData" value="" placeholder="Last name"/>
+                        <div class="error NotEmpty-userDTO-lastName"></div>
+                        <div class="error BadWords-userDTO-lastName"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateUsersModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="updateUsersModalButton" type="button">
                         Update
                     </button>
                 </div>
@@ -606,31 +625,40 @@
                         <label for="userNameAddUsersModal">Username:</label>
                         <input name="userName" id="userNameAddUsersModal" type="text" class="form-control addUsersData"
                                value="" placeholder="Username"/>
+                        <div class="error NotEmpty-userDTO-userName"></div>
+                        <div class="error BadWords-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
                         <label for="passwordAddUsersModal">Password:</label>
                         <input name="password" id="passwordAddUsersModal" type="text" class="form-control addUsersData"
                                value="" placeholder="Password" required="required"/>
+                        <div class="error NotEmpty-userDTO-password"></div>
                     </div>
                     <div class="form-group">
                         <label for="emailAddUsersModal">E-mail:</label>
                         <input name="email" type="text" id="emailAddUsersModal" class="form-control addUsersData"
                                value="" placeholder="E-mail"/>
+                        <div class="error NotEmpty-userDTO-email"></div>
+                        <div class="error Email-userDTO-email"></div>
                     </div>
                     <div class="form-group">
                         <label for="firstNameAddUsersModal">First name:</label>
                         <input name="firstName" type="text" id="firstNameAddUsersModal"
                                class="form-control addUsersData" value="" placeholder="First name"/>
+                        <div class="error NotEmpty-userDTO-firstName"></div>
+                        <div class="error BadWords-userDTO-firstName"></div>
                     </div>
                     <div class="form-group">
                         <label for="lastNameAddUsersModal">Last name:</label>
                         <input name="lastName" type="text" id="lastNameAddUsersModal" class="form-control addUsersData"
                                value="" placeholder="Last name"/>
+                        <div class="error NotEmpty-userDTO-lastName"></div>
+                        <div class="error BadWords-userDTO-lastName"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="addUsersModalButton" type="button" data-dismiss="modal">Add</a>
+                    <a class="btn btn-primary" id="addUsersModalButton" type="button">Add</a>
                 </div>
             </div>
         </div>
@@ -672,11 +700,13 @@
                         <label for="topicNameUpdateTopicsModal">Topic name:</label>
                         <input name="topicName" id="topicNameUpdateTopicsModal" type="text"
                                class="form-control updateTopicsData" value="" placeholder="Topic name"/>
+                        <div class="error NotEmpty-topicDTO-topicName"></div>
+                        <div class="error BadWords-topicDTO-topicName"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateTopicsModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="updateTopicsModalButton" type="button">
                         Update
                     </button>
                 </div>
@@ -699,11 +729,13 @@
                         <label for="topicNameAddTopicsModal">Topic name:</label>
                         <input name="topicName" id="topicNameAddTopicsModal" type="text"
                                class="form-control addTopicsData" value="" placeholder="Topic name"/>
+                        <div class="error NotEmpty-topicDTO-topicName"></div>
+                        <div class="error BadWords-topicDTO-topicName"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="addTopicsModalButton" type="button" data-dismiss="modal">Add</a>
+                    <a class="btn btn-primary" id="addTopicsModalButton" type="button">Add</a>
                 </div>
             </div>
         </div>
@@ -788,7 +820,9 @@
     <!-- Custom scripts for all pages-->
     <script src="admin/js/sb-admin.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+
     <script src="admin/scripts/adminController.js"></script>
+
 
     <!-- Page level plugin JavaScript-->
     <script src="admin/vendor/datatables/jquery.dataTables.js"></script>

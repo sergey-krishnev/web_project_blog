@@ -8,7 +8,7 @@ public class UsersDTO {
 
     private int id;
     @BadWords(message = "BadWords-userDTO-userName")
-    @NotEmpty(message = "NotEmpty-commentDTO-userName")
+    @NotEmpty(message = "NotEmpty-userDTO-userName")
     private String userName;
     @NotEmpty(message = "NotEmpty-userDTO-password")
     private String password;

@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 public class SubjectDTO {
     private int id;
     @BadWords(message = "BadWords-subjectDTO-subjectName")
-    @NotEmpty(message = "NotEmpty-commentDTO-subjectName")
+    @NotEmpty(message = "NotEmpty-subjectDTO-subjectName")
     private String subjectName;
-    @NotEmpty(message = "NotEmpty-commentDTO-userName")
+    @NotEmpty(message = "NotEmpty-subjectDTO-userName")
     private String userName;
-    @NotEmpty(message = "NotEmpty-commentDTO-topicName")
+    @NotEmpty(message = "NotEmpty-subjectDTO-topicName")
     private String topicName;
     private String date;
     @NotEmpty(message = "NotEmpty-subjectDTO-text")
