@@ -1,14 +1,23 @@
 package hibernate.dto;
 
+import hibernate.annotations.BadWords;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class SubjectDTO {
     private int id;
+    @BadWords(message = "BadWords-subjectDTO-subjectName")
+    @NotEmpty(message = "NotEmpty-commentDTO-subjectName")
     private String subjectName;
+    @NotEmpty(message = "NotEmpty-commentDTO-userName")
     private String userName;
+    @NotEmpty(message = "NotEmpty-commentDTO-topicName")
     private String topicName;
     private String date;
+    @NotEmpty(message = "NotEmpty-subjectDTO-text")
+    @BadWords(message = "BadWords-subjectDTO-text")
     private String text;
     private List<CommentDTO> comments;
 

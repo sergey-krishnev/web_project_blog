@@ -68,13 +68,19 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/subjects", method = RequestMethod.POST)
-    public ResponseEntity addSubjectDTO(@RequestBody SubjectDTO subjectDTO) {
+    public ResponseEntity addSubjectDTO(@Valid @RequestBody SubjectDTO subjectDTO, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.insertSubject(subjectDTO);
         return ResponseEntity.ok(subjectDTO);
     }
 
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.PUT)
-    public ResponseEntity updateSubjectDTO(@RequestBody SubjectDTO subjectDTO, @PathVariable int subjectId) {
+    public ResponseEntity updateSubjectDTO(@RequestBody SubjectDTO subjectDTO, Errors errors, @PathVariable int subjectId) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.updateSubject(subjectId, subjectDTO);
         return ResponseEntity.ok(subjectDTO);
     }
@@ -95,13 +101,19 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/topics", method = RequestMethod.POST)
-    public ResponseEntity addTopicDTO(@RequestBody TopicDTO topicDTO) {
+    public ResponseEntity addTopicDTO(@Valid @RequestBody TopicDTO topicDTO, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.insertTopic(topicDTO);
         return ResponseEntity.ok(topicDTO);
     }
 
     @RequestMapping(value = "/topics/{topicId}", method = RequestMethod.PUT)
-    public ResponseEntity updateTopicDTO(@RequestBody TopicDTO topicDTO, @PathVariable int topicId) {
+    public ResponseEntity updateTopicDTO(@Valid @RequestBody TopicDTO topicDTO, Errors errors, @PathVariable int topicId) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.updateTopic(topicId,topicDTO);
         return ResponseEntity.ok(topicDTO);
     }
@@ -121,13 +133,19 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity addUsersDTO(@RequestBody UsersDTO usersDTO) {
+    public ResponseEntity addUsersDTO(@Valid @RequestBody UsersDTO usersDTO, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.insertUsers(usersDTO);
         return ResponseEntity.ok(usersDTO);
     }
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
-    public ResponseEntity updateUsersDTO(@RequestBody UsersDTO usersDTO, @PathVariable int userId) {
+    public ResponseEntity updateUsersDTO(@Valid @RequestBody UsersDTO usersDTO, Errors errors, @PathVariable int userId) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
         crudService.updateUsers(userId, usersDTO);
         return ResponseEntity.ok(usersDTO);
     }

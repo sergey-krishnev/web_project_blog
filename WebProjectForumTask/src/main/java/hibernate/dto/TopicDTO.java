@@ -1,10 +1,15 @@
 package hibernate.dto;
 
+import hibernate.annotations.BadWords;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.List;
 
 public class TopicDTO {
 
     private int id;
+    @NotEmpty(message = "NotEmpty-commentDTO-topicName")
+    @BadWords(message = "BadWords-topicDTO-topicName")
     private String topicName;
     private List<SubjectDTO> subjects;
 
