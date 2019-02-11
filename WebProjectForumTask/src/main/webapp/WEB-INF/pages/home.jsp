@@ -83,9 +83,21 @@
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-            <h1 class="my-4 topicName subjectName">All Subjects</h1>
+            <h1 class="my-4 topicName">All Subjects</h1>
             <div class="aggregate-subjects"></div>
             <div class="aggregate-post"></div>
+            <!-- Comments Form -->
+            <div class="card my-4 comments-form" style="display: none">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
             <div class="aggregate-comments"></div>
             <%--<!-- Blog Post -->--%>
             <%--<div class="card mb-4">--%>
@@ -196,15 +208,31 @@
                 <div class = "card-body">
                 <h2 class = "card-title">\${subjectName}</h2>
                 <p class = "card-text">\${text}</p>
-                <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
+                <a href="/blog/subjects/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">Posted on \${date} by
                 <a href="#">\${userName}</a>
                 </div></div>
 </script>
 
-<script id="subjectTemplate" type="text/x-jQuery-tmpl">
+<script id="commentsTemplate" type="text/x-jQuery-tmpl">
+            <hr>
+           <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+            <h5 class="mt-0">\${userName}<span class="small"> at \${date}</span></h5>
+            \${message};
+            </div>
+           </div>
+</script>
 
+<script id="subjectTemplate" type="text/x-jQuery-tmpl">
+    <h1 class="mt-4">\${subjectName}</h1>
+    <p class="lead">by <a href="#">\${userName}</a></h1>
+    <hr>
+    <p>Posted on \${date}</p>
+    <hr>
+    <p class="lead">\${text}</p>
 </script>
 
 
