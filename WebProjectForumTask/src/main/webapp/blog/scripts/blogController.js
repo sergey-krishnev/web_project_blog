@@ -57,7 +57,11 @@ $(document).ready(function () {
             $.getJSON(subjectPath, function (data) {
                 $("#subjectTemplate").tmpl(data).appendTo(".aggregate-post");
             });
-            buildComments(subjectPath + "/comments")
+            buildComments(subjectPath + "/comments");
+            $.getJSON(subjectPath, function (data) {
+                addComment(data.topicName, data.subjectName, subjectPath + "/comments");
+            });
+
         })
     }
     function buildComments(commentsPath) {
@@ -65,7 +69,45 @@ $(document).ready(function () {
         $.getJSON(commentsPath, function (data) {
             $("#commentsTemplate").tmpl(data).appendTo(".aggregate-comments");
         })
+    }
+    function addComment(topicName, subjectName, updateCommentsPath) {
+        $(document).on('click', '.add-comment', function () {
 
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            var map = {};
+            map["id"] = 1;
+            map["userName"] = "Dumiel";
+            map["topicName"] = topicName;
+            map["subjectName"] = subjectName;
+            map["message"] = $(".text-message").val();
+            map["date"] = date + ' ' + time;
+            $.each(map, function (key, value) {
+                alert(key + " : " + value)
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/comments",
+                data: JSON.stringify(map),
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json",
+                success: function (data, textStatus, xhr) {
+                    $(".text-message").empty();
+                    alert("success");
+                    // var htmlMap = $("#" + pathname + "Template").tmpl(map);
+                    // alert(htmlMap);
+                    // htmlMap.appendTo("#" + pathname + "Body"); //Change
+                    // alert("success");
+                    buildComments(updateCommentsPath)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("error in operation")
+                }
+            })
+        })
     }
 
 });

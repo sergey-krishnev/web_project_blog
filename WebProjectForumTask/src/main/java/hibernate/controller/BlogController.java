@@ -6,11 +6,11 @@ import hibernate.dto.TopicDTO;
 import hibernate.service.interfaces.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -39,10 +39,24 @@ public class BlogController {
         return crudService.searchSubjectById(subjectId);
     }
 
+    @RequestMapping(value = "/comments", method = RequestMethod.GET)
+    public List<CommentDTO> getAllCommentDTO() {
+        return crudService.searchAllComment();
+    }
+
     @RequestMapping(value = "/subjects/{subjectId}/comments", method = RequestMethod.GET)
     public List<CommentDTO> getCommentsDTO(@PathVariable int subjectId) {
         SubjectDTO subjectDTO = crudService.searchSubjectById(subjectId);
         return subjectDTO.getComments();
+    }
+
+    @RequestMapping(value = "/comments", method = RequestMethod.POST)
+    public ResponseEntity addCommentDTO(@Valid @RequestBody CommentDTO commentDTO, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
+        crudService.insertComment(commentDTO);
+        return ResponseEntity.ok(commentDTO);
     }
 
     @RequestMapping(value = "/topics/subjects", method = RequestMethod.GET)
