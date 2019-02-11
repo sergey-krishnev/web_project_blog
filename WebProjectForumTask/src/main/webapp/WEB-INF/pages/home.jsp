@@ -178,6 +178,19 @@
     <!-- /.container -->
 </footer>
 
+<script id="subjectsTemplate" type="text/x-jQuery-tmpl">
+                <div class = "card mb-4">
+                <div class = "card-body">
+                <h2 class = "card-title">\${subjectName}</h2>
+                <p class = "card-text">\${text}</p>
+                <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">Posted on \${date} by
+                <a href="#">\${userName}</a>
+                </div></div>
+</script>
+
+
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>

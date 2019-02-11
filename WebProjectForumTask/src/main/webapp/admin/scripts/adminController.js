@@ -152,7 +152,15 @@ $(document).ready(function () {
                 url: pathDelete,
                 type: "DELETE",
                 success: function (data, textStatus, xhr) {
-                    $("#column" + id).css("display", "none");
+                    $("#" + pathname + "Body").empty();
+                    $.getJSON(path, function (data) {
+                        if (pathname === "subjects") {
+                            $.each(data, function (key, value) {
+                                value.text = value.text.split(".")[0] + ".";
+                            });
+                        }
+                        $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
+                    });
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     alert('Error in Operation');
