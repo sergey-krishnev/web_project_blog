@@ -14,18 +14,18 @@
     <title>FOUR ROOM Home</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="blog/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="blog/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="css/blog-home.css" rel="stylesheet">
+    <link href="blog/css/blog-home.css" rel="stylesheet">
 
 
 </head>
 
 <body>
-<a type="hidden" name="url" id="url" href="${pageContext.request.contextPath}/"></a>
+<a type="hidden" id="default-path" href="blog/topics"></a>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -83,9 +83,10 @@
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-            <h1 class="my-4 topicName">All Subjects</h1>
+            <h1 class="my-4 topicName subjectName">All Subjects</h1>
             <div class="aggregate-subjects"></div>
-
+            <div class="aggregate-post"></div>
+            <div class="aggregate-comments"></div>
             <%--<!-- Blog Post -->--%>
             <%--<div class="card mb-4">--%>
                 <%--<div class="card-body">--%>
@@ -190,12 +191,31 @@
     <!-- /.container -->
 </footer>
 
+<script id="subjectsTemplate" type="text/x-jQuery-tmpl">
+                <div class = "card mb-4">
+                <div class = "card-body">
+                <h2 class = "card-title">\${subjectName}</h2>
+                <p class = "card-text">\${text}</p>
+                <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">Posted on \${date} by
+                <a href="#">\${userName}</a>
+                </div></div>
+</script>
+
+<script id="subjectTemplate" type="text/x-jQuery-tmpl">
+
+</script>
+
+
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="blog/vendor/jquery/jquery.min.js"></script>
+<script src="blog/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 
 <!-- Custom jQuery scripts -->
-<script src="scripts/script.js"></script>
+<script src="blog/scripts/blogController.js"></script>
 
 </body>
 

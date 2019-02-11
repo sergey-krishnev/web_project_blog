@@ -24,21 +24,9 @@ public class MainController {
     @Autowired
     private MessageSource messageSource;
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @RequestMapping(value = "/blog",method = RequestMethod.GET)
     public String home() {
         return "home";
-    }
-
-    @RequestMapping(value = "/{topicId}", method = RequestMethod.GET)
-    public String getSpecificTopic(@PathVariable int topicId) {
-        crudService.searchTopicById(topicId); //create exception
-        return "home";
-    }
-
-    @RequestMapping(value = "/post/{subjectId}", method = RequestMethod.GET)
-    public String getSpecificSubject(@PathVariable int subjectId) {
-        crudService.searchSubjectById(subjectId);
-        return "post";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)

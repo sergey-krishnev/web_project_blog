@@ -23,10 +23,20 @@ public class BlogController {
     @Autowired
     private MessageSource messageSource;
 
+    @RequestMapping(value = "/topics", method = RequestMethod.GET)
+    public List<TopicDTO> getAllTopicsDTO() {
+        return crudService.searchAllTopic();
+    }
+
     @RequestMapping(value = "/topics/{topicId}/subjects", method = RequestMethod.GET)
     public List<SubjectDTO> getSubjectsByTopicId(@PathVariable int topicId) {
         TopicDTO topicDTO = crudService.searchTopicById(topicId);
         return topicDTO.getSubjects();
+    }
+
+    @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.GET)
+    public SubjectDTO getSubjectDTO(@PathVariable int subjectId) {
+        return crudService.searchSubjectById(subjectId);
     }
 
     @RequestMapping(value = "/subjects/{subjectId}/comments", method = RequestMethod.GET)
@@ -35,4 +45,8 @@ public class BlogController {
         return subjectDTO.getComments();
     }
 
+    @RequestMapping(value = "/topics/subjects", method = RequestMethod.GET)
+    public List<SubjectDTO> getAllSubjectsDTO() {
+        return crudService.searchAllSubject();
+    }
 }
