@@ -28,6 +28,11 @@ public class BlogController {
         return crudService.searchAllTopic();
     }
 
+    @RequestMapping(value = "/topics/{topicId}", method = RequestMethod.GET)
+    public TopicDTO getTopicId(@PathVariable int topicId) {
+        return crudService.searchTopicById(topicId);
+    }
+
     @RequestMapping(value = "/topics/{topicId}/subjects", method = RequestMethod.GET)
     public List<SubjectDTO> getSubjectsByTopicId(@PathVariable int topicId) {
         TopicDTO topicDTO = crudService.searchTopicById(topicId);

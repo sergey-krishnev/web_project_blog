@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +21,8 @@
 </head>
 
 <body>
+
+
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -79,34 +82,9 @@
             </div>
 
             <!-- Single Comment -->
+
             <div class="aggregate-comments">
-                <%--<div class="media mb-4">--%>
-                    <%--<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">--%>
-                    <%--<div class="media-body">--%>
-                        <%--<h5 class="mt-0">Commenter Name</h5>--%>
-                        <%--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras--%>
-                        <%--purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi--%>
-                        <%--vulputate fringilla. Donec lacinia congue felis in faucibus.--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="media mb-4">--%>
-                    <%--<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">--%>
-                    <%--<div class="media-body">--%>
-                        <%--<h5 class="mt-0">Commenter Name</h5>--%>
-                        <%--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras--%>
-                        <%--purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi--%>
-                        <%--vulputate fringilla. Donec lacinia congue felis in faucibus.--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="media mb-4">--%>
-                    <%--<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">--%>
-                    <%--<div class="media-body">--%>
-                        <%--<h5 class="mt-0">Commenter Name</h5>--%>
-                        <%--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras--%>
-                        <%--purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi--%>
-                        <%--vulputate fringilla. Donec lacinia congue felis in faucibus.--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+
             </div>
         </div>
 
@@ -127,18 +105,7 @@
             </div>
 
             <!-- Categories Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Topics</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul class="list-unstyled mb-0 aggregate-topics">
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <c:import url="/topic" />
 
             <!-- Side Widget -->
             <div class="card my-4">
@@ -157,17 +124,40 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-dark" style="display: none">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
     </div>
     <!-- /.container -->
 </footer>
 
+<script id="commentsTemplate" type="text/x-jQuery-tmpl">
+            <hr>
+           <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+            <h5 class="mt-0">\${userName}<span class="small"> at \${date}</span></h5>
+            \${message}
+            </div>
+           </div>
+</script>
+
+<script id="subjectTemplate" type="text/x-jQuery-tmpl">
+    <h1 class="mt-4">\${subjectName}</h1>
+    <p class="lead">by <a href="#">\${userName}</a></h1>
+    <hr>
+    <p>Posted on \${date}</p>
+    <hr>
+    <p class="lead">\${text}</p>
+</script>
+
 <!-- Bootstrap core JavaScript -->
-<script src="post/vendor/jquery/jquery.min.js"></script>
-<script src="post/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="post/scripts/postController.js"></script>
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+
+<script src="scripts/postController.js"></script>
 
 </body>
 
