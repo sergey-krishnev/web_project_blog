@@ -12,13 +12,13 @@
     <title>Login</title>
 
     <!-- Bootstrap core CSS-->
-    <link href="<c:url value="resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
 
     <!-- Custom fonts for this template-->
-    <link href="<c:url value="resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="<c:url value="resources/css/sb-admin.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/sb-admin.css" />" rel="stylesheet">
 
 </head>
 
@@ -66,11 +66,11 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="<c:url value="resources/vendor/jquery/jquery.min.js" />"></script>
-<script src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="<c:url value="resources/vendor/jquery-easing/jquery.easing.min.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />"></script>
 
 
 

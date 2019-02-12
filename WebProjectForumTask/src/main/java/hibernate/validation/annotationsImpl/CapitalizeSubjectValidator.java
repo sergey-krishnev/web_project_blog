@@ -1,6 +1,6 @@
-package hibernate.annotationsImpl;
+package hibernate.validation.annotationsImpl;
 
-import hibernate.annotations.CapitalizeSubject;
+import hibernate.validation.annotations.CapitalizeSubject;
 import org.apache.commons.text.WordUtils;
 
 import javax.validation.ConstraintValidator;

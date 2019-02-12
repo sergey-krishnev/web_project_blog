@@ -1,10 +1,9 @@
 package hibernate.dto;
 
-import hibernate.annotations.BadWords;
+import hibernate.validation.annotations.BadWords;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class SubjectDTO {
     private int id;

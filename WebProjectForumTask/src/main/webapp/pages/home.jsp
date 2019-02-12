@@ -14,12 +14,12 @@
     <title>FOUR ROOM Home</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<c:url value="resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
 
-    <link href="<c:url value="resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="<c:url value="resources/css/blog-home.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/blog-home.css" />" rel="stylesheet">
 
 
 </head>
@@ -192,13 +192,13 @@
 
 
 <!-- Bootstrap core JavaScript -->
-<script src="<c:url value="resources/vendor/jquery/jquery.js" />"></script>
-<script src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery/jquery.js" />"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 
 <!-- Custom jQuery scripts -->
-<script src="<c:url value="resources/js/blogController.js" />"></script>
+<script src="<c:url value="/resources/js/blogController.js" />"></script>
 
 </body>
 

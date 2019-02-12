@@ -1,4 +1,4 @@
-package hibernate.controller;
+package hibernate.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;

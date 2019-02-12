@@ -1,6 +1,6 @@
-package hibernate.annotations;
+package hibernate.validation.annotations;
 
-import hibernate.annotationsImpl.CapitalizeSubjectValidator;
+import hibernate.validation.annotationsImpl.BadWordsValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CapitalizeSubjectValidator.class)
-public @interface CapitalizeSubject {
-    String message() default "CapitalizeSubject-subjectDTO-subject";
+@Constraint(validatedBy = BadWordsValidator.class)
+public @interface BadWords {
+    String message() default "BadWords-commentDTO-message";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -1,6 +1,6 @@
-package hibernate.annotationsImpl;
+package hibernate.validation.annotationsImpl;
 
-import hibernate.annotations.BadWords;
+import hibernate.validation.annotations.BadWords;
 import hibernate.fileReader.ScvReader;
 
 import javax.validation.ConstraintValidator;

@@ -1,6 +1,6 @@
 package hibernate.dto;
 
-import hibernate.annotations.BadWords;
+import hibernate.validation.annotations.BadWords;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 

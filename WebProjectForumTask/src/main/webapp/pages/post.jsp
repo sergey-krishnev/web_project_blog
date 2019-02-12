@@ -19,10 +19,10 @@
     </style>
 
     <!-- Bootstrap core CSS -->
-    <link href="<c:url value="resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<c:url value="resources/css/blog-post.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/blog-post.css" />" rel="stylesheet">
 
 </head>
 
@@ -144,7 +144,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark" style="display: none">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+        <p class="m-0 text-center text-white">Copyright &copy; FOUR ROOM 2019</p>
     </div>
     <!-- /.container -->
 </footer>
@@ -170,13 +170,13 @@
 </script>
 
 <!-- Bootstrap core JavaScript -->
-<script src="<c:url value="resources/vendor/jquery/jquery.js" />"></script>
-<script src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
-<script src="<c:url value="resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery/jquery.js" />"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 
-<script src="<c:url value="resources/js/postController.js" />"></script>
+<script src="<c:url value="/resources/js/postController.js" />"></script>
 
 </body>
 

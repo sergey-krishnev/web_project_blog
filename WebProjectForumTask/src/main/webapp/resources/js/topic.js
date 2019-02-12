@@ -18,18 +18,4 @@ $(document).ready(function () {
             $("footer").css("display","block");
         });
     }
-    // function switchTopic() {
-    //     $(document).on('click', '.all-topics', function (event) {
-    //         event.preventDefault();
-    //         $(".aggregate-post").empty();
-    //         $(".comments-form").css("display","none");
-    //         var nameChanged = $(this).text();
-    //         $('.topicName').css("display","block").text(nameChanged);
-    //
-    //         var subjectsPath = $(this).attr("data-url");
-    //         buildSubjects(subjectsPath)
-    //     });
-    // }
-    //
-
 });

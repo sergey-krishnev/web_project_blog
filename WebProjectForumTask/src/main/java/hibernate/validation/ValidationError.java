@@ -1,4 +1,4 @@
-package hibernate.controller;
+package hibernate.validation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

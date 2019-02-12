@@ -4,11 +4,11 @@
 <head>
     <title>Topic</title>
 
-    <link href="<c:url value="resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
 
-    <link href="<c:url value="resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
 
-    <link href="<c:url value="resources/css/blog-home.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/blog-home.css" />" rel="stylesheet">
 
 </head>
 <body>
@@ -26,13 +26,13 @@
     </div>
 </div>
 
-<script src="<c:url value="resources/vendor/jquery/jquery.js" />"></script>
-<script src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery/jquery.js" />"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 
 <!-- Custom jQuery scripts -->
-<script src="<c:url value="resources/js/topic.js" />"></script>
+<script src="<c:url value="/resources/js/topic.js" />"></script>
 
 </body>
 </html>

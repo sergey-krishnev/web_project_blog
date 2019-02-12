@@ -4,6 +4,7 @@ import hibernate.dto.CommentDTO;
 import hibernate.dto.SubjectDTO;
 import hibernate.dto.TopicDTO;
 import hibernate.service.interfaces.CRUDService;
+import hibernate.validation.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
