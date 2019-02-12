@@ -93,10 +93,7 @@ function addSubmit() {
     var pathname = path.toString().replace("admin/","").toString();
     var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $(".error").text("");
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
+    var dateTime = getCurrentDate();
     $("#dateAdd" + Pathname + "Modal").val(dateTime);
     var map = {};
     $(".add" + Pathname + "Data").each(function () {
@@ -174,10 +171,7 @@ function updateSubmit(value) {
     var pathUpdate = $(value).attr("data-url");
     var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $(".error").text("");
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
+    var dateTime = getCurrentDate();
     $("#dateUpdate" + Pathname + "Modal").val(dateTime);
     var map = {};
     $(".update" + Pathname + "Data").each(function () {
@@ -313,4 +307,11 @@ function selectWithSelectedUsers(user) {
         });
         $(".usersSelectUpdate").html(userDTO_data);
     });
+}
+
+function getCurrentDate() {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return date + ' ' + time;
 }
