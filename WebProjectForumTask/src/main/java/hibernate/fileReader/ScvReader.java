@@ -25,6 +25,7 @@ public class ScvReader {
         if (fileUrl != null) {
             String stringUrl = fileUrl.getPath();
             stringUrl = stringUrl.substring(1);
+            stringUrl = stringUrl.replace("%20"," "); //fixed bug with delimeter
             dataSubject = Files.readAllLines(Paths.get(stringUrl), StandardCharsets.UTF_8);
         } else dataSubject = new ArrayList<>();
 
