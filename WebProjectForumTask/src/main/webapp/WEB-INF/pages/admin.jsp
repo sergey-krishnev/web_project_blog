@@ -342,7 +342,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateCommentsModalButton" type="button">
+                    <button class="btn btn-primary" id="updateCommentsModalButton" type="button" onclick="updateSubmit(this.getAttribute('data-url'))" data-url ="/">
                         Update
                     </button>
                 </div>
@@ -460,7 +460,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateSubjectsModalButton" type="button">
+                    <button class="btn btn-primary" id="updateSubjectsModalButton" type="button" onclick="updateSubmit(this.getAttribute('data-url'))" data-url ="/">
                         Update
                     </button>
                 </div>
@@ -602,7 +602,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateUsersModalButton" type="button">
+                    <button class="btn btn-primary" id="updateUsersModalButton" type="button" onclick="updateSubmit(this.getAttribute('data-url'))" data-url ="/">
                         Update
                     </button>
                 </div>
@@ -706,7 +706,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateTopicsModalButton" type="button">
+                    <button class="btn btn-primary" id="updateTopicsModalButton" type="button" onclick="updateSubmit(this.getAttribute('data-url'))" data-url ="/">
                         Update
                     </button>
                 </div>
@@ -751,7 +751,7 @@
             <td>\${date}</td>
             <%--<td><a class="btn btn-primary updateComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Update</a></td>--%>
             <%--<td><a class="btn btn-primary deleteComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Delete</a></td>--%>
-            <td><button type="button" class = "btn btn-primary updateComments" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal">Update</button></td>
+            <td><button type="button" class = "btn btn-primary updateComments" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" onclick = "updateModal(\${id})">Update</button></td>
             <td><button type="button" class = "btn btn-danger deleteComments" id ="\${id}" data-toggle="modal" data-target="#deleteCommentsModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
@@ -764,8 +764,8 @@
             <td>\${userName}</td>
             <td>\${topicName}</td>
             <td>\${date}</td>
-            <td><button type="button" class = "btn btn-success readSubjects" id ="\${id}" data-toggle="modal" data-target="#readSubjectsModal">Read</button></td>
-            <td><button type="button" class = "btn btn-primary updateSubjects" id ="\${id}" data-toggle="modal" data-target="#updateSubjectsModal">Update</button></td>
+            <td><button type="button" class = "btn btn-success readSubjects" id ="\${id}" data-toggle="modal" data-target="#readSubjectsModal" onclick = "read(\${id})">Read</button></td>
+            <td><button type="button" class = "btn btn-primary updateSubjects" id ="\${id}" data-toggle="modal" data-target="#updateSubjectsModal" onclick = "updateModal(\${id})">Update</button></td>
             <td><button type="button" class = "btn btn-danger deleteSubjects" id ="\${id}" data-toggle="modal" data-target="#deleteSubjectsModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
@@ -778,7 +778,7 @@
             <td>\${email}</td>
             <td>\${firstName}</td>
             <td>\${lastName}</td>
-            <td><button type="button" class = "btn btn-primary updateUsers" id ="\${id}" data-toggle="modal" data-target="#updateUsersModal">Update</button></td>
+            <td><button type="button" class = "btn btn-primary updateUsers" id ="\${id}" data-toggle="modal" data-target="#updateUsersModal" onclick = "updateModal(\${id})">Update</button></td>
             <td><button type="button" class = "btn btn-danger deleteUsers" id ="\${id}" data-toggle="modal" data-target="#deleteUsersModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
@@ -787,7 +787,7 @@
     <script id="topicsTemplate" type="text/x-jQuery-tmpl">
         <tr id = "column\${id}">
             <td>\${topicName}</td>
-            <td><button type="button" class = "btn btn-primary updateTopics" id ="\${id}" data-toggle="modal" data-target="#updateTopicsModal">Update</button></td>
+            <td><button type="button" class = "btn btn-primary updateTopics" id ="\${id}" data-toggle="modal" data-target="#updateTopicsModal" onclick = "updateModal(\${id})">Update</button></td>
             <td><button type="button" class = "btn btn-danger deleteTopics" id ="\${id}" data-toggle="modal" data-target="#deleteTopicsModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
