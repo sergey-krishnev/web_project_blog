@@ -1,9 +1,10 @@
 $(document).ready(function () {
-
     switchDashboard();
     buildTable();
     removeModal();
-
+    addModal();
+    updateModal();
+    read();
 });
 
 function removeModal() {
@@ -12,9 +13,7 @@ function removeModal() {
     var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $('#delete' + Pathname + 'Modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var id = button.data('id');
-        var pathDelete;
-        pathDelete = path + "/" + id;
+        var pathDelete = button.data('url');
         $("#delete" + Pathname + "ModalButton").attr("data-url", pathDelete);
     });
 }
@@ -28,7 +27,10 @@ function switchDashboard() {
         $(".displayTables").css("display", "none");
         $("#" + pathname + "Body").empty();
         buildTable();
-        removeModal()
+        removeModal();
+        addModal();
+        updateModal();
+        read();
     });
 }
 
@@ -49,7 +51,6 @@ function buildTable() {
         $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
     });
 }
-
 
 function removeSubmit(value) {
     var pathDelete = $(value).attr("data-url");
@@ -166,64 +167,69 @@ function addSubmit() {
     });
 }
 
-function updateModal(id) {
+function updateModal() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
+    var pathname = path.toString().replace("admin/", "").toString();
     var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    var pathUpdate = path + "/" + id;
-    $("#update" + Pathname + "ModalButton").attr("data-url", pathUpdate);
-    $(".error").text("");
-    var selectedSubject;
-    var selectedUser;
-    var selectedTopic;
-    $.getJSON(pathUpdate, function (data) {
-        selectedSubject = data.subjectName;
-        selectedUser = data.userName;
-        selectedTopic = data.topicName;
-        $.each(data, function (key, value) {
-            $("#" + key.toString() + "Update" + Pathname + "Modal").val(value);
-        });
-
-    });
-    $.getJSON("admin/subjects", function (data) {
-        var subjectDTO_data = '';
-        $.each(data, function (key, value) {
-            if (value.subjectName === selectedSubject) {
-                subjectDTO_data += '<option selected value="' + value.subjectName + '">' + value.subjectName + '</option>';
-            } else {
-                subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
-            }
+    $('#update' + Pathname + 'Modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var pathUpdate = button.data('url');
+        $("#update" + Pathname + "ModalButton").attr("data-url", pathUpdate);
+        $(".error").text("");
+        var selectedSubject;
+        var selectedUser;
+        var selectedTopic;
+        $.getJSON(pathUpdate, function (data) {
+            selectedSubject = data.subjectName;
+            selectedUser = data.userName;
+            selectedTopic = data.topicName;
+            $.each(data, function (key, value) {
+                $("#" + key.toString() + "Update" + Pathname + "Modal").val(value);
+            });
 
         });
-        $(".subjectsSelectUpdate").html(subjectDTO_data);
-    });
-    $.getJSON("admin/users", function (data) {
-        var userDTO_data = '';
-        $.each(data, function (key, value) {
-            if (value.userName === selectedUser) {
-                userDTO_data += '<option selected value="' + value.userName + '">' + value.userName + '</option>';
-            } else {
-                userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
-            }
+
+        $.getJSON("admin/subjects", function (data) {
+            var subjectDTO_data = '';
+            $.each(data, function (key, value) {
+                if (value.subjectName === selectedSubject) {
+                    subjectDTO_data += '<option selected value="' + value.subjectName + '">' + value.subjectName + '</option>';
+                } else {
+                    subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
+                }
+
+            });
+            $(".subjectsSelectUpdate").html(subjectDTO_data);
         });
-        $(".usersSelectUpdate").html(userDTO_data);
-    });
-    $.getJSON("admin/topics", function (data) {
-        var topicDTO_data = '';
-        $.each(data, function (key, value) {
-            if (value.topicName === selectedTopic) {
-                topicDTO_data += '<option selected value="' + value.topicName + '">' + value.topicName + '</option>';
-            } else {
-                topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
-            }
+        $.getJSON("admin/users", function (data) {
+            var userDTO_data = '';
+            $.each(data, function (key, value) {
+                if (value.userName === selectedUser) {
+                    userDTO_data += '<option selected value="' + value.userName + '">' + value.userName + '</option>';
+                } else {
+                    userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
+                }
+            });
+            $(".usersSelectUpdate").html(userDTO_data);
         });
-        $(".topicsSelectUpdate").html(topicDTO_data);
+        $.getJSON("admin/topics", function (data) {
+            var topicDTO_data = '';
+            $.each(data, function (key, value) {
+                if (value.topicName === selectedTopic) {
+                    topicDTO_data += '<option selected value="' + value.topicName + '">' + value.topicName + '</option>';
+                } else {
+                    topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
+                }
+            });
+            $(".topicsSelectUpdate").html(topicDTO_data);
+        });
     });
 }
 
-function updateSubmit(pathUpdate) {
+function updateSubmit(value) {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/", "").toString();
+    var pathUpdate = $(value).attr("data-url");
     var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $(".error").text("");
     var today = new Date();
@@ -276,12 +282,17 @@ function updateSubmit(pathUpdate) {
     })
 }
 
-function read(id) {
+function read() {
     var path = $('#default-path').attr("href");
-    var pathRead = path + "/" + id;
-    $.getJSON(pathRead, function (data) {
-        $(".subjectNameRead").html(data.subjectName);
-        $(".subjectsText").html(data.text);
-    });
+    var pathname = path.toString().replace("admin/", "").toString();
+    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
+    $('#read' + Pathname + 'Modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var pathRead = button.data('url');
 
+        $.getJSON(pathRead, function (data) {
+            $(".subjectNameRead").html(data.subjectName);
+            $(".subjectsText").html(data.text);
+        });
+    });
 }
