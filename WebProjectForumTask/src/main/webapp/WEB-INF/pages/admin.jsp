@@ -147,7 +147,7 @@
                                         </thead>
                                         <tbody id="commentsBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addComments" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addComments" onclick="addModal()" data-toggle="modal"
                                             data-target="#addCommentsModal">Add new comment
                                     </button>
                                 </div>
@@ -176,7 +176,7 @@
                                         </thead>
                                         <tbody id="subjectsBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addSubjects" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addSubjects" onclick="addModal()" data-toggle="modal"
                                             data-target="#addSubjectsModal">Add new subject
                                     </button>
                                 </div>
@@ -205,7 +205,7 @@
                                         </thead>
                                         <tbody id="usersBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addUsers" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addUsers" onclick="addModal()" data-toggle="modal"
                                             data-target="#addUsersModal">Add new user
                                     </button>
                                 </div>
@@ -230,7 +230,7 @@
                                         </thead>
                                         <tbody id="topicsBody"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addTopics" data-toggle="modal"
+                                    <button type="button" class="btn btn-info" id="addTopics" onclick="addModal()" data-toggle="modal"
                                             data-target="#addTopicsModal">Add new topic
                                     </button>
                                 </div>
@@ -297,7 +297,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this comment.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteCommentsModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="deleteCommentsModalButton" type="button" onclick="removeSubmit(this.getAttribute('data-url'))" data-url ="/" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -393,7 +393,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="addCommentsModalButton" type="button">Add
+                    <button class="btn btn-primary" id="addCommentsModalButton" onclick="addSubmit()" type="button">Add
                     </button>
                 </div>
             </div>
@@ -413,7 +413,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this subject.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteSubjectsModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="deleteSubjectsModalButton" type="button" onclick="removeSubmit(this.getAttribute('data-url'))" data-url ="/" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -509,7 +509,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="addSubjectsModalButton" type="button">Add
+                    <button class="btn btn-primary" id="addSubjectsModalButton" onclick="addSubmit()" type="button">Add
                     </button>
                 </div>
             </div>
@@ -545,7 +545,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this user.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteUsersModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="deleteUsersModalButton" type="button" onclick="removeSubmit(this.getAttribute('data-url'))" data-url ="/" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -658,7 +658,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="addUsersModalButton" type="button">Add</a>
+                    <a class="btn btn-primary" id="addUsersModalButton" onclick="addSubmit()" type="button">Add</a>
                 </div>
             </div>
         </div>
@@ -677,7 +677,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this topic.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteTopicsModalButton" type="button" data-dismiss="modal">
+                    <button class="btn btn-primary" id="deleteTopicsModalButton" type="button" onclick="removeSubmit(this.getAttribute('data-url'))" data-url ="/" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -735,7 +735,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="addTopicsModalButton" type="button">Add</a>
+                    <a class="btn btn-primary" id="addTopicsModalButton" onclick="addSubmit()" type="button">Add</a>
                 </div>
             </div>
         </div>
@@ -752,7 +752,7 @@
             <%--<td><a class="btn btn-primary updateComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Update</a></td>--%>
             <%--<td><a class="btn btn-primary deleteComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Delete</a></td>--%>
             <td><button type="button" class = "btn btn-primary updateComments" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteComments" id ="\${id}" data-toggle="modal" data-target="#deleteCommentsModal" onclick = "remove()">Delete</button></td>
+            <td><button type="button" class = "btn btn-danger deleteComments" id ="\${id}" data-toggle="modal" data-target="#deleteCommentsModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
     </script>
@@ -766,7 +766,7 @@
             <td>\${date}</td>
             <td><button type="button" class = "btn btn-success readSubjects" id ="\${id}" data-toggle="modal" data-target="#readSubjectsModal">Read</button></td>
             <td><button type="button" class = "btn btn-primary updateSubjects" id ="\${id}" data-toggle="modal" data-target="#updateSubjectsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteSubjects" id ="\${id}" data-toggle="modal" data-target="#deleteSubjectsModal" onclick = "removeModal()">Delete</button></td>
+            <td><button type="button" class = "btn btn-danger deleteSubjects" id ="\${id}" data-toggle="modal" data-target="#deleteSubjectsModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
     </script>
@@ -779,7 +779,7 @@
             <td>\${firstName}</td>
             <td>\${lastName}</td>
             <td><button type="button" class = "btn btn-primary updateUsers" id ="\${id}" data-toggle="modal" data-target="#updateUsersModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteUsers" id ="\${id}" data-toggle="modal" data-target="#deleteUsersModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-danger deleteUsers" id ="\${id}" data-toggle="modal" data-target="#deleteUsersModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
     </script>
@@ -788,7 +788,7 @@
         <tr id = "column\${id}">
             <td>\${topicName}</td>
             <td><button type="button" class = "btn btn-primary updateTopics" id ="\${id}" data-toggle="modal" data-target="#updateTopicsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteTopics" id ="\${id}" data-toggle="modal" data-target="#deleteTopicsModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-danger deleteTopics" id ="\${id}" data-toggle="modal" data-target="#deleteTopicsModal" onclick = "removeModal(\${id})">Delete</button></td>
         </tr>
 
     </script>
