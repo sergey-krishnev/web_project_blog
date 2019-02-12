@@ -53,7 +53,23 @@ $(document).ready(function () {
                         buildComments(updateCommentsPath)
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        alert("error in operation")
+                        var obj = JSON.parse(jqXHR.responseText);
+                        var objStr = obj.errors.toString();
+                        var array = objStr.split(',');
+                        var lang = $("#lang").val();
+                        $.i18n.properties({
+                            name: 'messages',
+                            path: '/bundle',
+                            mode: 'both',
+                            language: lang,
+                            callback: function () {
+                                $.each(array, function (index, value) {
+                                    var hashvalue = "." + value;
+                                    $(hashvalue).text($.i18n.prop(value));
+                                    // $("#NotEmpty.subjectDTO.subject").text($.i18n.prop("NotEmpty.subjectDTO.subject"));
+                                })
+                            }
+                        })
                     }
                 })
             })

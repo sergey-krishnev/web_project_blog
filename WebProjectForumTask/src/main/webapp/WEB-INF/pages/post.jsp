@@ -12,6 +12,12 @@
 
     <title>Start FOUR ROOM</title>
 
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
@@ -22,7 +28,7 @@
 
 <body>
 
-
+<input type="hidden" id ="lang" value="${pageContext.response.locale}"/>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -32,6 +38,13 @@
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <span style="float: left">
+        <a href="?lang=en_US">English</a>
+        |
+        <a href="?lang=ru">Russian</a>
+        </span>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -48,8 +61,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>--%>
+                <%--</li>--%>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin">Link admin</a>
                 </li>
             </ul>
         </div>
@@ -69,6 +85,8 @@
             <hr>
 
             <!-- Comments Form -->
+            <div class="error NotEmpty-commentDTO-message"></div>
+            <div class="error BadWords-commentDTO-message"></div>
             <div class="card my-4">
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
@@ -154,6 +172,7 @@
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="vendor/jquery-i18n-properties/jquery.i18n.properties.js"></script>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 

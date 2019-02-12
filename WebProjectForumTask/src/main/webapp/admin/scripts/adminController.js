@@ -15,12 +15,12 @@ var addPath = '#add' + Pathname;
 var addModalPath = '#add' + Pathname + "ModalButton";
 
 $(document).ready(function () {
-    switchDashboard(path, pathname);
     buildTable(path, Pathname, pathname);
     add(addPath, addModalPath, Pathname, path, pathname);
     remove(Pathname, path);
     read(path);
     update(updatePath, updateModalPath, Pathname, path, pathname);
+    switchDashboard(path, pathname);
     function switchDashboard(path, pathname) {
         $(document).on('click','.nav-link',function (event) {
             event.preventDefault();
@@ -42,6 +42,7 @@ $(document).ready(function () {
         });
     }
     function buildTable(path, Pathname, pathname) {
+        $("#" + pathname + "Body").empty();
         var idDispl = "#display" + Pathname + "Table";
         $(".Pathname").text(Pathname);
         $(idDispl).css("display", "block");

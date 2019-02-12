@@ -50,7 +50,8 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/admin">Link admin</a> <%--timely--%>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin">Link admin</a>
+                </li><%--timely--%>
                     <%--<sec:authorize access="!isAuthenticated()">--%>
                         <%--<a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>--%>
                     <%--</sec:authorize>--%>
@@ -70,7 +71,6 @@
                     </div>
                 </li>
                     <%--</sec:authorize>--%>
-                </li>
             </ul>
         </div>
     </div>
