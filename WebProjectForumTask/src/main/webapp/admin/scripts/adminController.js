@@ -1,51 +1,54 @@
-var path = $('#default-path').attr("href");
-var pathname = path.toString().replace("admin/","").toString();
-var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
 $(document).ready(function () {
 
-    var id;
+    switchDashboard();
+    buildTable();
+    removeModal();
+
+});
+
+function removeModal() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
     var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $('#delete' + Pathname + 'Modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        id = button.data('id');
-    var pathDelete;
-    pathDelete = path + "/" + id;
-    $("#delete" + Pathname + "ModalButton").attr("data-url", pathDelete);
+        var id = button.data('id');
+        var pathDelete;
+        pathDelete = path + "/" + id;
+        $("#delete" + Pathname + "ModalButton").attr("data-url", pathDelete);
     });
+}
 
-    switchDashboard(path, pathname);
-    buildTable(path, Pathname, pathname);
-    function switchDashboard() {
-        $(document).on('click','.nav-link',function (event) {
-            event.preventDefault();
-            $('#default-path').attr("href",$(this).attr("data-url"));
-            var pathChanged = $(this).attr("data-url");
-            var pathnameChanged = pathChanged.toString().replace("admin/", "");
-            var PathnameChanged = pathnameChanged.charAt(0).toUpperCase() + pathnameChanged.slice(1);
-            $(".displayTables").css("display", "none");
-            $("#" + pathnameChanged + "Body").empty();
-            buildTable(pathChanged, PathnameChanged,pathnameChanged);
-        });
-    }
-    function buildTable(path, Pathname, pathname) {
+function switchDashboard() {
+    $(document).on('click','.nav-link',function (event) {
+        event.preventDefault();
+        $('#default-path').attr("href",$(this).attr("data-url"));
+        var path = $(this).attr("data-url");
+        var pathname = path.toString().replace("admin/", "");
+        $(".displayTables").css("display", "none");
         $("#" + pathname + "Body").empty();
-        var idDispl = "#display" + Pathname + "Table";
-        $(".Pathname").text(Pathname);
-        $(idDispl).css("display", "block");
-        $.getJSON(path, function (data) {
-            if (pathname === "subjects") {
-                $.each(data, function (key, value) {
-                    value.text = value.text.split(".")[0] + ".";
-                });
-            }
-            $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
-        });
-    }
-});
+        buildTable();
+        removeModal()
+    });
+}
 
-
+function buildTable() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
+    $("#" + pathname + "Body").empty();
+    var idDispl = "#display" + Pathname + "Table";
+    $(".Pathname").text(Pathname);
+    $(idDispl).css("display", "block");
+    $.getJSON(path, function (data) {
+        if (pathname === "subjects") {
+            $.each(data, function (key, value) {
+                value.text = value.text.split(".")[0] + ".";
+            });
+        }
+        $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
+    });
+}
 
 
 function removeSubmit(value) {
