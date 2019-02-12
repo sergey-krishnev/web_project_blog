@@ -1,21 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: skryshneu
-  Date: 2/11/2019
-  Time: 1:50 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Topic</title>
 
-    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<c:url value="resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
 
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
 
-    <!-- Custom styles for this template -->
-    <link href="../css/blog-home.css" rel="stylesheet">
+    <link href="<c:url value="resources/css/blog-home.css" />" rel="stylesheet">
 
 </head>
 <body>
@@ -33,13 +26,13 @@
     </div>
 </div>
 
-<script src="../vendor/jquery/jquery.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="<c:url value="resources/vendor/jquery/jquery.js" />"></script>
+<script src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 
 <!-- Custom jQuery scripts -->
-<script src="../scripts/topic.js"></script>
+<script src="<c:url value="resources/js/topic.js" />"></script>
 
 </body>
 </html>

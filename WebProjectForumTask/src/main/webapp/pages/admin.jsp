@@ -19,16 +19,16 @@
     </style>
 
     <!-- Bootstrap core CSS-->
-    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<c:url value="resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="resources/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
 
     <!-- Page level plugin CSS-->
-    <link href="../vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="<c:url value="resources/vendor/datatables/dataTables.bootstrap4.css" />" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin.css" rel="stylesheet">
+    <link href="<c:url value="resources/css/sb-admin.css" />" rel="stylesheet">
 
     <link rel="shortcut icon" href="#" />
 
@@ -810,27 +810,25 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../vendor/jquery-i18n-properties/jquery.i18n.properties.js"></script>
+    <script src="<c:url value="resources/vendor/jquery/jquery.min.js" />"></script>
+    <script src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
+    <script src="<c:url value="resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<c:url value="resources/vendor/jquery-easing/jquery.easing.min.js" />"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin.min.js"></script>
-
+    <script src="<c:url value="resources/js/sb-admin.min.js" />"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
-
-    <script src="../scripts/adminController.js"></script>
+    <script src="<c:url value="resources/js/adminController.js" />"></script>
 
 
     <!-- Page level plugin JavaScript-->
-    <script src="../vendor/datatables/jquery.dataTables.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="<c:url value="resources/vendor/datatables/jquery.dataTables.js" />"></script>
+    <script src="<c:url value="resources/vendor/datatables/dataTables.bootstrap4.js" />"></script>
 
     <!-- Demo scripts for this page-->
-    <script src="../js/demo/datatables-demo.js"></script>
+    <script src="<c:url value="resources/js/demo/datatables-demo.js" />"></script>
 
 
 </body>
