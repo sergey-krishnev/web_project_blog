@@ -15,10 +15,12 @@
             base-package="hibernate.config" />
     <mvc:default-servlet-handler />
 
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
     <bean name="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="prefix" value="/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
