@@ -6,24 +6,23 @@
 //     Pathname : $('#default-path').attr("href").toString().replace("admin/","").charAt(0).toUpperCase() + $('#default-path').attr("href").replace("admin/","").slice(1)
 // }
 var path = $('#default-path').attr("href");
-var schemeHost = $("#url").attr("href");
 var pathname = path.toString().replace("admin/","").toString();
 var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
 var updatePath = '.update' + Pathname;
 var updateModalPath = '#update' + Pathname + "ModalButton";
 var addPath = '#add' + Pathname;
 var addModalPath = '#add' + Pathname + "ModalButton";
-
 $(document).ready(function () {
+    switchDashboard(path, pathname);
     buildTable(path, Pathname, pathname);
     add(addPath, addModalPath, Pathname, path, pathname);
-    remove(Pathname, path);
+    remove(Pathname, path, pathname);
     read(path);
     update(updatePath, updateModalPath, Pathname, path, pathname);
-    switchDashboard(path, pathname);
-    function switchDashboard(path, pathname) {
+    function switchDashboard() {
         $(document).on('click','.nav-link',function (event) {
             event.preventDefault();
+            $('#default-path').attr("href",$(this).attr("data-url"));
             var pathChanged = $(this).attr("data-url");
             var pathnameChanged = pathChanged.toString().replace("admin/", "");
             var PathnameChanged = pathnameChanged.charAt(0).toUpperCase() + pathnameChanged.slice(1);
@@ -31,12 +30,11 @@ $(document).ready(function () {
             var updateModalPathChanged = '#update' + PathnameChanged + "ModalButton";
             var addPathChanged = '#add' + PathnameChanged;
             var addModalPathChanged = '#add' + PathnameChanged + "ModalButton";
-            // alert(Pathname);
             $(".displayTables").css("display", "none");
             $("#" + pathnameChanged + "Body").empty();
             buildTable(pathChanged, PathnameChanged,pathnameChanged);
             add(addPathChanged, addModalPathChanged, PathnameChanged, pathChanged, pathnameChanged);
-            remove(PathnameChanged, pathChanged);
+            remove(PathnameChanged, pathChanged, pathnameChanged);
             read(pathChanged);
             update(updatePathChanged, updateModalPathChanged, PathnameChanged, pathChanged, pathnameChanged);
         });
@@ -141,7 +139,12 @@ $(document).ready(function () {
             });
         });
     }
-    function remove(Pathname, path) {
+
+    function removeModal() {
+        alert("aaaaa");
+    }
+
+    function remove(Pathname, path, pathname) {
 
         var pathDelete;
         $(document).on('click', '.delete' + Pathname, function() {

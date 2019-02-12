@@ -752,7 +752,7 @@
             <%--<td><a class="btn btn-primary updateComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Update</a></td>--%>
             <%--<td><a class="btn btn-primary deleteComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Delete</a></td>--%>
             <td><button type="button" class = "btn btn-primary updateComments" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteComments" id ="\${id}" data-toggle="modal" data-target="#deleteCommentsModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-danger deleteComments" id ="\${id}" data-toggle="modal" data-target="#deleteCommentsModal" onclick = "remove()">Delete</button></td>
         </tr>
 
     </script>
@@ -766,7 +766,7 @@
             <td>\${date}</td>
             <td><button type="button" class = "btn btn-success readSubjects" id ="\${id}" data-toggle="modal" data-target="#readSubjectsModal">Read</button></td>
             <td><button type="button" class = "btn btn-primary updateSubjects" id ="\${id}" data-toggle="modal" data-target="#updateSubjectsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteSubjects" id ="\${id}" data-toggle="modal" data-target="#deleteSubjectsModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-danger deleteSubjects" id ="\${id}" data-toggle="modal" data-target="#deleteSubjectsModal" onclick = "removeModal()">Delete</button></td>
         </tr>
 
     </script>
@@ -819,9 +819,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="admin/js/sb-admin.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 
     <script src="admin/scripts/adminController.js"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+
+
 
 
     <!-- Page level plugin JavaScript-->
