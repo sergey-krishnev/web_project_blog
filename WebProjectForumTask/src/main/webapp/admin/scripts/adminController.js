@@ -1,14 +1,20 @@
-// var glob = {
-//     id : null,
-//     path : $('#default-path').attr("href"),
-//     schemeHost : $("#url").attr("href"),
-//     pathname : $('#default-path').attr("href").toString().replace("admin/",""),
-//     Pathname : $('#default-path').attr("href").toString().replace("admin/","").charAt(0).toUpperCase() + $('#default-path').attr("href").replace("admin/","").slice(1)
-// }
 var path = $('#default-path').attr("href");
 var pathname = path.toString().replace("admin/","").toString();
 var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
 $(document).ready(function () {
+
+    var id;
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
+    $('#delete' + Pathname + 'Modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        id = button.data('id');
+    var pathDelete;
+    pathDelete = path + "/" + id;
+    $("#delete" + Pathname + "ModalButton").attr("data-url", pathDelete);
+    });
+
     switchDashboard(path, pathname);
     buildTable(path, Pathname, pathname);
     function switchDashboard() {
@@ -41,17 +47,9 @@ $(document).ready(function () {
 
 
 
-function removeModal(id) {
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    var pathDelete;
-        pathDelete = path + "/" + id;
-        $("#delete" + Pathname + "ModalButton").attr("data-url", pathDelete);
 
-}
-
-function removeSubmit(pathDelete) {
+function removeSubmit(value) {
+    var pathDelete = $(value).attr("data-url");
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
     $.ajax({
