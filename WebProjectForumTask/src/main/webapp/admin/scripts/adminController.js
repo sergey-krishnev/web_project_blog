@@ -59,7 +59,7 @@ function removeSubmit(value) {
     $.ajax({
         url: pathDelete,
         type: "DELETE",
-        success: function (data, textStatus, xhr) {
+        success: function () {
             $("#" + pathname + "Body").empty();
             $.getJSON(path, function (data) {
                 if (pathname === "subjects") {
@@ -70,7 +70,7 @@ function removeSubmit(value) {
                 $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
             });
         },
-        error: function (xhr, textStatus, errorThrown) {
+        error: function () {
             alert('Error in Operation');
         }
     })
@@ -82,30 +82,10 @@ function addModal() {
     var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $(".error").text("");
     $(".add" + Pathname + "Data").val("");
-    $.getJSON("/admin/subjects", function (data) {
-        var subjectDTO_data = '';
-        subjectDTO_data += '<option selected disabled>Select the subject</option>';
-        $.each(data, function (key, value) {
-            subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
-        });
-        $(".subjectsSelectUpdate").html(subjectDTO_data);
-    });
-    $.getJSON("/admin/users", function (data) {
-        var userDTO_data = '<option selected disabled>Select the user</option>';
-        userDTO_data += '';
-        $.each(data, function (key, value) {
-            userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
-        });
-        $(".usersSelectUpdate").html(userDTO_data);
-    });
-    $.getJSON("/admin/topics", function (data) {
-        var topicDTO_data = '<option selected disabled>Select the topic</option>';
-        topicDTO_data += '';
-        $.each(data, function (key, value) {
-            topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
-        });
-        $(".topicsSelectUpdate").html(topicDTO_data);
-    });
+    selectSubjects();
+    selectUsers();
+    selectTopics();
+
 }
 
 function addSubmit() {
@@ -129,12 +109,8 @@ function addSubmit() {
         data: JSON.stringify(map),
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
-        success: function (data, textStatus, xhr) {
+        success: function () {
             $('#add' + Pathname + "Modal").modal('hide');
-            // var htmlMap = $("#" + pathname + "Template").tmpl(map);
-            // alert(htmlMap);
-            // htmlMap.appendTo("#" + pathname + "Body"); //Change
-            // alert("success");
             $("#" + pathname + "Body").empty();
             $.getJSON(path, function (data) {
                 if (pathname === "subjects") {
@@ -145,7 +121,7 @@ function addSubmit() {
                 $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
             });
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             var obj = JSON.parse(jqXHR.responseText);
             var objStr = obj.errors.toString();
             var array = objStr.split(',');
@@ -159,7 +135,6 @@ function addSubmit() {
                     $.each(array, function (index, value) {
                         var hashvalue = "." + value;
                         $(hashvalue).text($.i18n.prop(value));
-                        // $("#NotEmpty.subjectDTO.subject").text($.i18n.prop("NotEmpty.subjectDTO.subject"));
                     })
                 }
             })
@@ -186,42 +161,9 @@ function updateModal() {
             $.each(data, function (key, value) {
                 $("#" + key.toString() + "Update" + Pathname + "Modal").val(value);
             });
-
-        });
-
-        $.getJSON("admin/subjects", function (data) {
-            var subjectDTO_data = '';
-            $.each(data, function (key, value) {
-                if (value.subjectName === selectedSubject) {
-                    subjectDTO_data += '<option selected value="' + value.subjectName + '">' + value.subjectName + '</option>';
-                } else {
-                    subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
-                }
-
-            });
-            $(".subjectsSelectUpdate").html(subjectDTO_data);
-        });
-        $.getJSON("admin/users", function (data) {
-            var userDTO_data = '';
-            $.each(data, function (key, value) {
-                if (value.userName === selectedUser) {
-                    userDTO_data += '<option selected value="' + value.userName + '">' + value.userName + '</option>';
-                } else {
-                    userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
-                }
-            });
-            $(".usersSelectUpdate").html(userDTO_data);
-        });
-        $.getJSON("admin/topics", function (data) {
-            var topicDTO_data = '';
-            $.each(data, function (key, value) {
-                if (value.topicName === selectedTopic) {
-                    topicDTO_data += '<option selected value="' + value.topicName + '">' + value.topicName + '</option>';
-                } else {
-                    topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
-                }
-            });
-            $(".topicsSelectUpdate").html(topicDTO_data);
+            selectWithSelectedSubjects(selectedSubject);
+            selectWithSelectedUsers(selectedUser);
+            selectWithSelectedTopics(selectedTopic);
         });
     });
 }
@@ -294,5 +236,81 @@ function read() {
             $(".subjectNameRead").html(data.subjectName);
             $(".subjectsText").html(data.text);
         });
+    });
+}
+
+function selectSubjects() {
+    $.getJSON("/admin/subjects", function (data) {
+        var subjectDTO_data = '';
+        subjectDTO_data += '<option selected disabled>Select the subject</option>';
+        $.each(data, function (key, value) {
+            subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
+        });
+        $(".subjectsSelectUpdate").html(subjectDTO_data);
+    });
+}
+
+function selectTopics() {
+    $.getJSON("/admin/topics", function (data) {
+        var topicDTO_data = '<option selected disabled>Select the topic</option>';
+        topicDTO_data += '';
+        $.each(data, function (key, value) {
+            topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
+        });
+        $(".topicsSelectUpdate").html(topicDTO_data);
+    });
+}
+
+function selectUsers() {
+    $.getJSON("/admin/users", function (data) {
+        var userDTO_data = '<option selected disabled>Select the user</option>';
+        userDTO_data += '';
+        $.each(data, function (key, value) {
+            userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
+        });
+        $(".usersSelectUpdate").html(userDTO_data);
+    });
+}
+
+function selectWithSelectedSubjects(subject) {
+    $.getJSON("admin/subjects", function (data) {
+        var subjectDTO_data = '';
+        $.each(data, function (key, value) {
+            if (value.subjectName === subject) {
+                subjectDTO_data += '<option selected value="' + value.subjectName + '">' + value.subjectName + '</option>';
+            } else {
+                subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
+            }
+
+        });
+        $(".subjectsSelectUpdate").html(subjectDTO_data);
+    });
+}
+
+function selectWithSelectedTopics(topic) {
+    $.getJSON("admin/topics", function (data) {
+        var topicDTO_data = '';
+        $.each(data, function (key, value) {
+            if (value.topicName === topic) {
+                topicDTO_data += '<option selected value="' + value.topicName + '">' + value.topicName + '</option>';
+            } else {
+                topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
+            }
+        });
+        $(".topicsSelectUpdate").html(topicDTO_data);
+    });
+}
+
+function selectWithSelectedUsers(user) {
+    $.getJSON("admin/users", function (data) {
+        var userDTO_data = '';
+        $.each(data, function (key, value) {
+            if (value.userName === user) {
+                userDTO_data += '<option selected value="' + value.userName + '">' + value.userName + '</option>';
+            } else {
+                userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
+            }
+        });
+        $(".usersSelectUpdate").html(userDTO_data);
     });
 }
