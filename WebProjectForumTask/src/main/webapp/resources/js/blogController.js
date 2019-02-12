@@ -13,18 +13,19 @@ $(document).ready(function () {
         changeTopicName(pathname);
     }
 
-    function buildSubjects(subjectsPath) {
-        $.getJSON(subjectsPath, function (data) {
-            $.each(data, function (key, value) {
-                value.text = value.text.split(".")[0] + ".";
-            });
-            $("#subjectsTemplate").tmpl(data).appendTo(".aggregate-subjects");
-        });
-    }
-
-    function changeTopicName(subjectsPath) {
-        $.getJSON(subjectsPath, function (data) {
-                $(".topicName").text(data.topicName);
-        })
-    }
 });
+
+function buildSubjects(subjectsPath) {
+    $.getJSON(subjectsPath, function (data) {
+        $.each(data, function (key, value) {
+            value.text = value.text.split(".")[0] + ".";
+        });
+        $("#subjectsTemplate").tmpl(data).appendTo(".aggregate-subjects");
+    });
+}
+
+function changeTopicName(subjectsPath) {
+    $.getJSON(subjectsPath, function (data) {
+        $(".topicName").text(data.topicName);
+    })
+}
