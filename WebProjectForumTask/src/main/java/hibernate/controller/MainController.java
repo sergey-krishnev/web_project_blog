@@ -44,6 +44,9 @@ public class MainController {
         return "post";
     }
 
+    @RequestMapping(value = "/post/{subjectId}/update", method = RequestMethod.GET)
+    public String updatePost(@PathVariable int subjectId) { return "post"; }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String getAdmin() {
         return "admin";

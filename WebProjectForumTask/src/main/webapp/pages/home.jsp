@@ -177,6 +177,7 @@
                 <div class = "card-body">
                 <h2 class = "card-title">\${subjectName}</h2>
                 <p class = "card-text">\${text}</p>
+                <a href="/post/\${id}/update" class = "btn btn-primary subject-update style="font-size:24px">Edit</a>
                 <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">Posted on \${date} by

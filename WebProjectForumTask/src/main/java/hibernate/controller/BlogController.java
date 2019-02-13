@@ -56,6 +56,15 @@ public class BlogController {
         return ResponseEntity.ok(subjectDTO);
     }
 
+    @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.PUT)
+    public ResponseEntity updateSubjectDTO(@Valid @RequestBody SubjectDTO subjectDTO, Errors errors, @PathVariable int subjectId) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
+        crudService.updateSubject(subjectId, subjectDTO);
+        return ResponseEntity.ok(subjectDTO);
+    }
+
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
     public List<CommentDTO> getAllCommentDTO() {
         return crudService.searchAllComment();
