@@ -21,7 +21,7 @@ public class SameSubjectNameValidator implements ConstraintValidator<SameSubject
 
     @Override
     public boolean isValid(String subject, ConstraintValidatorContext constraintValidatorContext) {
-        Boolean exist = crudService.searchBySubjectName(subject);
-        return false;
+        boolean exist = crudService.searchBySubjectName(subject);
+        return !(exist);
     }
 }

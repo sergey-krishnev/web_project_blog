@@ -40,9 +40,20 @@ public class BlogController {
         return topicDTO.getSubjects();
     }
 
+
+
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.GET)
     public SubjectDTO getSubjectDTO(@PathVariable int subjectId) {
         return crudService.searchSubjectById(subjectId);
+    }
+
+    @RequestMapping(value = "/topics/subjects", method = RequestMethod.POST)
+    public ResponseEntity addSubjectsDTO(@Valid @RequestBody SubjectDTO subjectDTO, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }
+        crudService.insertSubject(subjectDTO);
+        return ResponseEntity.ok(subjectDTO);
     }
 
     @RequestMapping(value = "/comments", method = RequestMethod.GET)

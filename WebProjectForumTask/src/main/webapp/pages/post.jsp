@@ -27,7 +27,6 @@
 </head>
 
 <body>
-
 <input type="hidden" id ="lang" value="${pageContext.response.locale}"/>
 
 <!-- Navigation -->
@@ -82,8 +81,31 @@
 
             <div class="aggregate-post"></div>
 
-            <hr>
-
+            <!-- Subject add form -->
+            <div class="subject-add-form" style="display: none">
+                <h1>New subject</h1>
+                <div class="form-group">
+                <label for="subject-name-form">Subject name</label>
+            <input name="subjectName" class="form-control form-control-lg subject-add" id="subject-name-form" type="text" placeholder="Subject name">
+                    <div class="error NotEmpty-subjectDTO-subjectName"></div>
+                    <div class="error SameSubjectName-subjectDTO-subject"></div>
+                    <div class="error BadWords-subjectDTO-subjectName"></div>
+                </div>
+                <div class="form-group">
+                <label for="topic-name-form">Topic name</label>
+                <select name="topicName" class="form-control form-control-lg topics-select-update subject-add" id="topic-name-form">
+                    <option>Large select</option>
+                </select>
+                    <div class="error NotEmpty-subjectDTO-topicName"></div>
+                </div>
+                <div class="form-group">
+                    <label for="text-form">Text</label>
+                    <textarea name="text" class="form-control subject-add" id="text-form" rows="12"></textarea>
+                    <div class="error NotEmpty-subjectDTO-text"></div>
+                    <div class="error BadWords-subjectDTO-text"></div>
+                </div>
+                <a type="button" class="btn btn-primary" onclick="addSubjectSubmit()">Submit</a>
+            </div>
             <!-- Comments Form -->
             <div class="error NotEmpty-commentDTO-message"></div>
             <div class="error BadWords-commentDTO-message"></div>

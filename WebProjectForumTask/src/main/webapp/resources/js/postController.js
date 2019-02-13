@@ -16,8 +16,61 @@ $(document).ready(function () {
 
 function addSubjectForm(pathname) {
     if (pathname === "add") {
-
+        $(".comment-form").css("display", "none");
+        $(".subject-add-form").css("display", "block");
+        selectTopics();
     }
+}
+
+function addSubjectSubmit() {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var map = {};
+    $(".subject-add").each(function () {
+        map[$(this).attr("name")] = $(this).val();
+    });
+    map["id"] = 1;
+    map["userName"] = "Dumiel";
+    map["date"] = date + ' ' + time;
+    $.each(map, function (key, value) {
+        alert(key + " : " + value)
+    });
+
+    alert(JSON.stringify(map));
+
+    $.ajax({
+        type: "POST",
+        url: "/blog/topics/subjects",
+        data: JSON.stringify(map),
+        contentType: 'application/json; charset=UTF-8',
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+            alert("success");
+            // var htmlMap = $("#" + pathname + "Template").tmpl(map);
+            // alert(htmlMap);
+            // htmlMap.appendTo("#" + pathname + "Body"); //Change
+            // alert("success");
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            var obj = JSON.parse(jqXHR.responseText);
+            var objStr = obj.errors.toString();
+            var array = objStr.split(',');
+            var lang = $("#lang").val();
+            $.i18n.properties({
+                name: 'messages',
+                path: '/resources/bundle',
+                mode: 'both',
+                language: lang,
+                callback: function () {
+                    $.each(array, function (index, value) {
+                        var hashvalue = "." + value;
+                        $(hashvalue).text($.i18n.prop(value));
+                    })
+                }
+            })
+        }
+    })
 }
 
 function buildComments(commentsPath) {
@@ -67,18 +120,28 @@ function addComment(topicName, subjectName, updateCommentsPath) {
                 var lang = $("#lang").val();
                 $.i18n.properties({
                     name: 'messages',
-                    path: '/bundle',
+                    path: '/resources/bundle',
                     mode: 'both',
                     language: lang,
                     callback: function () {
                         $.each(array, function (index, value) {
                             var hashvalue = "." + value;
                             $(hashvalue).text($.i18n.prop(value));
-                            // $("#NotEmpty.subjectDTO.subject").text($.i18n.prop("NotEmpty.subjectDTO.subject"));
                         })
                     }
                 })
             }
         })
     })
+}
+
+function selectTopics() {
+    $.getJSON("/blog/topics", function (data) {
+        var topicDTO_data = '<option selected disabled>Select the topic</option>';
+        topicDTO_data += '';
+        $.each(data, function (key, value) {
+            topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
+        });
+        $(".topics-select-update").html(topicDTO_data);
+    });
 }

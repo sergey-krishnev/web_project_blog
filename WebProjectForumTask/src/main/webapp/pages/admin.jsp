@@ -485,6 +485,7 @@
                                class="form-control add-subjects-data" value="" placeholder="Subject name">
                         <div class="error NotEmpty-subjectDTO-subjectName"></div>
                         <div class="error BadWords-subjectDTO-subjectName"></div>
+                        <div class="error SameSubjectName-subjectDTO-subject"></div>
                     </div>
                     <div class="form-group">
                         <label for="userName-add-subjects-modal">Username:</label>

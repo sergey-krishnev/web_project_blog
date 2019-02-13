@@ -96,6 +96,7 @@ function addSubmit() {
         map[$(this).attr("name")] = $(this).val();
     });
     map["id"] = 1;
+    alert(JSON.stringify(map));
     $.ajax({
         type: "POST",
         url: path,

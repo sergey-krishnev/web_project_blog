@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    var path = $('#default-path').attr("href");
     var pathname = window.location.pathname;
     pathname = pathname.replace("all", "topics/subjects");
     var id = pathname.match("\\d+");

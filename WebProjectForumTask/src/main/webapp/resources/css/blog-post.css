@@ -4,8 +4,9 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-blog-post/blob/master/LICENSE)
  */
 
-body {
-  padding-top: 54px;
+footer {
+  position: relative;
+  bottom: -101px
 }
 
 @media (min-width: 992px) {
