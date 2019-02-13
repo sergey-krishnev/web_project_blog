@@ -44,7 +44,7 @@ public class CRUDServiceImpl implements CRUDService {
     @Override
     public boolean searchBySubjectName(String subject) {
         Subject subject1 = crudDao.searchBySubjectName(subject);
-        return true;
+        return false;
     }
 
     @Transactional(readOnly = true)
