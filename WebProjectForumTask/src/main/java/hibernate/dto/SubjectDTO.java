@@ -1,6 +1,7 @@
 package hibernate.dto;
 
 import hibernate.validation.annotations.BadWords;
+import hibernate.validation.annotations.SameSubjectName;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public class SubjectDTO {
     private int id;
     @BadWords(message = "BadWords-subjectDTO-subjectName")
     @NotEmpty(message = "NotEmpty-subjectDTO-subjectName")
+    @SameSubjectName
     private String subjectName;
     @NotEmpty(message = "NotEmpty-subjectDTO-userName")
     private String userName;

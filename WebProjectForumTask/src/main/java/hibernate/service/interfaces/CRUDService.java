@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface CRUDService {
 
+    boolean searchBySubjectName(String subject);
+
     List<SubjectDTO> searchSubjectByTopic(Topic topic);
 
     TopicDTO searchTopicById(int topicId);

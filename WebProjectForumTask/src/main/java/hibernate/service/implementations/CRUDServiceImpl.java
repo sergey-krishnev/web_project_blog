@@ -41,6 +41,12 @@ public class CRUDServiceImpl implements CRUDService {
         return new java.sql.Date(date.getTime());
     }
 
+    @Override
+    public boolean searchBySubjectName(String subject) {
+        Subject subject1 = crudDao.searchBySubjectName(subject);
+        return false;
+    }
+
     @Transactional(readOnly = true)
     @Override
     public List<SubjectDTO> searchSubjectByTopic(Topic topic) {
