@@ -39,6 +39,11 @@ public class MainController {
         return "post";
     }
 
+    @RequestMapping(value = "/post/add", method = RequestMethod.GET)
+    public String addPost() {
+        return "post";
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String getAdmin() {
         return "admin";

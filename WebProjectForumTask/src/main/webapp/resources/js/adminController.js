@@ -10,11 +10,10 @@ $(document).ready(function () {
 function removeModal() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    $('#delete' + Pathname + 'Modal').on('show.bs.modal', function (event) {
+    $('#delete-' + pathname + '-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var pathDelete = button.data('url');
-        $("#delete" + Pathname + "ModalButton").attr("data-url", pathDelete);
+        $("#delete-" + pathname + "-modal-button").attr("data-url", pathDelete);
     });
 }
 
@@ -24,8 +23,8 @@ function switchDashboard() {
         $('#default-path').attr("href",$(this).attr("data-url"));
         var path = $(this).attr("data-url");
         var pathname = path.toString().replace("admin/", "");
-        $(".displayTables").css("display", "none");
-        $("#" + pathname + "Body").empty();
+        $(".display-tables").css("display", "none");
+        $("#" + pathname + "-body").empty();
         buildTable();
         removeModal();
         addModal();
@@ -37,10 +36,10 @@ function switchDashboard() {
 function buildTable() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    $("#" + pathname + "Body").empty();
-    var idDispl = "#display" + Pathname + "Table";
-    $(".Pathname").text(Pathname);
+    var pathnameCapital = pathname.charAt(0).toUpperCase() + pathname.slice(1);
+    $("#" + pathname + "-body").empty();
+    var idDispl = "#display-" + pathname + "-table";
+    $(".pathname-capital").text(pathnameCapital);
     $(idDispl).css("display", "block");
     $.getJSON(path, function (data) {
         if (pathname === "subjects") {
@@ -48,7 +47,7 @@ function buildTable() {
                 value.text = value.text.split(".")[0] + ".";
             });
         }
-        $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
+        $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
     });
 }
 
@@ -60,14 +59,14 @@ function removeSubmit(value) {
         url: pathDelete,
         type: "DELETE",
         success: function () {
-            $("#" + pathname + "Body").empty();
+            $("#" + pathname + "-body").empty();
             $.getJSON(path, function (data) {
                 if (pathname === "subjects") {
                     $.each(data, function (key, value) {
                         value.text = value.text.split(".")[0] + ".";
                     });
                 }
-                $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
+                $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
             });
         },
         error: function () {
@@ -79,24 +78,21 @@ function removeSubmit(value) {
 function addModal() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $(".error").text("");
-    $(".add" + Pathname + "Data").val("");
+    $(".add-" + pathname + "-data").val("");
     selectSubjects();
     selectUsers();
     selectTopics();
-
 }
 
 function addSubmit() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $(".error").text("");
     var dateTime = getCurrentDate();
-    $("#dateAdd" + Pathname + "Modal").val(dateTime);
+    $("#date-add-" + pathname + "-modal").val(dateTime);
     var map = {};
-    $(".add" + Pathname + "Data").each(function () {
+    $(".add-" + pathname + "-data").each(function () {
         map[$(this).attr("name")] = $(this).val();
     });
     map["id"] = 1;
@@ -107,15 +103,15 @@ function addSubmit() {
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function () {
-            $('#add' + Pathname + "Modal").modal('hide');
-            $("#" + pathname + "Body").empty();
+            $('#add-' + pathname + "-modal").modal('hide');
+            $("#" + pathname + "-body").empty();
             $.getJSON(path, function (data) {
                 if (pathname === "subjects") {
                     $.each(data, function (key, value) {
                         value.text = value.text.split(".")[0] + ".";
                     });
                 }
-                $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
+                $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
             });
         },
         error: function (jqXHR) {
@@ -142,11 +138,10 @@ function addSubmit() {
 function updateModal() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/", "").toString();
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    $('#update' + Pathname + 'Modal').on('show.bs.modal', function (event) {
+    $('#update-' + pathname + '-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var pathUpdate = button.data('url');
-        $("#update" + Pathname + "ModalButton").attr("data-url", pathUpdate);
+        $("#update-" + pathname + "-modal-button").attr("data-url", pathUpdate);
         $(".error").text("");
         var selectedSubject;
         var selectedUser;
@@ -156,7 +151,7 @@ function updateModal() {
             selectedUser = data.userName;
             selectedTopic = data.topicName;
             $.each(data, function (key, value) {
-                $("#" + key.toString() + "Update" + Pathname + "Modal").val(value);
+                $("#" + key.toString() + "-update-" + pathname + "-modal").val(value);
             });
             selectWithSelectedSubjects(selectedSubject);
             selectWithSelectedUsers(selectedUser);
@@ -169,12 +164,11 @@ function updateSubmit(value) {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/", "").toString();
     var pathUpdate = $(value).attr("data-url");
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     $(".error").text("");
     var dateTime = getCurrentDate();
-    $("#dateUpdate" + Pathname + "Modal").val(dateTime);
+    $("#date-update-" + pathname + "-modal").val(dateTime);
     var map = {};
-    $(".update" + Pathname + "Data").each(function () {
+    $(".update-" + pathname + "-data").each(function () {
         map[$(this).attr("name")] = $(this).val();
     });
     map["id"] = 1;
@@ -185,15 +179,15 @@ function updateSubmit(value) {
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (data, textStatus, xhr) {
-            $('#update' + Pathname + "Modal").modal('hide');
-            $("#" + pathname + "Body").empty();
+            $('#update-' + pathname + "-modal").modal('hide');
+            $("#" + pathname + "-body").empty();
             $.getJSON(path, function (data) {
                 if (pathname === "subjects") {
                     $.each(data, function (key, value) {
                         value.text = value.text.split(".")[0] + ".";
                     });
                 }
-                $("#" + pathname + "Template").tmpl(data).appendTo("#" + pathname + "Body");
+                $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
             });
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -220,14 +214,13 @@ function updateSubmit(value) {
 function read() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/", "").toString();
-    var Pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    $('#read' + Pathname + 'Modal').on('show.bs.modal', function (event) {
+    $('#read-' + pathname + '-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var pathRead = button.data('url');
 
         $.getJSON(pathRead, function (data) {
-            $(".subjectNameRead").html(data.subjectName);
-            $(".subjectsText").html(data.text);
+            $(".subjectName-read").html(data.subjectName);
+            $(".subjects-text").html(data.text);
         });
     });
 }
@@ -239,7 +232,7 @@ function selectSubjects() {
         $.each(data, function (key, value) {
             subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
         });
-        $(".subjectsSelectUpdate").html(subjectDTO_data);
+        $(".subjects-select-update").html(subjectDTO_data);
     });
 }
 
@@ -250,7 +243,7 @@ function selectTopics() {
         $.each(data, function (key, value) {
             topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
         });
-        $(".topicsSelectUpdate").html(topicDTO_data);
+        $(".topics-select-update").html(topicDTO_data);
     });
 }
 
@@ -261,7 +254,7 @@ function selectUsers() {
         $.each(data, function (key, value) {
             userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
         });
-        $(".usersSelectUpdate").html(userDTO_data);
+        $(".users-select-update").html(userDTO_data);
     });
 }
 
@@ -276,7 +269,7 @@ function selectWithSelectedSubjects(subject) {
             }
 
         });
-        $(".subjectsSelectUpdate").html(subjectDTO_data);
+        $(".subjects-select-update").html(subjectDTO_data);
     });
 }
 
@@ -290,7 +283,7 @@ function selectWithSelectedTopics(topic) {
                 topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
             }
         });
-        $(".topicsSelectUpdate").html(topicDTO_data);
+        $(".topics-select-update").html(topicDTO_data);
     });
 }
 
@@ -304,7 +297,7 @@ function selectWithSelectedUsers(user) {
                 userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
             }
         });
-        $(".usersSelectUpdate").html(userDTO_data);
+        $(".users-select-update").html(userDTO_data);
     });
 }
 

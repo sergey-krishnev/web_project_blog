@@ -91,23 +91,23 @@
 
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
-            <li class="nav-item changePathname" id=commentsNavItem>
-                <a class="nav-link changeLink" data-url="admin/comments" href="#">
+            <li class="nav-item">
+                <a class="nav-link" data-url="admin/comments" href="#">
                     <i class="fas fa-fw fa-comments"></i>
                     <span>Comments</span></a>
             </li>
-            <li class="nav-item changePathname" id=subjectsNavItem>
-                <a class="nav-link changeLink" data-url="admin/subjects" href="#">
+            <li class="nav-item">
+                <a class="nav-link " data-url="admin/subjects" href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span>Subjects</span></a>
             </li>
-            <li class="nav-item changePathname" id=usersNavItem>
-                <a class="nav-link changeLink" data-url="admin/users" href="#">
+            <li class="nav-item">
+                <a class="nav-link" data-url="admin/users" href="#">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users</span></a>
             </li>
-            <li class="nav-item changePathname" id=topicsNavItem>
-                <a class="nav-link changeLink" data-url="admin/topics"  href="#">
+            <li class="nav-item">
+                <a class="nav-link" data-url="admin/topics"  href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span>Topics</span></a>
             </li>
@@ -119,14 +119,14 @@
 
                 <!-- Breadcrumbs-->
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item Pathname">
+                    <li class="breadcrumb-item pathname-capital">
                     </li>
                 </ol>
 
                 <!-- Comments DataTables Example -->
 
                 <div id="adminTables">
-                    <div id="displayCommentsTable" class="displayTables" style="display: none">
+                    <div id="display-comments-table" class="display-tables" style="display: none">
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-comments"></i>
@@ -145,17 +145,17 @@
                                             <th colspan="2">Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="commentsBody"></tbody>
+                                        <tbody id="comments-body"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addComments" data-url ="/admin/comments" onclick="addModal()" data-toggle="modal"
-                                            data-target="#addCommentsModal">Add new comment
+                                    <button type="button" class="btn btn-info" id="add-comments" data-url ="/admin/comments" onclick="addModal()" data-toggle="modal"
+                                            data-target="#add-comments-modal">Add new comment
                                     </button>
                                 </div>
                             </div>
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
-                    <div id="displaySubjectsTable" class="displayTables" style="display: none">
+                    <div id="display-subjects-table" class="display-tables" style="display: none">
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-list"></i>
@@ -174,17 +174,17 @@
                                             <th colspan="3">Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="subjectsBody"></tbody>
+                                        <tbody id="subjects-body"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addSubjects" data-url ="/admin/subjects" onclick="addModal()" data-toggle="modal"
-                                            data-target="#addSubjectsModal">Add new subject
+                                    <button type="button" class="btn btn-info" id="add-subjects" data-url ="/admin/subjects" onclick="addModal()" data-toggle="modal"
+                                            data-target="#add-subjects-modal">Add new subject
                                     </button>
                                 </div>
                             </div>
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
-                    <div id="displayUsersTable"  class="displayTables" style="display: none">
+                    <div id="display-users-table"  class="display-tables" style="display: none">
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-users"></i>
@@ -203,17 +203,17 @@
                                             <th colspan="2">Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="usersBody"></tbody>
+                                        <tbody id="users-body"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addUsers" data-url ="/admin/users" onclick="addModal()" data-toggle="modal"
-                                            data-target="#addUsersModal">Add new user
+                                    <button type="button" class="btn btn-info" id="add-users" data-url ="/admin/users" onclick="addModal()" data-toggle="modal"
+                                            data-target="#add-users-modal">Add new user
                                     </button>
                                 </div>
                             </div>
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
-                    <div id="displayTopicsTable" class="displayTables" style="display: none">
+                    <div id="display-topics-table" class="display-tables" style="display: none">
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fas fa-list"></i>
@@ -228,10 +228,10 @@
                                             <th colspan="2">Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="topicsBody"></tbody>
+                                        <tbody id="topics-body"></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info" id="addTopics" data-url ="/admin/topics" onclick="addModal()" data-toggle="modal"
-                                            data-target="#addTopicsModal">Add new topic
+                                    <button type="button" class="btn btn-info" id="add-topics" data-url ="/admin/topics" onclick="addModal()" data-toggle="modal"
+                                            data-target="#add-topics-modal">Add new topic
                                     </button>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@
     </div>
 
     <!-- Modal Delete Comments-->
-    <div class="modal fade" id="deleteCommentsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="delete-comments-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -297,7 +297,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this comment.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteCommentsModalButton" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
+                    <button class="btn btn-primary" id="delete-comments-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -306,7 +306,7 @@
     </div>
 
     <!-- Modal Update Comments-->
-    <div class="modal fade" id="updateCommentsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="update-comments-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -317,32 +317,32 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="messageUpdateCommentsModal">Comment</label>
-                        <input name="message" id="messageUpdateCommentsModal" class="form-control updateCommentsData"
+                        <label for="message-update-comments-modal">Comment</label>
+                        <input name="message" id="message-update-comments-modal" class="form-control update-comments-data"
                                placeholder="Comment" type="text">
                         <div class="error NotEmpty-commentDTO-message"></div>
                         <div class="error BadWords-commentDTO-message"></div>
                     </div>
                     <div class="form-group">
-                        <label for="userNameUpdateCommentsModal">Username</label>
-                        <select name="userName" id="userNameUpdateCommentsModal"
-                                class="form-control updateCommentsData usersSelectUpdate"></select>
+                        <label for="userName-update-comments-modal">Username</label>
+                        <select name="userName" id="userName-update-comments-modal"
+                                class="form-control update-comments-data users-select-update"></select>
                     </div>
                     <div class="form-group">
-                        <label for="topicNameUpdateCommentsModal">Topic name:</label>
-                        <select name="topicName" id="topicNameUpdateCommentsModal"
-                                class="form-control updateCommentsData topicsSelectUpdate"></select>
+                        <label for="topicName-update-comments-modal">Topic name:</label>
+                        <select name="topicName" id="topicName-update-comments-modal"
+                                class="form-control update-comments-data topics-select-update"></select>
                     </div>
                     <div class="form-group">
-                        <label for="subjectNameUpdateCommentsModal">Subject name:</label>
-                        <select name="subjectName" id="subjectNameUpdateCommentsModal"
-                                class="form-control updateCommentsData subjectsSelectUpdate"></select>
+                        <label for="subjectName-update-comments-modal">Subject name:</label>
+                        <select name="subjectName" id="subjectName-update-comments-modal"
+                                class="form-control update-comments-data subjects-select-update"></select>
                     </div>
-                    <input id="dateUpdateCommentsModal" name="date" type="hidden" class="updateCommentsData" value="">
+                    <input id="date-update-comments-modal" name="date" type="hidden" class="update-comments-data" value="">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateCommentsModalButton" type="button" onclick="updateSubmit(this)" data-url ="#">
+                    <button class="btn btn-primary" id="update-comments-modal-button" type="button" onclick="updateSubmit(this)" data-url ="#">
                         Update
                     </button>
                 </div>
@@ -351,7 +351,7 @@
     </div>
 
     <!-- Modal Add Comments-->
-    <div class="modal fade" id="addCommentsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="add-comments-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -362,38 +362,38 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="messageAddCommentsModal">Comment</label>
-                        <input name="message" id="messageAddCommentsModal" class="form-control addCommentsData"
+                        <label for="message-add-comments-modal">Comment</label>
+                        <input name="message" id="message-add-comments-modal" class="form-control add-comments-data"
                                placeholder="Comment" type="text">
                         <div class="error NotEmpty-commentDTO-message"></div>
                         <div class="error BadWords-commentDTO-message"></div>
                     </div>
                     <div class="form-group">
-                        <label for="userNameAddCommentsModal">Username</label>
-                        <select name="userName" id="userNameAddCommentsModal"
-                                class="form-control addCommentsData usersSelectUpdate">
+                        <label for="userName-add-comments-modal">Username</label>
+                        <select name="userName" id="userName-add-comments-modal"
+                                class="form-control add-comments-data users-select-update">
                         </select>
                         <div class="error NotEmpty-commentDTO-userName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="topicNameAddCommentsModal">Topic name:</label>
-                        <select name="topicName" id="topicNameAddCommentsModal"
-                                class="form-control addCommentsData topicsSelectUpdate">
+                        <label for="topicName-add-comments-modal">Topic name:</label>
+                        <select name="topicName" id="topicName-add-comments-modal"
+                                class="form-control add-comments-data topics-select-update">
                         </select>
                         <div class="error NotEmpty-commentDTO-topicName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="subjectNameAddCommentsModal">Subject name:</label>
-                        <select name="subjectName" id="subjectNameAddCommentsModal"
-                                class="form-control addCommentsData subjectsSelectUpdate">
+                        <label for="subjectName-add-comments-modal">Subject name:</label>
+                        <select name="subjectName" id="subjectName-add-comments-modal"
+                                class="form-control add-comments-data subjects-select-update">
                         </select>
                         <div class="error NotEmpty-commentDTO-subjectName"></div>
                     </div>
-                    <input id="dateAddCommentsModal" name="date" type="hidden" class="addCommentsData" value="">
+                    <input id="date-add-comments-modal" name="date" type="hidden" class="add-comments-data" value="">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="addCommentsModalButton" onclick="addSubmit()" type="button">Add
+                    <button class="btn btn-primary" id="add-comments-modal-button" onclick="addSubmit()" type="button">Add
                     </button>
                 </div>
             </div>
@@ -401,7 +401,7 @@
     </div>
 
     <!-- Modal Delete Subjects-->
-    <div class="modal fade" id="deleteSubjectsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="delete-subjects-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -413,7 +413,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this subject.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteSubjectsModalButton" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
+                    <button class="btn btn-primary" id="delete-subjects-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -422,7 +422,7 @@
     </div>
 
     <!-- Modal Update Subjects-->
-    <div class="modal fade" id="updateSubjectsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="update-subjects-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -433,34 +433,34 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="subjectNameUpdateSubjectsModal">Subject name:</label>
-                        <input name="subjectName" id="subjectNameUpdateSubjectsModal" type="text"
-                               class="form-control updateSubjectsData" value="" placeholder="Subject name">
+                        <label for="subjectName-update-subjects-modal">Subject name:</label>
+                        <input name="subjectName" id="subjectName-update-subjects-modal" type="text"
+                               class="form-control update-subjects-data" value="" placeholder="Subject name">
                         <div class="error NotEmpty-subjectDTO-subjectName"></div>
                         <div class="error BadWords-subjectDTO-subjectName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="userNameUpdateSubjectsModal">Username:</label>
-                        <select name="userName" id="userNameUpdateSubjectsModal"
-                                class="form-control usersSelectUpdate updateSubjectsData"></select>
+                        <label for="userName-update-subjects-modal">Username:</label>
+                        <select name="userName" id="userName-update-subjects-modal"
+                                class="form-control users-select-update update-subjects-data"></select>
                     </div>
                     <div class="form-group">
-                        <label for="topicNameUpdateSubjectsModal">Topic name:</label>
-                        <select name="topicName" id="topicNameUpdateSubjectsModal"
-                                class="form-control topicsSelectUpdate updateSubjectsData"></select>
+                        <label for="topicName-update-subjects-modal">Topic name:</label>
+                        <select name="topicName" id="topicName-update-subjects-modal"
+                                class="form-control topics-select-update update-subjects-data"></select>
                     </div>
-                    <input id="dateUpdateSubjectsModal" name="date" type="hidden" class="updateSubjectsData" value="">
+                    <input id="date-update-subjects-modal" name="date" type="hidden" class="update-subjects-data" value="">
                     <div class="form-group">
-                        <label for="textUpdateSubjectsModal">Text</label>
-                        <textarea name="text" id="textUpdateSubjectsModal" type="text"
-                                  class="form-control updateSubjectsData" placeholder="Text" rows=5></textarea>
+                        <label for="text-update-subjects-modal">Text</label>
+                        <textarea name="text" id="text-update-subjects-modal" type="text"
+                                  class="form-control update-subjects-data" placeholder="Text" rows=5></textarea>
                         <div class="error NotEmpty-subjectDTO-text"></div>
                         <div class="error BadWords-subjectDTO-text"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateSubjectsModalButton" type="button" onclick="updateSubmit(this)" data-url ="#">
+                    <button class="btn btn-primary" id="update-subjects-modal-button" type="button" onclick="updateSubmit(this)" data-url ="#">
                         Update
                     </button>
                 </div>
@@ -469,7 +469,7 @@
     </div>
 
     <!-- Modal Add Subjects-->
-    <div class="modal fade" id="addSubjectsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="add-subjects-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -480,28 +480,28 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="subjectNameAddSubjectsModal">Subject name:</label>
-                        <input name="subjectName" id="subjectNameAddSubjectsModal" type="text"
-                               class="form-control addSubjectsData" value="" placeholder="Subject name">
+                        <label for="subjectName-add-subjects-modal">Subject name:</label>
+                        <input name="subjectName" id="subjectName-add-subjects-modal" type="text"
+                               class="form-control add-subjects-data" value="" placeholder="Subject name">
                         <div class="error NotEmpty-subjectDTO-subjectName"></div>
                         <div class="error BadWords-subjectDTO-subjectName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="userNameAddSubjectsModal">Username:</label>
-                        <select name="userName" id="userNameAddSubjectsModal"
-                                class="form-control usersSelectUpdate addSubjectsData"></select>
+                        <label for="userName-add-subjects-modal">Username:</label>
+                        <select name="userName" id="userName-add-subjects-modal"
+                                class="form-control users-select-update add-subjects-data"></select>
                         <div class="error NotEmpty-subjectDTO-userName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="topicNameAddSubjectsModal">Topic name:</label>
-                        <select name="topicName" id="topicNameAddSubjectsModal"
-                                class="form-control topicsSelectUpdate addSubjectsData"></select>
+                        <label for="topicName-add-subjects-modal">Topic name:</label>
+                        <select name="topicName" id="topicName-add-subjects-modal"
+                                class="form-control topics-select-update add-subjects-data"></select>
                         <div class="error NotEmpty-subjectDTO-topicName"></div>
                     </div>
-                    <input id="dateAddSubjectsModal" name="date" type="hidden" class="addSubjectsData" value="">
+                    <input id="date-add-subjects-modal" name="date" type="hidden" class="add-subjects-data" value="">
                     <div class="form-group">
-                        <label for="textAddSubjectsModal">Text</label>
-                        <textarea name="text" id="textAddSubjectsModal" type="text" class="form-control addSubjectsData"
+                        <label for="text-add-subjects-modal">Text</label>
+                        <textarea name="text" id="text-add-subjects-modal" type="text" class="form-control add-subjects-data"
                                   placeholder="Text" rows=5></textarea>
                         <div class="error NotEmpty-subjectDTO-text"></div>
                         <div class="error BadWords-subjectDTO-text"></div>
@@ -509,7 +509,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="addSubjectsModalButton" onclick="addSubmit()" type="button">Add
+                    <button class="btn btn-primary" id="add-subjects-modal-button" onclick="addSubmit()" type="button">Add
                     </button>
                 </div>
             </div>
@@ -517,23 +517,23 @@
     </div>
 
     <!-- Modal Read Subjects-->
-    <div class="modal fade" id="readSubjectsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="read-subjects-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title subjectNameRead"></h5>
+                    <h5 class="modal-title subjectName-read"></h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body subjectsText">
+                <div class="modal-body subjects-text">
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal Delete Users-->
-    <div class="modal fade" id="deleteUsersModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="delete-users-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -545,7 +545,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this user.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteUsersModalButton" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
+                    <button class="btn btn-primary" id="delete-users-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -554,7 +554,7 @@
     </div>
 
     <!-- Modal Update Users-->
-    <div class="modal fade" id="updateUsersModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="update-users-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -565,44 +565,44 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="userNameUpdateUsersModal">Username:</label>
-                        <input name="userName" id="userNameUpdateUsersModal" type="text"
-                               class="form-control updateUsersData" value="" placeholder="Username"/>
+                        <label for="userName-update-users-modal">Username:</label>
+                        <input name="userName" id="userName-update-users-modal" type="text"
+                               class="form-control update-users-data" value="" placeholder="Username"/>
                         <div class="error NotEmpty-userDTO-userName"></div>
                         <div class="error BadWords-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="passwordUpdateUsersModal">Password:</label>
-                        <input name="password" id="passwordUpdateUsersModal" type="text"
-                               class="form-control updateUsersData" value="" placeholder="Password"
+                        <label for="password-update-users-modal">Password:</label>
+                        <input name="password" id="password-update-users-modal" type="text"
+                               class="form-control update-users-data" value="" placeholder="Password"
                                required="required"/>
                         <div class="error NotEmpty-userDTO-password"></div>
                     </div>
                     <div class="form-group">
-                        <label for="emailUpdateUsersModal">E-mail:</label>
-                        <input name="email" type="text" id="emailUpdateUsersModal" class="form-control updateUsersData"
+                        <label for="email-update-users-modal">E-mail:</label>
+                        <input name="email" type="text" id="email-update-users-modal" class="form-control update-users-data"
                                value="" placeholder="E-mail"/>
                         <div class="error NotEmpty-userDTO-email"></div>
                         <div class="error Email-userDTO-email"></div>
                     </div>
                     <div class="form-group">
-                        <label for="firstNameUpdateUsersModal">First name:</label>
-                        <input name="firstName" type="text" id="firstNameUpdateUsersModal"
-                               class="form-control updateUsersData" value="" placeholder="First name"/>
+                        <label for="firstName-update-users-modal">First name:</label>
+                        <input name="firstName" type="text" id="firstName-update-users-modal"
+                               class="form-control update-users-data" value="" placeholder="First name"/>
                         <div class="error NotEmpty-userDTO-firstName"></div>
                         <div class="error BadWords-userDTO-firstName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="lastNameUpdateUsersModal">Last name:</label>
-                        <input name="lastName" type="text" id="lastNameUpdateUsersModal"
-                               class="form-control updateUsersData" value="" placeholder="Last name"/>
+                        <label for="lastName-update-users-modal">Last name:</label>
+                        <input name="lastName" type="text" id="lastName-update-users-modal"
+                               class="form-control update-users-data" value="" placeholder="Last name"/>
                         <div class="error NotEmpty-userDTO-lastName"></div>
                         <div class="error BadWords-userDTO-lastName"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateUsersModalButton" type="button" onclick="updateSubmit(this)" data-url ="/">
+                    <button class="btn btn-primary" id="update-users-modal-button" type="button" onclick="updateSubmit(this)" data-url ="/">
                         Update
                     </button>
                 </div>
@@ -611,7 +611,7 @@
     </div>
 
     <!-- Modal Add Users-->
-    <div class="modal fade" id="addUsersModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="add-users-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -622,35 +622,35 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="userNameAddUsersModal">Username:</label>
-                        <input name="userName" id="userNameAddUsersModal" type="text" class="form-control addUsersData"
+                        <label for="userName-add-users-modal">Username:</label>
+                        <input name="userName" id="userName-add-users-modal" type="text" class="form-control add-users-data"
                                value="" placeholder="Username"/>
                         <div class="error NotEmpty-userDTO-userName"></div>
                         <div class="error BadWords-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="passwordAddUsersModal">Password:</label>
-                        <input name="password" id="passwordAddUsersModal" type="text" class="form-control addUsersData"
+                        <label for="password-add-users-modal">Password:</label>
+                        <input name="password" id="password-add-users-modal" type="text" class="form-control add-users-data"
                                value="" placeholder="Password" required="required"/>
                         <div class="error NotEmpty-userDTO-password"></div>
                     </div>
                     <div class="form-group">
-                        <label for="emailAddUsersModal">E-mail:</label>
-                        <input name="email" type="text" id="emailAddUsersModal" class="form-control addUsersData"
+                        <label for="email-add-users-modal">E-mail:</label>
+                        <input name="email" type="text" id="email-add-users-modal" class="form-control add-users-data"
                                value="" placeholder="E-mail"/>
                         <div class="error NotEmpty-userDTO-email"></div>
                         <div class="error Email-userDTO-email"></div>
                     </div>
                     <div class="form-group">
-                        <label for="firstNameAddUsersModal">First name:</label>
-                        <input name="firstName" type="text" id="firstNameAddUsersModal"
-                               class="form-control addUsersData" value="" placeholder="First name"/>
+                        <label for="firstName-add-users-modal">First name:</label>
+                        <input name="firstName" type="text" id="firstName-add-users-modal"
+                               class="form-control add-users-data" value="" placeholder="First name"/>
                         <div class="error NotEmpty-userDTO-firstName"></div>
                         <div class="error BadWords-userDTO-firstName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="lastNameAddUsersModal">Last name:</label>
-                        <input name="lastName" type="text" id="lastNameAddUsersModal" class="form-control addUsersData"
+                        <label for="lastName-add-users-modal">Last name:</label>
+                        <input name="lastName" type="text" id="lastName-add-users-modal" class="form-control add-users-data"
                                value="" placeholder="Last name"/>
                         <div class="error NotEmpty-userDTO-lastName"></div>
                         <div class="error BadWords-userDTO-lastName"></div>
@@ -658,14 +658,14 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="addUsersModalButton" onclick="addSubmit()" type="button">Add</a>
+                    <a class="btn btn-primary" id="add-users-modal-button" onclick="addSubmit()" type="button">Add</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal Delete Topics-->
-    <div class="modal fade" id="deleteTopicsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="delete-topics-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -677,7 +677,7 @@
                 <div class="modal-body">Select "Delete" below if you are ready to delete this topic.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="deleteTopicsModalButton" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
+                    <button class="btn btn-primary" id="delete-topics-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -686,7 +686,7 @@
     </div>
 
     <!-- Modal Update Topics-->
-    <div class="modal fade" id="updateTopicsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="update-topics-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -697,16 +697,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="topicNameUpdateTopicsModal">Topic name:</label>
-                        <input name="topicName" id="topicNameUpdateTopicsModal" type="text"
-                               class="form-control updateTopicsData" value="" placeholder="Topic name"/>
+                        <label for="topicName-update-topics-modal">Topic name:</label>
+                        <input name="topicName" id="topicName-update-topics-modal" type="text"
+                               class="form-control update-topics-fata" value="" placeholder="Topic name"/>
                         <div class="error NotEmpty-topicDTO-topicName"></div>
                         <div class="error BadWords-topicDTO-topicName"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="updateTopicsModalButton" type="button" onclick="updateSubmit(this)" data-url ="#">
+                    <button class="btn btn-primary" id="update-topics-modal-button" type="button" onclick="updateSubmit(this)" data-url ="#">
                         Update
                     </button>
                 </div>
@@ -715,7 +715,7 @@
     </div>
 
     <!-- Modal Add Topics-->
-    <div class="modal fade" id="addTopicsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="add-topics-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -726,88 +726,70 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="topicNameAddTopicsModal">Topic name:</label>
-                        <input name="topicName" id="topicNameAddTopicsModal" type="text"
-                               class="form-control addTopicsData" value="" placeholder="Topic name"/>
+                        <label for="topicName-add-topics-modal">Topic name:</label>
+                        <input name="topicName" id="topicName-add-topics-modal" type="text"
+                               class="form-control add-topics-data" value="" placeholder="Topic name"/>
                         <div class="error NotEmpty-topicDTO-topicName"></div>
                         <div class="error BadWords-topicDTO-topicName"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="addTopicsModalButton" onclick="addSubmit()" type="button">Add</a>
+                    <a class="btn btn-primary" id="add-topics-modal-button" onclick="addSubmit()" type="button">Add</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Templates -->
-    <script id="commentsTemplate" type="text/x-jQuery-tmpl">
+    <script id="comments-template" type="text/x-jQuery-tmpl">
         <tr id = "column\${id}">
             <td>\${message}</td>
             <td>\${userName}</td>
             <td>\${topicName}</td>
             <td>\${subjectName}</td>
             <td>\${date}</td>
-            <%--<td><a class="btn btn-primary updateComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Update</a></td>--%>
-            <%--<td><a class="btn btn-primary deleteComments" href="\${href}" id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal" role="button">Delete</a></td>--%>
-            <td><button type="button" class = "btn btn-primary updateComments" data-url ="/admin/comments/\${id} "id ="\${id}" data-toggle="modal" data-target="#updateCommentsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteComments" data-url ="/admin/comments/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#deleteCommentsModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-comments" data-url ="/admin/comments/\${id} "id ="\${id}" data-toggle="modal" data-target="#update-comments-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-comments" data-url ="/admin/comments/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-comments-modal">Delete</button></td>
         </tr>
 
     </script>
 
-    <script id="subjectsTemplate" type="text/x-jQuery-tmpl">
+    <script id="subjects-template" type="text/x-jQuery-tmpl">
         <tr id = "column\${id}">
             <td>\${subjectName}</td>
             <td>\${text}</td>
             <td>\${userName}</td>
             <td>\${topicName}</td>
             <td>\${date}</td>
-            <td><button type="button" class = "btn btn-success readSubjects" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#readSubjectsModal">Read</button></td>
-            <td><button type="button" class = "btn btn-primary updateSubjects" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#updateSubjectsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteSubjects" data-url ="/admin/subjects/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#deleteSubjectsModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-success read-subjects" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#read-subjects-modal">Read</button></td>
+            <td><button type="button" class = "btn btn-primary update-subjects" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-subjects-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-subjects" data-url ="/admin/subjects/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-subjects-modal">Delete</button></td>
         </tr>
 
     </script>
 
-    <script id="usersTemplate" type="text/x-jQuery-tmpl">
+    <script id="users-template" type="text/x-jQuery-tmpl">
         <tr id = "column\${id}">
             <td>\${userName}</td>
             <td>\${password}</td>
             <td>\${email}</td>
             <td>\${firstName}</td>
             <td>\${lastName}</td>
-            <td><button type="button" class = "btn btn-primary updateUsers" data-url ="/admin/users/\${id}" id ="\${id}" data-toggle="modal" data-target="#updateUsersModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteUsers" data-url ="/admin/users/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#deleteUsersModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-users" data-url ="/admin/users/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-users-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-users" data-url ="/admin/users/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-users-modal">Delete</button></td>
         </tr>
 
     </script>
 
-    <script id="topicsTemplate" type="text/x-jQuery-tmpl">
+    <script id="topics-template" type="text/x-jQuery-tmpl">
         <tr id = "column\${id}">
             <td>\${topicName}</td>
-            <td><button type="button" class = "btn btn-primary updateTopics" data-url ="/admin/topics/\${id}" id ="\${id}" data-toggle="modal" data-target="#updateTopicsModal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger deleteTopics" data-url ="/admin/topics/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#deleteTopicsModal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-topics" data-url ="/admin/topics/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-topics-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-topics" data-url ="/admin/topics/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-topics-modal">Delete</button></td>
         </tr>
 
     </script>
-
-    <script id="topicsSelectTemplate" type="text/x-jQuery-tmpl">
-        <option value="\${topicName}">\${topicName}</option>
-
-    </script>
-
-    <script id="subjectsSelectTemplate" type="text/x-jQuery-tmpl">
-        <option value="\${subjectName}">\${subjectName}</option>
-
-    </script>
-
-    <script id="usersSelectTemplate" type="text/x-jQuery-tmpl">
-        <option value="\${userName}">\${userName}</option>
-
-    </script>
-
 
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>

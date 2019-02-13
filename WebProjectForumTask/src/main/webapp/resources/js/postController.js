@@ -11,7 +11,14 @@ $(document).ready(function () {
     $.getJSON(subjectPath, function (data) {
         addComment(data.topicName, data.subjectName, subjectPath + "/comments");
     });
+    addSubjectForm(pathname);
 });
+
+function addSubjectForm(pathname) {
+    if (pathname === "add") {
+
+    }
+}
 
 function buildComments(commentsPath) {
     $(".aggregate-comments").empty();
