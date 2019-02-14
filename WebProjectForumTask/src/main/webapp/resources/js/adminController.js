@@ -58,6 +58,9 @@ function removeSubmit(value) {
     $.ajax({
         url: pathDelete,
         type: "DELETE",
+        headers : {
+            "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+        },
         success: function () {
             $("#" + pathname + "-body").empty();
             $.getJSON(path, function (data) {
@@ -100,6 +103,9 @@ function addSubmit() {
     $.ajax({
         type: "POST",
         url: path,
+        headers : {
+            "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+        },
         data: JSON.stringify(map),
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
@@ -176,6 +182,9 @@ function updateSubmit(value) {
     $.ajax({
         type: "PUT",
         url: pathUpdate,
+        headers : {
+            "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+        },
         data: JSON.stringify(map),
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",

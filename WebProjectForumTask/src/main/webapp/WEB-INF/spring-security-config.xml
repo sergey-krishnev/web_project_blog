@@ -10,6 +10,11 @@
 
     <http realm="WebProject Forum" use-expressions="false">
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/blog/subjects/**" access="ROLE_USER" method="POST"/>
+        <intercept-url pattern="/blog/subjects/**" access="ROLE_USER" method="PUT"/>
+        <intercept-url pattern="/blog/comments/**" access="ROLE_USER" method="POST"/>
+        <intercept-url pattern="/post/add" access="ROLE_USER"/>
+        <intercept-url pattern="/post/**/update" access="ROLE_USER"/>
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 
 

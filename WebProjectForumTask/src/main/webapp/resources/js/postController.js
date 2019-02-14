@@ -36,15 +36,13 @@ function addSubjectSubmit() {
     map["id"] = 1;
     map["userName"] = "Dumiel";
     map["date"] = date + ' ' + time;
-    $.each(map, function (key, value) {
-        alert(key + " : " + value)
-    });
-
-    alert(JSON.stringify(map));
 
     $.ajax({
         type: "POST",
         url: "/blog/topics/subjects",
+        headers : {
+            "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+        },
         data: JSON.stringify(map),
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
@@ -104,15 +102,13 @@ function updateSubjectSubmit(value) {
     map["id"] = 1;
     map["userName"] = "Dumiel";
     map["date"] = date + ' ' + time;
-    $.each(map, function (key, value) {
-        alert(key + " : " + value)
-    });
 
-    alert(JSON.stringify(map));
-    alert($(value).data("url"));
     $.ajax({
         type: "PUT",
         url: $(value).data("url"),
+        headers : {
+            "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+        },
         data: JSON.stringify(map),
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
@@ -173,6 +169,9 @@ function addComment(topicName, subjectName, updateCommentsPath) {
         $.ajax({
             type: "POST",
             url: "/blog/comments",
+            headers : {
+                "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+            },
             data: JSON.stringify(map),
             contentType: 'application/json; charset=UTF-8',
             dataType: "json",
