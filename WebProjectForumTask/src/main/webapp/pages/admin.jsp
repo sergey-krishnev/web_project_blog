@@ -70,7 +70,7 @@
         <!-- Navbar -->
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle fa-fw"></i>
                 </a>
@@ -152,7 +152,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
                     <div id="display-subjects-table" class="display-tables" style="display: none">
@@ -181,7 +180,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
                     <div id="display-users-table"  class="display-tables" style="display: none">
@@ -210,7 +208,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
                     <div id="display-topics-table" class="display-tables" style="display: none">
@@ -235,7 +232,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
                 </div>
@@ -795,6 +791,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>
     <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
+    <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
     <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
 
     <!-- Core plugin JavaScript-->

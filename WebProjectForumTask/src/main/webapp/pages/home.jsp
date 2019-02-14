@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>--%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,11 @@
     <!-- Custom styles for this template -->
     <link href="<c:url value="/resources/css/blog-home.css" />" rel="stylesheet">
 
+    <!-- Page level plugin CSS-->
+    <link href="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.css" />" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<c:url value="/resources/css/sb-admin.css" />" rel="stylesheet">
 
 </head>
 
@@ -57,28 +62,29 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+
+                    <sec:authorize access="!isAuthenticated()">
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/admin">Link admin</a>
-                </li><%--timely--%>
-                    <%--<sec:authorize access="!isAuthenticated()">--%>
-                        <%--<a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>--%>
-                    <%--</sec:authorize>--%>
-                    <%--<sec:authorize access="isAuthenticated()">--%>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                </li>
+                    </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
                 <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user-circle fa-fw"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <%--<sec:authorize access="hasRole('ADMIN')">--%>
-                        <%--<a class="dropdown-item" href="/admin">Admin panel</a>--%>
-                        <%--</sec:authorize>--%>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">
+                        <sec:authorize access="hasRole('ADMIN')">
+                        <a class="dropdown-item" href="/admin">Admin panel</a>
+                        </sec:authorize>
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
                     </div>
                 </li>
-                    <%--</sec:authorize>--%>
+                    </sec:authorize>
+
             </ul>
         </div>
     </div>
@@ -186,13 +192,13 @@
 </script>
 
 
-<!-- Bootstrap core JavaScript -->
-<script src="<c:url value="/resources/vendor/jquery/jquery.js" />"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
+<script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
-
-<!-- Custom jQuery scripts -->
 <script src="<c:url value="/resources/js/blogController.js" />"></script>
 
 </body>
