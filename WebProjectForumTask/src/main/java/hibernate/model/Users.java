@@ -33,6 +33,9 @@ public class Users implements Serializable {
     @OneToMany(mappedBy = "users")
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "users")
+    private List<Authority> authorities;
+
     public int getId() {
         return id;
     }
@@ -97,6 +100,14 @@ public class Users implements Serializable {
         this.comments = comments;
     }
 
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
@@ -106,6 +117,9 @@ public class Users implements Serializable {
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", subjects=" + subjects +
+                ", comments=" + comments +
+                ", authorities=" + authorities +
                 '}';
     }
 }

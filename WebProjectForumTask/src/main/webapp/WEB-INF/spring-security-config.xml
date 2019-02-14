@@ -30,6 +30,9 @@
     </http>
 
     <authentication-manager>
+
+        <!--<authentication-provider user-service-ref="jdbcGroupsImpl"/>-->
+
         <authentication-provider>
             <user-service>
                 <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
@@ -37,6 +40,7 @@
             </user-service>
         </authentication-provider>
     </authentication-manager>
+
     <global-method-security secured-annotations="enabled" />
     <b:bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 </b:beans>
