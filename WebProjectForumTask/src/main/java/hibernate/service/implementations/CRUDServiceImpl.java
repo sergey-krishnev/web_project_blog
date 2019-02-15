@@ -1,5 +1,6 @@
 package hibernate.service.implementations;
 
+import hibernate.dao.implementations.AppUserPrincipal;
 import hibernate.dao.interfaces.CRUDDao;
 import hibernate.dto.CommentDTO;
 import hibernate.dto.SubjectDTO;
@@ -11,6 +12,9 @@ import hibernate.model.Topic;
 import hibernate.model.Users;
 import hibernate.service.interfaces.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

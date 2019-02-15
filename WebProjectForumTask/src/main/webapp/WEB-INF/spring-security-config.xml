@@ -2,6 +2,7 @@
 <b:beans xmlns="http://www.springframework.org/schema/security"
          xmlns:b="http://www.springframework.org/schema/beans"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:security="http://www.springframework.org/schema/security"
          xsi:schemaLocation="
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd
@@ -29,17 +30,28 @@
         <csrf/>
     </http>
 
-    <authentication-manager>
+    <!--<authentication-manager>-->
 
-        <!--<authentication-provider user-service-ref="jdbcGroupsImpl"/>-->
+        <!--&lt;!&ndash;<authentication-provider user-service-ref="jdbcGroupsImpl"/>&ndash;&gt;-->
 
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
-                <user name="user" password="user" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />-->
+                <!--<user name="user" password="user" authorities="ROLE_USER" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+
+    <b:bean id="appUserDetailsService"
+          class="hibernate.service.implementations.AppUserDetailsService"/>
+
+    <security:authentication-manager>
+        <security:authentication-provider
+                user-service-ref="appUserDetailsService" >
+        </security:authentication-provider>
+    </security:authentication-manager>
+
 
     <global-method-security secured-annotations="enabled" />
 
