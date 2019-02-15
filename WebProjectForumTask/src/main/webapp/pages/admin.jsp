@@ -570,6 +570,7 @@
                                class="form-control update-users-data" value="" placeholder="Username"/>
                         <div class="error NotEmpty-userDTO-userName"></div>
                         <div class="error BadWords-userDTO-userName"></div>
+                        <div class="error SameUserName-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
                         <label for="password-update-users-modal">Password:</label>
@@ -627,6 +628,7 @@
                                value="" placeholder="Username"/>
                         <div class="error NotEmpty-userDTO-userName"></div>
                         <div class="error BadWords-userDTO-userName"></div>
+                        <div class="error SameUserName-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
                         <label for="password-add-users-modal">Password:</label>

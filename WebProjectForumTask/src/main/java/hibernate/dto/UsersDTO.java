@@ -1,6 +1,7 @@
 package hibernate.dto;
 
 import hibernate.validation.annotations.BadWords;
+import hibernate.validation.annotations.SameUserName;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,6 +10,7 @@ public class UsersDTO {
     private int id;
     @BadWords(message = "BadWords-userDTO-userName")
     @NotEmpty(message = "NotEmpty-userDTO-userName")
+    @SameUserName
     private String userName;
     @NotEmpty(message = "NotEmpty-userDTO-password")
     private String password;

@@ -42,5 +42,6 @@
     </authentication-manager>
 
     <global-method-security secured-annotations="enabled" />
+
     <b:bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 </b:beans>

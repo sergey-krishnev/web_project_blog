@@ -168,6 +168,18 @@ public class CRUDServiceImpl implements CRUDService {
         return users;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean searchByUserName(String userName) {
+        List<Users> users = crudDao.searchAllUsers();
+        for (Users user : users) {
+            if (userName.equals(user.getNickname())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Transactional
     @Override
     public void updateTopic(int topicId, TopicDTO topicDTO) {

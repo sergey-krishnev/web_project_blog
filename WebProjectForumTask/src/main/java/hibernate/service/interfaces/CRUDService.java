@@ -33,6 +33,8 @@ public interface CRUDService {
 
     List<UsersDTO> searchAllUsers();
 
+    Boolean searchByUserName(String username);
+
     void updateTopic(int topicId, TopicDTO topicDTO);
 
     void deleteTopic(int topicId);

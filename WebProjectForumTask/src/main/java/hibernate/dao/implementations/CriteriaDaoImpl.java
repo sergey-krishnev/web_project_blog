@@ -13,7 +13,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.jws.soap.SOAPBinding;
 import java.sql.Date;
 import java.util.List;
 
@@ -250,5 +249,4 @@ public class CriteriaDaoImpl implements CRUDDao {
         Comment comment = (Comment) session.get(Comment.class, commentId);
         session.delete(comment);
     }
-
 }
