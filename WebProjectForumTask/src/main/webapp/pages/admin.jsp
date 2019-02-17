@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <sec:csrfMetaTags />
-
+    <sec:authentication property="principal.username" var="username" />
 
     <title class="Pathname">Dashboard</title>
 
@@ -75,6 +75,7 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
+                    ${username}
                     <i class="fas fa-user-circle fa-fw"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">

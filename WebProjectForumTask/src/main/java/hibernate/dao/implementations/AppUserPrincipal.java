@@ -1,14 +1,17 @@
 package hibernate.dao.implementations;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import hibernate.model.Authority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import hibernate.model.Users;
+import org.springframework.stereotype.Repository;
 
 public class AppUserPrincipal implements UserDetails {
 
@@ -34,8 +37,12 @@ public class AppUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-        return authorities;
+        final List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        List<Authority> authorities = user.getAuthorities();
+        for (Authority authority : authorities) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
+        }
+        return grantedAuthorities;
     }
 
     @Override

@@ -70,8 +70,11 @@
                 </li>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
+                        <sec:authentication property="principal.username" var="username" />
+                        <input type="hidden" id ="username" value="${username}"/>
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ${username}
                         <i class="fas fa-user-circle fa-fw"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">
@@ -131,7 +134,7 @@
                     </div>
                 </div>
             </div>
-
+            <sec:authorize access="isAuthenticated()">
             <div class="card my-4">
                 <h5 class="card-header">Add own subject</h5>
                 <div class="card-body">
@@ -139,6 +142,7 @@
                     <a href="/post/add" class = "btn btn-primary">Add new subject</a>
                 </div>
             </div>
+            </sec:authorize>
 
             <!-- Categories Widget -->
             <jsp:include page="topic.jsp" />
@@ -184,7 +188,9 @@
                 <div class = "card-body">
                 <h2 class = "card-title">\${subjectName}</h2>
                 <p class = "card-text">\${text}</p>
+                <sec:authorize access="isAuthenticated()">
                 <a href="/post/\${id}/update" class = "btn btn-primary subject-update style="font-size:24px">Edit</a>
+                </sec:authorize>
                 <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">Posted on \${date} by
