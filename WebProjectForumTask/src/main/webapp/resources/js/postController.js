@@ -96,7 +96,6 @@ function updateSubjectSubmit(value) {
         map[$(this).attr("name")] = $(this).val();
     });
     map["id"] = 1;
-    map["userName"] = $("#username").val();;
     map["date"] = date + ' ' + time;
 
     $.ajax({

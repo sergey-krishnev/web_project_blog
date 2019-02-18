@@ -20,7 +20,8 @@ function buildSubjects(subjectsPath) {
             value.text = value.text.split(".")[0] + ".";
         });
         $("#subjectsTemplate").tmpl(data).appendTo(".aggregate-subjects");
-        $('[name = ' + currentSubject + ']').show();
+        $('.subject-update[name = ' + currentSubject + ']').show();
+        $('.admin-update[name = ' + currentSubject + ']').hide();
     });
 }
 

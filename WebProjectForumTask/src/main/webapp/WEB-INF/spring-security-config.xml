@@ -13,11 +13,11 @@
 
     <http realm="WebProject Forum" use-expressions="true">
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/blog/subjects/**" access="hasRole('ROLE_USER')" method="POST"/>
-        <intercept-url pattern="/blog/subjects/**" access="hasRole('ROLE_USER')" method="PUT"/>
-        <intercept-url pattern="/blog/comments/**" access="hasRole('ROLE_USER')" method="POST"/>
+        <intercept-url pattern="/blog/topics/subjects" access="hasRole('ROLE_USER')" method="POST"/>
+        <intercept-url pattern="/blog/subjects/{subjectId}" access="@securityUserServiceImpl.canAccessUser(#subjectId,principal.username) or hasRole('ROLE_ADMIN')" method="PUT"/>
+        <intercept-url pattern="/blog/comments" access="hasRole('ROLE_USER')" method="POST"/>
         <intercept-url pattern="/post/add" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/post/{subjectId}/update" access="@securityUserServiceImpl.canAccessUser(#subjectId,principal.username)"/>
+        <intercept-url pattern="/post/{subjectId}/update" access="@securityUserServiceImpl.canAccessUser(#subjectId,principal.username) or hasRole('ROLE_ADMIN')"/>
 
 
 

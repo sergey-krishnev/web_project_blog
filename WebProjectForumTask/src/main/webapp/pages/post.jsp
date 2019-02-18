@@ -161,6 +161,9 @@
                     <div class="error NotEmpty-subjectDTO-text"></div>
                     <div class="error BadWords-subjectDTO-text"></div>
                 </div>
+
+                <input class="subject-update" id="userName-update-form" name="userName" type="hidden" value="">
+
                 <button type="button" data-url = "#" class="btn btn-primary update-subject-submit" onclick="updateSubjectSubmit(this)">Submit</button>
 
             </div>

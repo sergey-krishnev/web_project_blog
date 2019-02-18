@@ -191,6 +191,9 @@
                 <sec:authorize access="isAuthenticated()">
                 <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update" style = "display : none">Edit</a>
                 </sec:authorize>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-update">Edit</a>
+                </sec:authorize>
                 <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">Posted on \${date} by
