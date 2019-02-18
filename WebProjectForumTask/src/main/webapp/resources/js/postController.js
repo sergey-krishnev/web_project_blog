@@ -149,7 +149,7 @@ function addComment(topicName, subjectName, updateCommentsPath) {
 
         var map = {};
         map["id"] = 1;
-        map["userName"] = $("#username");
+        map["userName"] = $("#username").val();
         map["topicName"] = topicName;
         map["subjectName"] = subjectName;
         map["message"] = $(".text-message").val();
