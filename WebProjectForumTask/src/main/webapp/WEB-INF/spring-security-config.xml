@@ -9,14 +9,15 @@
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <http realm="WebProject Forum" use-expressions="false">
-        <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/blog/subjects/**" access="ROLE_USER" method="POST"/>
-        <intercept-url pattern="/blog/subjects/**" access="ROLE_USER" method="PUT"/>
-        <intercept-url pattern="/blog/comments/**" access="ROLE_USER" method="POST"/>
-        <intercept-url pattern="/post/add" access="ROLE_USER"/>
-        <intercept-url pattern="/post/**/update" access="ROLE_USER"/>
-        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <security:global-method-security pre-post-annotations="enabled"/>
+
+    <http realm="WebProject Forum" use-expressions="true">
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/blog/subjects/**" access="hasRole('ROLE_USER')" method="POST"/>
+        <intercept-url pattern="/blog/subjects/**" access="hasRole('ROLE_USER')" method="PUT"/>
+        <intercept-url pattern="/blog/comments/**" access="hasRole('ROLE_USER')" method="POST"/>
+        <intercept-url pattern="/post/add" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/post/{subjectId}/update" access="@securityUserServiceImpl.canAccessUser(#subjectId,principal.username)"/>
 
 
 
@@ -51,9 +52,6 @@
                 user-service-ref="appUserDetailsService" >
         </security:authentication-provider>
     </security:authentication-manager>
-
-
-    <global-method-security secured-annotations="enabled" />
 
     <b:bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 </b:beans>

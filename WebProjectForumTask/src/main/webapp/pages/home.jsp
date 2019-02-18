@@ -189,7 +189,7 @@
                 <h2 class = "card-title">\${subjectName}</h2>
                 <p class = "card-text">\${text}</p>
                 <sec:authorize access="isAuthenticated()">
-                <a href="/post/\${id}/update" class = "btn btn-primary subject-update style="font-size:24px">Edit</a>
+                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update" style = "display : none">Edit</a>
                 </sec:authorize>
                 <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
                 </div>

@@ -11,15 +11,16 @@ $(document).ready(function () {
         buildSubjects(pathname + "/subjects");
         changeTopicName(pathname);
     }
-
 });
 
 function buildSubjects(subjectsPath) {
+    var currentSubject = $("#username").val();
     $.getJSON(subjectsPath, function (data) {
         $.each(data, function (key, value) {
             value.text = value.text.split(".")[0] + ".";
         });
         $("#subjectsTemplate").tmpl(data).appendTo(".aggregate-subjects");
+        $('[name = ' + currentSubject + ']').show();
     });
 }
 

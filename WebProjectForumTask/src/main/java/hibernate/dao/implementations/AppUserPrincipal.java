@@ -11,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import hibernate.model.Users;
-import org.springframework.stereotype.Repository;
 
 public class AppUserPrincipal implements UserDetails {
 

@@ -96,7 +96,7 @@ function updateSubjectSubmit(value) {
         map[$(this).attr("name")] = $(this).val();
     });
     map["id"] = 1;
-    map["userName"] = "Dumiel";
+    map["userName"] = $("#username").val();;
     map["date"] = date + ' ' + time;
 
     $.ajax({
@@ -111,10 +111,6 @@ function updateSubjectSubmit(value) {
         success: function (data, textStatus, xhr) {
             alert("success");
             window.location.href = "/blog/all"
-            // var htmlMap = $("#" + pathname + "Template").tmpl(map);
-            // alert(htmlMap);
-            // htmlMap.appendTo("#" + pathname + "Body"); //Change
-            // alert("success");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -158,10 +154,6 @@ function addComment(topicName, subjectName, updateCommentsPath) {
         map["subjectName"] = subjectName;
         map["message"] = $(".text-message").val();
         map["date"] = date + ' ' + time;
-        $.each(map, function (key, value) {
-            alert(key + " : " + value)
-        });
-
         $.ajax({
             type: "POST",
             url: "/blog/comments",

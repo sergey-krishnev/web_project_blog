@@ -57,18 +57,18 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="/blog/all">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/blog/all">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="/blog/all">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/blog/all">Contact</a>
                 </li>
                 <%--<li class="nav-item">--%>
                     <%--<a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>--%>
@@ -167,6 +167,9 @@
 
 
             <!-- Comments Form -->
+            <sec:authorize access="!isAuthenticated()">
+            <div class="error">Have to log in to leave comment</div>
+            </sec:authorize>
             <div class="error NotEmpty-commentDTO-message"></div>
             <div class="error BadWords-commentDTO-message"></div>
             <div class="card my-4 comment-form">
@@ -214,6 +217,25 @@
 
 </div>
 <!-- /.container -->
+
+<%--Logout Modal--%>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="<c:url value="/logout" />">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Footer -->
 <footer class="py-5 bg-dark" style="display: none">
