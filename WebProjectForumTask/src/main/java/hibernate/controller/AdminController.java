@@ -79,7 +79,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.PUT)
-    public ResponseEntity updateSubjectDTO(@RequestBody SubjectDTO subjectDTO, Errors errors, @PathVariable int subjectId) {
+    public ResponseEntity updateSubjectDTO(@Valid @RequestBody SubjectDTO subjectDTO, Errors errors, @PathVariable int subjectId) {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }

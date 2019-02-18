@@ -182,8 +182,8 @@ function updateSubmit(value) {
     $.ajax({
         type: "PUT",
         url: pathUpdate,
-        headers : {
-            "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+        headers: {
+            "X-CSRF-Token": $('meta[name="_csrf"]').attr('content')
         },
         data: JSON.stringify(map),
         contentType: 'application/json; charset=UTF-8',

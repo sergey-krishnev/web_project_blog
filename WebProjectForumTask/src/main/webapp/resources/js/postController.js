@@ -91,6 +91,7 @@ function updateSubjectSubmit(value) {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var pathUpdate = $(value).data("url");
     var map = {};
     $(".subject-update").each(function () {
         map[$(this).attr("name")] = $(this).val();
@@ -100,9 +101,9 @@ function updateSubjectSubmit(value) {
 
     $.ajax({
         type: "PUT",
-        url: $(value).data("url"),
-        headers : {
-            "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
+        url: pathUpdate,
+        headers: {
+            "X-CSRF-Token": $('meta[name="_csrf"]').attr('content')
         },
         data: JSON.stringify(map),
         contentType: 'application/json; charset=UTF-8',
@@ -153,6 +154,7 @@ function addComment(topicName, subjectName, updateCommentsPath) {
         map["subjectName"] = subjectName;
         map["message"] = $(".text-message").val();
         map["date"] = date + ' ' + time;
+
         $.ajax({
             type: "POST",
             url: "/blog/comments",
