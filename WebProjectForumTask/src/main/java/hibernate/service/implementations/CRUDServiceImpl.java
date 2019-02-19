@@ -111,7 +111,7 @@ public class CRUDServiceImpl implements CRUDService {
         start += (page-1) * size;
         int div = topics.size()/size;
         int mod = topics.size()%size;
-        if (page-1 == div) return topics.subList(start, mod);
+        if (page-1 == div) return topics.subList(start,start + mod);
         if (start + size > topics.size()) return new ArrayList<>();
         return topics.subList(start, start + size);
     }
@@ -145,7 +145,7 @@ public class CRUDServiceImpl implements CRUDService {
         start += (page-1) * size;
         int div = subjects.size()/size;
         int mod = subjects.size()%size;
-        if (page-1 == div) return subjects.subList(start, mod);
+        if (page-1 == div) return subjects.subList(start,start + mod);
         if (start + size > subjects.size()) return new ArrayList<>();
         return subjects.subList(start, start + size);
     }
@@ -192,7 +192,7 @@ public class CRUDServiceImpl implements CRUDService {
         start += (page-1) * size;
         int div = comments.size()/size;
         int mod = comments.size()%size;
-        if (page-1 == div) return comments.subList(start, mod);
+        if (page-1 == div) return comments.subList(start,start + mod);
         if (start + size > comments.size()) return new ArrayList<>();
         return comments.subList(start, start + size);
     }
@@ -223,7 +223,7 @@ public class CRUDServiceImpl implements CRUDService {
         start += (page-1) * size;
         int div = users.size()/size;
         int mod = users.size()%size;
-        if (page-1 == div) return users.subList(start, mod);
+        if (page-1 == div) return users.subList(start,start + mod);
         if (start + size > users.size()) return new ArrayList<>();
         return users.subList(start, start + size);
     }
