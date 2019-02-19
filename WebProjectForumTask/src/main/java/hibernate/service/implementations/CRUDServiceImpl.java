@@ -97,6 +97,26 @@ public class CRUDServiceImpl implements CRUDService {
     public List<TopicDTO> searchAllTopic() {
         List<Topic> topicList = crudDao.searchAllTopic();
         List<TopicDTO> topics = new ArrayList<>();
+        topicToTopicDTO(topicList, topics);
+        return topics;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<TopicDTO> searchAllTopicPaginated(int page, int size) {
+        List<Topic> topicList = crudDao.searchAllTopic();
+        List<TopicDTO> topics = new ArrayList<>();
+        topicToTopicDTO(topicList, topics);
+        int start = 0;
+        start += (page-1) * size;
+        int div = topics.size()/size;
+        int mod = topics.size()%size;
+        if (page-1 == div) return topics.subList(start, mod);
+        if (start + size > topics.size()) return new ArrayList<>();
+        return topics.subList(start, start + size);
+    }
+
+    private void topicToTopicDTO(List<Topic> topicList, List<TopicDTO> topics) {
         for (Topic topic : topicList) {
             TopicDTO topicDTO = new TopicDTO();
             topicDTO.setId(topic.getId());
@@ -104,7 +124,6 @@ public class CRUDServiceImpl implements CRUDService {
             topicDTO.setSubjects(searchSubjectByTopic(topic));
             topics.add(topicDTO);
         }
-        return topics;
     }
 
     @Transactional(readOnly = true)
@@ -114,6 +133,21 @@ public class CRUDServiceImpl implements CRUDService {
         List<SubjectDTO> subjectDTOList = new ArrayList<>();
         subjectToSubjectDTO(subjects, subjectDTOList);
         return subjectDTOList;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<SubjectDTO> searchAllSubjectPaginated(int page, int size) {
+        List<Subject> subjectList = crudDao.searchAllSubject();
+        List<SubjectDTO> subjects = new ArrayList<>();
+        subjectToSubjectDTO(subjectList, subjects);
+        int start = 0;
+        start += (page-1) * size;
+        int div = subjects.size()/size;
+        int mod = subjects.size()%size;
+        if (page-1 == div) return subjects.subList(start, mod);
+        if (start + size > subjects.size()) return new ArrayList<>();
+        return subjects.subList(start, start + size);
     }
 
     private void subjectToSubjectDTO(List<Subject> subjects, List<SubjectDTO> subjectDTOList) {
@@ -148,6 +182,22 @@ public class CRUDServiceImpl implements CRUDService {
         return comments;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<CommentDTO> searchAllCommentPaginated(int page, int size) {
+        List<Comment> commentList = crudDao.searchAllComment();
+        List<CommentDTO> comments = new ArrayList<>();
+        commentToCommentDTO(commentList, comments);
+        int start = 0;
+        start += (page-1) * size;
+        int div = comments.size()/size;
+        int mod = comments.size()%size;
+        if (page-1 == div) return comments.subList(start, mod);
+        if (start + size > comments.size()) return new ArrayList<>();
+        return comments.subList(start, start + size);
+    }
+
+
     @Transactional
     @Override
     public void insertTopic(TopicDTO topicDTO) {
@@ -159,6 +209,26 @@ public class CRUDServiceImpl implements CRUDService {
     public List<UsersDTO> searchAllUsers() {
         List<Users> usersList = crudDao.searchAllUsers();
         List<UsersDTO> users = new ArrayList<>();
+        userToUserDTO(usersList, users);
+        return users;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UsersDTO> searchAllUsersPaginated(int page, int size) {
+        List<Users> usersList = crudDao.searchAllUsers();
+        List<UsersDTO> users = new ArrayList<>();
+        userToUserDTO(usersList, users);
+        int start = 0;
+        start += (page-1) * size;
+        int div = users.size()/size;
+        int mod = users.size()%size;
+        if (page-1 == div) return users.subList(start, mod);
+        if (start + size > users.size()) return new ArrayList<>();
+        return users.subList(start, start + size);
+    }
+
+    private void userToUserDTO(List<Users> usersList, List<UsersDTO> users) {
         for (Users user : usersList) {
             UsersDTO usersDTO = new UsersDTO();
             usersDTO.setId(user.getId());
@@ -169,7 +239,6 @@ public class CRUDServiceImpl implements CRUDService {
             usersDTO.setLastName(user.getLastName());
             users.add(usersDTO);
         }
-        return users;
     }
 
     @Override

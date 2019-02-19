@@ -4,6 +4,7 @@ import hibernate.dto.CommentDTO;
 import hibernate.dto.SubjectDTO;
 import hibernate.dto.TopicDTO;
 import hibernate.dto.UsersDTO;
+import hibernate.model.Comment;
 import hibernate.model.Subject;
 import hibernate.model.Topic;
 import hibernate.model.Users;
@@ -23,15 +24,23 @@ public interface CRUDService {
 
     List<TopicDTO> searchAllTopic();
 
+    List<TopicDTO> searchAllTopicPaginated(int page, int size);
+
     List<SubjectDTO> searchAllSubject();
+
+    List<SubjectDTO> searchAllSubjectPaginated(int page, int size);
 
     List<CommentDTO> searchCommentBySubject(Subject subject);
 
     List<CommentDTO> searchAllComment();
 
+    List<CommentDTO> searchAllCommentPaginated(int page, int size);
+
     void insertTopic(TopicDTO topicDTO);
 
     List<UsersDTO> searchAllUsers();
+
+    List<UsersDTO> searchAllUsersPaginated(int page, int size);
 
     Boolean searchByUserName(String username);
 

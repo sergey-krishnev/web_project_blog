@@ -2,10 +2,7 @@ package hibernate.dao.implementations;
 
 import hibernate.dao.interfaces.CRUDDao;
 import hibernate.dto.CommentDTO;
-import hibernate.model.Comment;
-import hibernate.model.Subject;
-import hibernate.model.Topic;
-import hibernate.model.Users;
+import hibernate.model.*;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.criterion.Order;
@@ -196,6 +193,10 @@ public class CriteriaDaoImpl implements CRUDDao {
         List<Comment> comments = users.getComments();
         for (Comment comment : comments) {
             session.delete(comment);
+        }
+        List<Authority> authorities = users.getAuthorities();
+        for (Authority authority : authorities) {
+            session.delete(authority);
         }
         session.delete(users);
     }

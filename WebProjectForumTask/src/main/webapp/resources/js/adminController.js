@@ -41,7 +41,7 @@ function buildTable() {
     var idDispl = "#display-" + pathname + "-table";
     $(".pathname-capital").text(pathnameCapital);
     $(idDispl).css("display", "block");
-    $.getJSON(path, function (data) {
+    $.getJSON(path + "?page=1&&size=5", function (data) {
         if (pathname === "subjects") {
             $.each(data, function (key, value) {
                 value.text = value.text.split(".")[0] + ".";
@@ -53,8 +53,6 @@ function buildTable() {
 
 function removeSubmit(value) {
     var pathDelete = $(value).attr("data-url");
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
     $.ajax({
         url: pathDelete,
         type: "DELETE",
@@ -62,15 +60,7 @@ function removeSubmit(value) {
             "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
         },
         success: function () {
-            $("#" + pathname + "-body").empty();
-            $.getJSON(path, function (data) {
-                if (pathname === "subjects") {
-                    $.each(data, function (key, value) {
-                        value.text = value.text.split(".")[0] + ".";
-                    });
-                }
-                $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
-            });
+            buildTable();
         },
         error: function () {
             alert('Error in Operation');
@@ -111,15 +101,7 @@ function addSubmit() {
         dataType: "json",
         success: function () {
             $('#add-' + pathname + "-modal").modal('hide');
-            $("#" + pathname + "-body").empty();
-            $.getJSON(path, function (data) {
-                if (pathname === "subjects") {
-                    $.each(data, function (key, value) {
-                        value.text = value.text.split(".")[0] + ".";
-                    });
-                }
-                $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
-            });
+            buildTable();
         },
         error: function (jqXHR) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -190,15 +172,7 @@ function updateSubmit(value) {
         dataType: "json",
         success: function (data, textStatus, xhr) {
             $('#update-' + pathname + "-modal").modal('hide');
-            $("#" + pathname + "-body").empty();
-            $.getJSON(path, function (data) {
-                if (pathname === "subjects") {
-                    $.each(data, function (key, value) {
-                        value.text = value.text.split(".")[0] + ".";
-                    });
-                }
-                $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
-            });
+            buildTable();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var obj = JSON.parse(jqXHR.responseText);

@@ -31,6 +31,15 @@ public class AdminController {
         return crudService.searchAllComment();
     }
 
+    @RequestMapping(value = "/comments",params = {"page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<CommentDTO> getAllCommentDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
+        if (start > 0 && size > 0) {
+            return crudService.searchAllCommentPaginated(start, size);
+        }
+        return crudService.searchAllComment();
+    }
+
     @RequestMapping(value = "/comments/{commentId}", method = RequestMethod.GET)
     public CommentDTO getCommentDTO(@PathVariable int commentId) {
         return crudService.searchCommentById(commentId);
@@ -61,6 +70,15 @@ public class AdminController {
 
     @RequestMapping(value = "/subjects", method = RequestMethod.GET)
     public List<SubjectDTO> getAllSubjectDTO() {
+        return crudService.searchAllSubject();
+    }
+
+    @RequestMapping(value = "/subjects",params = {"page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
+        if (start > 0 && size > 0) {
+            return crudService.searchAllSubjectPaginated(start, size);
+        }
         return crudService.searchAllSubject();
     }
 
@@ -97,6 +115,15 @@ public class AdminController {
         return crudService.searchAllTopic();
     }
 
+    @RequestMapping(value = "/topics", params = {"page", "size"},method = RequestMethod.GET)
+    @ResponseBody
+    public List<TopicDTO> getTopicsDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
+        if (start > 0 && size > 0) {
+            return crudService.searchAllTopicPaginated(start, size);
+        }
+        return crudService.searchAllTopic();
+    }
+
     @RequestMapping(value = "/topics/{topicId}", method = RequestMethod.GET)
     public TopicDTO getTopicDTO(@PathVariable int topicId) {
         return crudService.searchTopicById(topicId);
@@ -127,6 +154,15 @@ public class AdminController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<UsersDTO> getAllUsersDTO() { return crudService.searchAllUsers();
+    }
+
+    @RequestMapping(value = "/users", params = {"page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<UsersDTO> getAllUsersDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
+        if (start > 0 && size > 0) {
+            return crudService.searchAllUsersPaginated(start, size);
+        }
+        return crudService.searchAllUsers();
     }
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
