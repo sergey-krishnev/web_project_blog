@@ -1,12 +1,13 @@
 $(document).ready(function () {
     switchDashboard();
-    buildTable();
+    buildTable("?page=1&&size=5");
     buildShowingNumberInfo();
     buildShowingNumberButtons();
     removeModal();
     addModal();
     updateModal();
     read();
+    switchPage();
 });
 
 function removeModal() {
@@ -27,7 +28,7 @@ function switchDashboard() {
         var pathname = path.toString().replace("admin/", "");
         $(".display-tables").css("display", "none");
         $("#" + pathname + "-body").empty();
-        buildTable();
+        buildTable("?page=1&&size=5");
         buildShowingNumberInfo();
         buildShowingNumberButtons();
         removeModal();
@@ -37,7 +38,7 @@ function switchDashboard() {
     });
 }
 
-function buildTable() {
+function buildTable(page) {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
     var pathnameCapital = pathname.charAt(0).toUpperCase() + pathname.slice(1);
@@ -45,7 +46,7 @@ function buildTable() {
     var idDispl = "#display-" + pathname + "-table";
     $(".pathname-capital").text(pathnameCapital);
     $(idDispl).css("display", "block");
-    $.getJSON(path + "?page=1&&size=5", function (data) {
+    $.getJSON(path + page, function (data) {
         if (pathname === "subjects") {
             $.each(data, function (key, value) {
                 value.text = value.text.split(".")[0] + ".";
@@ -81,13 +82,21 @@ function buildShowingNumberButtons() {
         showingNumberButtons += '<a class="page-link" href="#" tabindex="-1">Previous</a>';
         showingNumberButtons += '</li>';
         for (var i = 1; i <= pages; i++) {
-            showingNumberButtons += '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>';
+            showingNumberButtons += '<li class="page-item"><a class="page-link" id="page-' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
         }
         showingNumberButtons += '<li class="page-item"><a class="page-link" href="#">Next</a></li>';
         showingNumberButtons += '</ul>';
         showingNumberButtons += '</nav>';
         $("#buttons-numbers-"+pathname).html(showingNumberButtons);
     });
+}
+
+function switchPage() {
+    $(document).on('click','.page-link',function (event) {
+        event.preventDefault();
+        var page = $(this).attr("data-href");
+        buildTable(page);
+    })
 }
 
 function removeSubmit(value) {
@@ -99,7 +108,7 @@ function removeSubmit(value) {
             "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
         },
         success: function () {
-            buildTable();
+            buildTable("?page=1&&size=5");
         },
         error: function () {
             alert('Error in Operation');
@@ -140,7 +149,7 @@ function addSubmit() {
         dataType: "json",
         success: function () {
             $('#add-' + pathname + "-modal").modal('hide');
-            buildTable();
+            buildTable("?page=1&&size=5");
         },
         error: function (jqXHR) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -211,7 +220,7 @@ function updateSubmit(value) {
         dataType: "json",
         success: function (data, textStatus, xhr) {
             $('#update-' + pathname + "-modal").modal('hide');
-            buildTable();
+            buildTable("?page=1&&size=5");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var obj = JSON.parse(jqXHR.responseText);
