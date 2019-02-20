@@ -88,4 +88,13 @@ public class BlogController {
     public List<SubjectDTO> getAllSubjectsDTO() {
         return crudService.searchAllSubject();
     }
+
+    @RequestMapping(value = "/topics/subjects",params = {"page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
+        if (start > 0 && size > 0) {
+            return crudService.searchAllSubjectPaginated(start, size);
+        }
+        return crudService.searchAllSubject();
+    }
 }
