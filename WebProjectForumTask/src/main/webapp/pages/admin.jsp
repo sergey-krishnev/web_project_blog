@@ -161,6 +161,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-7" id="buttons-numbers-comments">
                                     </div>
+                                    <input id="comments-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
                                 </div>
                                 <button type="button" class="btn btn-info" id="add-comments"
                                         data-url="/admin/comments" onclick="addModal()" data-toggle="modal"
