@@ -23,7 +23,7 @@
 
         <form-login login-page="/login"
                     authentication-failure-url="/login.jsp?login_error=1"
-                    default-target-url="/blog/all"/>
+                    default-target-url="/blog/all?page=1"/>
         <http-basic/>
         <logout logout-success-url="/login"/>
         <remember-me />

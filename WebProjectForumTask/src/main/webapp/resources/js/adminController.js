@@ -129,19 +129,6 @@ function nextPage() {
         var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
         buildTable(pageQuery);
         buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
-        $.getJSON(path, function (data) {
-            var jsonObject = JSON.stringify(data);
-            var count = JSON.parse(jsonObject).length;
-            var pages = Math.floor(count / 5);
-            if (count % 5 !== 0) pages++;
-
-            if (currentPage === pages) $(".next-link").addClass("disabled"); else {
-                $(".next-link").removeClass("disabled")
-            }
-            if (currentPage !== 1) {$(".previous-link").removeClass("disabled")} else {
-                $(".previous-link").addClass("disabled")
-            }
-        })
     });
 }
 
@@ -154,19 +141,6 @@ function previousPage() {
         var pageQuery = "?page=" + (parseInt(currentPage)) + "&&size=5";
         buildTable(pageQuery);
         buildShowingNumberInfo(1+(currentPage-1)*5,5+(currentPage-1)*5);
-        $.getJSON(path, function (data) {
-            var jsonObject = JSON.stringify(data);
-            var count = JSON.parse(jsonObject).length;
-            var pages = Math.floor(count / 5);
-            if (count % 5 !== 0) pages++;
-
-            if (currentPage === pages) $(".next-link").addClass("disabled"); else {
-                $(".next-link").removeClass("disabled")
-            }
-            if (currentPage !== 1) {$(".previous-link").removeClass("disabled")} else {
-                $(".previous-link").addClass("disabled")
-            }
-        })
     });
 }
 
