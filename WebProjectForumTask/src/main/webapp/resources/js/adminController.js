@@ -125,7 +125,7 @@ function nextPage() {
         event.preventDefault();
         var path = $('#default-path').attr("href");
         var pathname = path.toString().replace("admin/","").toString();
-        var currentPage = $("#" + pathname + "-current-page").attr("data-id");
+        var currentPage = parseInt($("#" + pathname + "-current-page").attr("data-id"));
         var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
         buildTable(pageQuery);
         buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
@@ -146,14 +146,14 @@ function nextPage() {
 }
 
 function previousPage() {
-    $(document).on('click','.next-link',function (event) {
+    $(document).on('click','.previous-link',function (event) {
         event.preventDefault();
         var path = $('#default-path').attr("href");
         var pathname = path.toString().replace("admin/","").toString();
-        var currentPage = $("#" + pathname + "-current-page").attr("data-id");
-        var pageQuery = "?page=" + (parseInt(currentPage)-1) + "&&size=5";
+        var currentPage = parseInt($("#" + pathname + "-current-page").attr("data-id"));
+        var pageQuery = "?page=" + (parseInt(currentPage)) + "&&size=5";
         buildTable(pageQuery);
-        buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
+        buildShowingNumberInfo(1+(currentPage-1)*5,5+(currentPage-1)*5);
         $.getJSON(path, function (data) {
             var jsonObject = JSON.stringify(data);
             var count = JSON.parse(jsonObject).length;

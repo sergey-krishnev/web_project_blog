@@ -199,6 +199,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-7" id="buttons-numbers-subjects">
                                     </div>
+                                    <input id="subjects-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
                                 </div>
                                 <button type="button" class="btn btn-info" id="add-subjects"
                                         data-url="/admin/subjects" onclick="addModal()" data-toggle="modal"
@@ -236,6 +237,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-7" id="buttons-numbers-users">
                                     </div>
+                                    <input id="users-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
                                 </div>
                                 <button type="button" class="btn btn-info" id="add-users"
                                         data-url="/admin/users" onclick="addModal()" data-toggle="modal"
@@ -269,6 +271,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-7" id="buttons-numbers-topics">
                                     </div>
+                                    <input id="topics-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
                                 </div>
                                 <button type="button" class="btn btn-info" id="add-topics"
                                         data-url="/admin/topics" onclick="addModal()" data-toggle="modal"
