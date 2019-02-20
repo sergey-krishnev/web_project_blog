@@ -42,9 +42,9 @@
         </button>
 
         <span style="float: left">
-        <a href="?lang=en_US">English</a>
+        <a href="?lang=en_US&page=1">English</a>
         |
-        <a href="?lang=ru">Russian</a>
+        <a href="?lang=ru&page=1">Russian</a>
         </span>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -109,11 +109,11 @@
 
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">
-                <li class="page-item">
-                    <a class="page-link" href="/blog/all?page=1" onclick="olderPage(this)">&larr; Older</a>
+                <li class="page-item" id="older-page">
+                    <a class="page-link" href="#" onclick="olderPage()">&larr; Older</a>
                 </li>
-                <li class="page-item">
-                    <a class="page-link" href="/blog/all?page=1" onclick="newerPage(this)">Newer &rarr;</a>
+                <li class="page-item" id="newer-page">
+                    <a class="page-link" href="#" onclick="newerPage()">Newer &rarr;</a>
                 </li>
             </ul>
 

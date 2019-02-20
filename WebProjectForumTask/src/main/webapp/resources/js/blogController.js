@@ -6,6 +6,15 @@ $(document).ready(function () {
     var id = pathname.match("\\d+");
     if (id === null) {
         buildSubjects(pathname + "?" + search + "&size=3");
+        $.getJSON(pathname, function (data) {
+            var jsonObject = JSON.stringify(data);
+            var count = JSON.parse(jsonObject).length;
+            var pages = Math.floor(count / 3);
+            if (count % 3 !== 0) pages++;
+        var page = parseInt(search.slice(-1));
+        if (page === 1) $("#newer-page").addClass("disabled");
+        if (page === pages) $("#older-page").addClass("disabled");
+        });
     } else {
         var checkedPath = "topics/" + id;
         pathname = pathname.replace(id, checkedPath);
@@ -14,20 +23,20 @@ $(document).ready(function () {
     }
 });
 
-function olderPage(value) {         //fix this
-    var href = $(value).attr("href");
-    var page = parseInt(href.slice(-1));
+function olderPage() {
+    var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
+    var page = parseInt(search.slice(-1));
     page++;
-    href = href.replace(/.$/,page);
-    $(value).attr("href", href);
+    search = search.replace(/.$/,page);
+    window.location.href = "/blog/all?" + search;
 }
 
-function newerPage(value) {         //fix this
-    var href = $(value).attr("href");
-    var page = parseInt(href.slice(-1));
+function newerPage() {
+    var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
+    var page = parseInt(search.slice(-1));
     page--;
-    href = href.replace(/.$/,page);
-    $(value).attr("href", href);
+    search = search.replace(/.$/,page);
+    window.location.href = "/blog/all?" + search;
 }
 
 function buildSubjects(subjectsPath) {
