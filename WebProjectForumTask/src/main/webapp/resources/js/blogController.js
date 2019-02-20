@@ -1,10 +1,11 @@
 $(document).ready(function () {
 
     var pathname = window.location.pathname;
+    var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
     pathname = pathname.replace("all", "topics/subjects");
     var id = pathname.match("\\d+");
     if (id === null) {
-        buildSubjects(pathname);
+        buildSubjects(pathname + "?" + search + "&size=3");
     } else {
         var checkedPath = "topics/" + id;
         pathname = pathname.replace(id, checkedPath);
@@ -12,6 +13,22 @@ $(document).ready(function () {
         changeTopicName(pathname);
     }
 });
+
+function olderPage(value) {         //fix this
+    var href = $(value).attr("href");
+    var page = parseInt(href.slice(-1));
+    page++;
+    href = href.replace(/.$/,page);
+    $(value).attr("href", href);
+}
+
+function newerPage(value) {         //fix this
+    var href = $(value).attr("href");
+    var page = parseInt(href.slice(-1));
+    page--;
+    href = href.replace(/.$/,page);
+    $(value).attr("href", href);
+}
 
 function buildSubjects(subjectsPath) {
     var currentSubject = $("#username").val();

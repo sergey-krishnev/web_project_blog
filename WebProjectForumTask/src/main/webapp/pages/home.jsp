@@ -110,10 +110,10 @@
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">
                 <li class="page-item">
-                    <a class="page-link" href="#">&larr; Older</a>
+                    <a class="page-link" href="/blog/all?page=1" onclick="olderPage(this)">&larr; Older</a>
                 </li>
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Newer &rarr;</a>
+                <li class="page-item">
+                    <a class="page-link" href="/blog/all?page=1" onclick="newerPage(this)">Newer &rarr;</a>
                 </li>
             </ul>
 
