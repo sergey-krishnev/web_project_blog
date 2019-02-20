@@ -1,6 +1,8 @@
 $(document).ready(function () {
     switchDashboard();
     buildTable();
+    buildShowingNumberInfo();
+    buildShowingNumberButtons();
     removeModal();
     addModal();
     updateModal();
@@ -26,6 +28,8 @@ function switchDashboard() {
         $(".display-tables").css("display", "none");
         $("#" + pathname + "-body").empty();
         buildTable();
+        buildShowingNumberInfo();
+        buildShowingNumberButtons();
         removeModal();
         addModal();
         updateModal();
@@ -48,6 +52,41 @@ function buildTable() {
             });
         }
         $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
+    });
+}
+
+function buildShowingNumberInfo() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    $.getJSON(path, function (data) {
+        var jsonObject= JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var showingNumberInfo = 'Showing 1 to 5 of ' + count + ' entries';
+        $("#showing-numbers-"+pathname).text(showingNumberInfo);
+    });
+}
+
+function buildShowingNumberButtons() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    $.getJSON(path, function (data) {
+        var jsonObject = JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var pages = count/5;
+        if(count%5 !== 0) pages++;
+        var showingNumberButtons = '';
+        showingNumberButtons += '<nav aria-label="Page navigation">';
+        showingNumberButtons += '<ul class="pagination justify-content-end">';
+        showingNumberButtons += '<li class="page-item disabled">';
+        showingNumberButtons += '<a class="page-link" href="#" tabindex="-1">Previous</a>';
+        showingNumberButtons += '</li>';
+        for (var i = 1; i <= pages; i++) {
+            showingNumberButtons += '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>';
+        }
+        showingNumberButtons += '<li class="page-item"><a class="page-link" href="#">Next</a></li>';
+        showingNumberButtons += '</ul>';
+        showingNumberButtons += '</nav>';
+        $("#buttons-numbers-"+pathname).html(showingNumberButtons);
     });
 }
 
