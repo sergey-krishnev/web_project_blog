@@ -1,7 +1,7 @@
 $(document).ready(function () {
     switchDashboard();
     buildTable("?page=1&&size=5");
-    buildShowingNumberInfo();
+    buildShowingNumberInfo(1,5);
     buildShowingNumberButtons();
     removeModal();
     addModal();
@@ -29,7 +29,7 @@ function switchDashboard() {
         $(".display-tables").css("display", "none");
         $("#" + pathname + "-body").empty();
         buildTable("?page=1&&size=5");
-        buildShowingNumberInfo();
+        buildShowingNumberInfo(1,5);
         buildShowingNumberButtons();
         removeModal();
         addModal();
@@ -56,13 +56,13 @@ function buildTable(page) {
     });
 }
 
-function buildShowingNumberInfo() {
+function buildShowingNumberInfo(start, end) {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
     $.getJSON(path, function (data) {
         var jsonObject= JSON.stringify(data);
         var count = JSON.parse(jsonObject).length;
-        var showingNumberInfo = 'Showing 1 to 5 of ' + count + ' entries';
+        var showingNumberInfo = 'Showing ' + start + ' to ' + end + ' of ' + count + ' entries';
         $("#showing-numbers-"+pathname).text(showingNumberInfo);
     });
 }
@@ -82,7 +82,7 @@ function buildShowingNumberButtons() {
         showingNumberButtons += '<a class="page-link" href="#" tabindex="-1">Previous</a>';
         showingNumberButtons += '</li>';
         for (var i = 1; i <= pages; i++) {
-            showingNumberButtons += '<li class="page-item"><a class="page-link" id="page-' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
+            showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
         }
         showingNumberButtons += '<li class="page-item"><a class="page-link" href="#">Next</a></li>';
         showingNumberButtons += '</ul>';
@@ -92,10 +92,12 @@ function buildShowingNumberButtons() {
 }
 
 function switchPage() {
-    $(document).on('click','.page-link',function (event) {
+    $(document).on('click','.number-link',function (event) {
         event.preventDefault();
-        var page = $(this).attr("data-href");
-        buildTable(page);
+        var pageQuery = $(this).attr("data-href");
+        var page = $(this).attr("id");
+        buildTable(pageQuery);
+        buildShowingNumberInfo(1+(page-1)*5,5+(page-1)*5);
     })
 }
 
