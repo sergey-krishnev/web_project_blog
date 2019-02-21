@@ -19,11 +19,11 @@ $(document).ready(function () {
         var checkedPath = "topics/" + id;
         pathname = pathname.replace(id, checkedPath);
         buildSubjects(pathname + "/subjects?" + search + "&size=3");
-        $.getJSON(pathname, function (data) {
+        $.getJSON(pathname + "/subjects", function (data) {
             var jsonObject = JSON.stringify(data);
             var count = JSON.parse(jsonObject).length;
             var pages = Math.floor(count / 3);
-            if (count % 3 !== 0) pages++;
+            if ((count % 3 !== 0) || (count === 0)) pages++;
             var page = parseInt(search.slice(-1));
             if (page === 1) $("#newer-page").addClass("disabled");
             if (page === pages) $("#older-page").addClass("disabled");
@@ -37,7 +37,7 @@ function olderPage() {
     var page = parseInt(search.slice(-1));
     page++;
     search = search.replace(/.$/,page);
-    window.location.href = "/blog/all?" + search;
+    window.location.href = window.location.pathname + "?" + search;
 }
 
 function newerPage() {
@@ -45,7 +45,7 @@ function newerPage() {
     var page = parseInt(search.slice(-1));
     page--;
     search = search.replace(/.$/,page);
-    window.location.href = "/blog/all?" + search;
+    window.location.href = window.location.pathname + "?" + search;
 }
 
 function buildSubjects(subjectsPath) {

@@ -8,8 +8,8 @@ $(document).ready(function () {
     updateModal();
     read();
     switchNumberPage();
-    nextPage();
-    previousPage();
+    // nextPage();
+    // previousPage();
 });
 
 function removeModal() {
@@ -82,12 +82,12 @@ function buildShowingNumberButtons() {
         showingNumberButtons += '<nav aria-label="Page navigation">';
         showingNumberButtons += '<ul class="pagination justify-content-end">';
         showingNumberButtons += '<li class="page-item previous-link disabled">';
-        showingNumberButtons += '<a class="page-link " href="#" tabindex="-1">Previous</a>';
+        showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="previousPage(event)">Previous</a>';
         showingNumberButtons += '</li>';
         for (var i = 1; i <= pages; i++) {
             showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
         }
-        showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#">Next</a></li>';
+        showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
         showingNumberButtons += '</ul>';
         showingNumberButtons += '</nav>';
         $("#buttons-numbers-"+pathname).html(showingNumberButtons);
@@ -120,28 +120,54 @@ function switchNumberPage() {
     });
 }
 
-function nextPage() {
-    $(document).on('click','.next-link',function (event) {
-        event.preventDefault();
-        var path = $('#default-path').attr("href");
+function nextPage(event) {
+    event.preventDefault();
+    var path = $('#default-path').attr("href");
         var pathname = path.toString().replace("admin/","").toString();
-        var currentPage = parseInt($("#" + pathname + "-current-page").attr("data-id"));
+        var hiddenPage = $("#" + pathname + "-current-page");
+        var currentPage = parseInt(hiddenPage.attr("data-id"));
+        hiddenPage.attr("data-id", parseInt(currentPage)+1);
         var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
         buildTable(pageQuery);
         buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
-    });
+    $.getJSON(path, function (data) {
+        var jsonObject = JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var pages = Math.floor(count / 5);
+        if (count % 5 !== 0) pages++;
+
+        if (parseInt(currentPage)+1 === pages) $(".next-link").addClass("disabled"); else {
+            $(".next-link").removeClass("disabled")
+        }
+        if (parseInt(currentPage)+1 !== 1) {$(".previous-link").removeClass("disabled")} else {
+            $(".previous-link").addClass("disabled")
+        }
+    })
 }
 
-function previousPage() {
-    $(document).on('click','.previous-link',function (event) {
-        event.preventDefault();
-        var path = $('#default-path').attr("href");
+function previousPage(event) {
+    event.preventDefault();
+    var path = $('#default-path').attr("href");
         var pathname = path.toString().replace("admin/","").toString();
-        var currentPage = parseInt($("#" + pathname + "-current-page").attr("data-id"));
-        var pageQuery = "?page=" + (parseInt(currentPage)) + "&&size=5";
+        var hiddenPage = $("#" + pathname + "-current-page");
+        var currentPage = parseInt(hiddenPage.attr("data-id"));
+        hiddenPage.attr("data-id", parseInt(currentPage)-1);
+        var pageQuery = "?page=" + (parseInt(currentPage)-1) + "&&size=5";
         buildTable(pageQuery);
-        buildShowingNumberInfo(1+(currentPage-1)*5,5+(currentPage-1)*5);
-    });
+        buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
+    $.getJSON(path, function (data) {
+        var jsonObject = JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var pages = Math.floor(count / 5);
+        if (count % 5 !== 0) pages++;
+
+        if (parseInt(currentPage)-1 === pages) $(".next-link").addClass("disabled"); else {
+            $(".next-link").removeClass("disabled")
+        }
+        if (parseInt(currentPage)-1 !== 1) {$(".previous-link").removeClass("disabled")} else {
+            $(".previous-link").addClass("disabled")
+        }
+    })
 }
 
 function removeSubmit(value) {
