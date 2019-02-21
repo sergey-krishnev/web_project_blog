@@ -180,6 +180,8 @@ function removeSubmit(value) {
         },
         success: function () {
             buildTable("?page=1&&size=5");
+            buildShowingNumberInfo(1,5);
+            buildShowingNumberButtons();
         },
         error: function () {
             alert('Error in Operation');
@@ -221,6 +223,8 @@ function addSubmit() {
         success: function () {
             $('#add-' + pathname + "-modal").modal('hide');
             buildTable("?page=1&&size=5");
+            buildShowingNumberInfo(1,5);
+            buildShowingNumberButtons();
         },
         error: function (jqXHR) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -292,6 +296,8 @@ function updateSubmit(value) {
         success: function (data, textStatus, xhr) {
             $('#update-' + pathname + "-modal").modal('hide');
             buildTable("?page=1&&size=5");
+            buildShowingNumberInfo(1,5);
+            buildShowingNumberButtons();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var obj = JSON.parse(jqXHR.responseText);
