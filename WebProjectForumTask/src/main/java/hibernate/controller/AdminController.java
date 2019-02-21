@@ -33,9 +33,9 @@ public class AdminController {
 
     @RequestMapping(value = "/comments",params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<CommentDTO> getAllCommentDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
-        if (start > 0 && size > 0) {
-            return crudService.searchAllCommentPaginated(start, size);
+    public List<CommentDTO> getAllCommentDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchAllCommentPaginated(page, size);
         }
         return crudService.searchAllComment();
     }
@@ -75,9 +75,9 @@ public class AdminController {
 
     @RequestMapping(value = "/subjects",params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
-        if (start > 0 && size > 0) {
-            return crudService.searchAllSubjectPaginated(start, size);
+    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchAllSubjectPaginated(page, size);
         }
         return crudService.searchAllSubject();
     }
@@ -117,9 +117,9 @@ public class AdminController {
 
     @RequestMapping(value = "/topics", params = {"page", "size"},method = RequestMethod.GET)
     @ResponseBody
-    public List<TopicDTO> getTopicsDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
-        if (start > 0 && size > 0) {
-            return crudService.searchAllTopicPaginated(start, size);
+    public List<TopicDTO> getTopicsDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchAllTopicPaginated(page, size);
         }
         return crudService.searchAllTopic();
     }
@@ -158,9 +158,9 @@ public class AdminController {
 
     @RequestMapping(value = "/users", params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<UsersDTO> getAllUsersDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
-        if (start > 0 && size > 0) {
-            return crudService.searchAllUsersPaginated(start, size);
+    public List<UsersDTO> getAllUsersDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchAllUsersPaginated(page, size);
         }
         return crudService.searchAllUsers();
     }

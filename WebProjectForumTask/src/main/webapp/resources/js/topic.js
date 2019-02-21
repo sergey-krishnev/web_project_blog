@@ -11,7 +11,7 @@ $(document).ready(function () {
             topicDTO_data += '</li>';
             $.each(data, function (key, value) {
                 topicDTO_data += '<li class="nav-item">';
-                topicDTO_data += '<a class="nav-link all-topics" href="/blog/' + value.id + '">' + value.topicName + '</a>';
+                topicDTO_data += '<a class="nav-link all-topics" href="/blog/' + value.id + '?page=1">' + value.topicName + '</a>';
                 topicDTO_data += '</li>';
             });
             $('.aggregate-topics').html(topicDTO_data)

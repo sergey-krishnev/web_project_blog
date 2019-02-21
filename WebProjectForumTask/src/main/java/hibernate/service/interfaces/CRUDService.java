@@ -30,6 +30,8 @@ public interface CRUDService {
 
     List<SubjectDTO> searchAllSubjectPaginated(int page, int size);
 
+    List<SubjectDTO> searchSubjectByTopicPaginated(int topicId, int page, int size);
+
     List<CommentDTO> searchCommentBySubject(Subject subject);
 
     List<CommentDTO> searchAllComment();

@@ -150,6 +150,20 @@ public class CRUDServiceImpl implements CRUDService {
         return subjects.subList(start, start + size);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<SubjectDTO> searchSubjectByTopicPaginated(int topicId, int page, int size) {
+        TopicDTO topicDTO = searchTopicById(topicId);
+        List<SubjectDTO> subjects = topicDTO.getSubjects();
+        int start = 0;
+        start += (page-1) * size;
+        int div = subjects.size()/size;
+        int mod = subjects.size()%size;
+        if (page-1 == div) return subjects.subList(start,start + mod);
+        if (start + size > subjects.size()) return new ArrayList<>();
+        return subjects.subList(start, start + size);
+    }
+
     private void subjectToSubjectDTO(List<Subject> subjects, List<SubjectDTO> subjectDTOList) {
         for (Subject subject : subjects) {
             SubjectDTO subjectDTO = new SubjectDTO();

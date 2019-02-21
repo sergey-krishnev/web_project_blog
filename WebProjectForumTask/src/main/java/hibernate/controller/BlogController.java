@@ -41,6 +41,17 @@ public class BlogController {
         return topicDTO.getSubjects();
     }
 
+    @RequestMapping(value = "/topics/{topicId}/subjects",params = {"page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<SubjectDTO> getSubjectsByTopicId(@PathVariable int topicId,@RequestParam("page") int page,
+                                                 @RequestParam("size") int size) {
+        TopicDTO topicDTO = crudService.searchTopicById(topicId);
+        if (page > 0 && size > 0) {
+            return crudService.searchSubjectByTopicPaginated(topicId,page,size);
+        }
+        return topicDTO.getSubjects();
+    }
+
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.GET)
     public SubjectDTO getSubjectDTO(@PathVariable int subjectId) {
         return crudService.searchSubjectById(subjectId);
@@ -91,9 +102,9 @@ public class BlogController {
 
     @RequestMapping(value = "/topics/subjects",params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int start, @RequestParam("size") int size) {
-        if (start > 0 && size > 0) {
-            return crudService.searchAllSubjectPaginated(start, size);
+    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchAllSubjectPaginated(page, size);
         }
         return crudService.searchAllSubject();
     }

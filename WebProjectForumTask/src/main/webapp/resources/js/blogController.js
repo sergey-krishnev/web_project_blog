@@ -18,7 +18,16 @@ $(document).ready(function () {
     } else {
         var checkedPath = "topics/" + id;
         pathname = pathname.replace(id, checkedPath);
-        buildSubjects(pathname + "/subjects");
+        buildSubjects(pathname + "/subjects?" + search + "&size=3");
+        $.getJSON(pathname, function (data) {
+            var jsonObject = JSON.stringify(data);
+            var count = JSON.parse(jsonObject).length;
+            var pages = Math.floor(count / 3);
+            if (count % 3 !== 0) pages++;
+            var page = parseInt(search.slice(-1));
+            if (page === 1) $("#newer-page").addClass("disabled");
+            if (page === pages) $("#older-page").addClass("disabled");
+        });
         changeTopicName(pathname);
     }
 });
