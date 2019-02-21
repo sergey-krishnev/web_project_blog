@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Users implements Serializable {
     @Id
+    @GeneratedValue(generator = "users_id__generator", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="users_id__generator", sequenceName = "forum_schema.forum_id_users_seq", allocationSize=1)
     @Column(name = "id", unique = true)
     private int id;
 

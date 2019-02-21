@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public class Authority implements Serializable {
     @Id
+    @GeneratedValue(generator = "authorities_id__generator", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="authorities_id__generator", sequenceName = "forum_schema.forum_id_authorities_seq", allocationSize=1)
     @Column(name = "id", unique = true)
     private int id;
 
