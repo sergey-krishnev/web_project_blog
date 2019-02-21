@@ -8,9 +8,24 @@ $(document).ready(function () {
     updateModal();
     read();
     switchNumberPage();
+    internationalization();
     // nextPage();
     // previousPage();
 });
+
+function internationalization() {
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: 'resources/bundle',
+        mode: 'both',
+        language: lang,
+        callback: function () {
+                $(".admin-brand").text($.i18n.prop("admin-brand"));
+
+        }
+    })
+}
 
 function removeModal() {
     var path = $('#default-path').attr("href");
@@ -37,6 +52,7 @@ function switchDashboard() {
         addModal();
         updateModal();
         read();
+        internationalization();
     });
 }
 

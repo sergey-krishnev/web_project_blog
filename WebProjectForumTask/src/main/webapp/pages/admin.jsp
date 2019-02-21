@@ -13,7 +13,7 @@
     <sec:csrfMetaTags />
     <sec:authentication property="principal.username" var="username" />
 
-    <title class="Pathname">Dashboard</title>
+    <title class="Pathname">Admin</title>
 
     <style type="text/css">
         .error {
@@ -45,22 +45,22 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-        <a class="navbar-brand mr-1" href="#">Start FOUR ROOM Admin</a>
+        <a class="navbar-brand mr-1 admin-brand" href="#">FOUR ROOM Admin</a>
 
         <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
 
         <span style="float: left">
-        <a href="?lang=en_US">English</a>
+        <a href="?lang=en_US" class="admin-language-en">English</a>
         |
-        <a href="?lang=ru">Russian</a>
+        <a href="?lang=ru" class="admin-language-ru">Russian</a>
         </span>
 
         <!-- Navbar Search -->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"
+                <input type="text" class="form-control admin-search" placeholder="Search for..." aria-label="Search"
                        aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="button">
@@ -79,11 +79,11 @@
                     <i class="fas fa-user-circle fa-fw"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/blog/all?page=1">Main page</a>
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Activity Log</a>
+                    <a class="dropdown-item admin-dropdown-main-page" href="/blog/all?page=1">Main page</a>
+                    <a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>
+                    <a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    <a class="dropdown-item admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
                 </div>
             </li>
         </ul>
@@ -98,22 +98,22 @@
             <li class="nav-item">
                 <a class="nav-link" data-url="admin/comments" href="#">
                     <i class="fas fa-fw fa-comments"></i>
-                    <span>Comments</span></a>
+                    <span class="admin-sidebar-comments">Comments</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " data-url="admin/subjects" href="#">
                     <i class="fas fa-fw fa-list"></i>
-                    <span>Subjects</span></a>
+                    <span class="admin-sidebar-subjects">Subjects</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-url="admin/users" href="#">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Users</span></a>
+                    <span class="admin-sidebar-users">Users</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-url="admin/topics"  href="#">
                     <i class="fas fa-fw fa-list"></i>
-                    <span>Topics</span></a>
+                    <span class="admin-sidebar-topics">Topics</span></a>
             </li>
         </ul>
 
@@ -134,7 +134,7 @@
                 <div id="adminTables">
                     <div id="display-comments-table" class="display-tables" style="display: none">
                         <div class="card mb-3">
-                            <div class="card-header">
+                            <div class="card-header admin-card-head-comments">
                                 <i class="fas fa-comments"></i>
                                 Comments Data Table
                             </div>
@@ -143,12 +143,12 @@
                                     <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
-                                            <th>Comment</th>
-                                            <th>Username</th>
-                                            <th>Topic name</th>
-                                            <th>Subject name</th>
-                                            <th>Date</th>
-                                            <th colspan="2">Action</th>
+                                            <th class="admin-data-table-head-comment">Comment</th>
+                                            <th class="admin-data-table-head-username">Username</th>
+                                            <th class="admin-data-table-head-topic">Topic name</th>
+                                            <th class="admin-data-table-head-subject">Subject name</th>
+                                            <th class="admin-data-table-head-date">Date</th>
+                                            <th class="admin-data-table-head-action" colspan="2">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody id="comments-body"></tbody>
