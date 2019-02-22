@@ -19,10 +19,13 @@ function internationalization() {
         name: 'admin',
         path: 'resources/bundle',
         mode: 'both',
+        cache: true,
         language: lang,
         callback: function () {
-                $(".admin-brand").text($.i18n.prop("admin-brand"));
-
+           var array = $.i18n.map;
+            $.each(array, function (index, value) {
+                $("." + index).text(value);
+            });
         }
     })
 }
