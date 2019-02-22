@@ -40,6 +40,12 @@ public class AdminController {
         return crudService.searchAllComment();
     }
 
+//    @RequestMapping(value = "/comments", params = {"search"}, method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<CommentDTO> getSearchedComments(@RequestParam("search") String search) {
+//            return crudService.searchCommentBySearch(search);
+//    }
+
     @RequestMapping(value = "/comments/{commentId}", method = RequestMethod.GET)
     public CommentDTO getCommentDTO(@PathVariable int commentId) {
         return crudService.searchCommentById(commentId);

@@ -5,6 +5,7 @@ import hibernate.dto.CommentDTO;
 import hibernate.model.*;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,17 @@ public class CriteriaDaoImpl implements CRUDDao {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Comment.class);
         return cr.list();
     }
+
+//    @Override
+//    public List<Comment> searchCommentBySearch(String search) {
+//        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Comment.class);
+//        Criterion criterionMessage = Restrictions.ilike("message", search);
+//        Criterion criterionUserId = Restrictions.eq("user_id", searchByUserName(search).getId());
+//        Criterion criterionSubjectId = Restrictions.eq("subject_id", searchBySubjectName(search).getId());
+//        Criterion criterionOr = Restrictions.or(criterionMessage,criterionUserId,criterionSubjectId);
+//        cr.add(criterionOr);
+//        return cr.list();
+//    }
 
     @Override
     public List<Users> searchAllUsers() {

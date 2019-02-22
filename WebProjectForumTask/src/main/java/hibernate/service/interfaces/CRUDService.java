@@ -36,6 +36,8 @@ public interface CRUDService {
 
     List<CommentDTO> searchAllComment();
 
+//    List<CommentDTO> searchCommentBySearch(String search);
+
     List<CommentDTO> searchAllCommentPaginated(int page, int size);
 
     void insertTopic(TopicDTO topicDTO);
