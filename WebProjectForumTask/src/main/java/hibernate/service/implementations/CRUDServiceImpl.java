@@ -137,6 +137,30 @@ public class CRUDServiceImpl implements CRUDService {
 
     @Transactional(readOnly = true)
     @Override
+    public List<SubjectDTO> searchLikeSubjectName(String search) {
+        List<Subject> subjects = crudDao.searchLikeSubjectName(search);
+        List<SubjectDTO> subjectDTOList = new ArrayList<>();
+        subjectToSubjectDTO(subjects, subjectDTOList);
+        return subjectDTOList;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<SubjectDTO> searchLikeSubjectNamePaginated(int page, int size, String search) {
+        List<Subject> subjectList = crudDao.searchLikeSubjectName(search);
+        List<SubjectDTO> subjects = new ArrayList<>();
+        subjectToSubjectDTO(subjectList, subjects);
+        int start = 0;
+        start += (page-1) * size;
+        int div = subjects.size()/size;
+        int mod = subjects.size()%size;
+        if (page-1 == div) return subjects.subList(start,start + mod);
+        if (start + size > subjects.size()) return new ArrayList<>();
+        return subjects.subList(start, start + size);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public List<SubjectDTO> searchAllSubjectPaginated(int page, int size) {
         List<Subject> subjectList = crudDao.searchAllSubject();
         List<SubjectDTO> subjects = new ArrayList<>();

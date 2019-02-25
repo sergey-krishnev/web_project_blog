@@ -100,6 +100,15 @@ public class BlogController {
         return crudService.searchAllSubject();
     }
 
+    @RequestMapping(value = "/topics/subjects",params = {"search", "page", "size"},method = RequestMethod.GET)
+    public List<SubjectDTO> getLikeSubjectName(@RequestParam("page") int page, @RequestParam("size") int size,
+                                               @RequestParam("search") String search) {
+        if (page > 0 && size > 0) {
+            return crudService.searchLikeSubjectNamePaginated(page,size,search);
+        }
+        return crudService.searchLikeSubjectName(search);
+    }
+
     @RequestMapping(value = "/topics/subjects",params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
     public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {

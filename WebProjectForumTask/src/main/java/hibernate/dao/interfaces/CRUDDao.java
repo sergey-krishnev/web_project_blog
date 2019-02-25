@@ -31,6 +31,8 @@ public interface CRUDDao{
 
     Subject searchBySubjectName(String subjectName);
 
+    List<Subject> searchLikeSubjectName(String search);
+
     void insertTopic(String topicName);
 
     void updateTopic(int topicId, String topicName);

@@ -28,6 +28,10 @@ public interface CRUDService {
 
     List<SubjectDTO> searchAllSubject();
 
+    List<SubjectDTO> searchLikeSubjectName(String search);
+
+    List<SubjectDTO> searchLikeSubjectNamePaginated(int page, int size, String search);
+
     List<SubjectDTO> searchAllSubjectPaginated(int page, int size);
 
     List<SubjectDTO> searchSubjectByTopicPaginated(int topicId, int page, int size);

@@ -15,7 +15,7 @@
 <a type="hidden" id="default-path" href="blog/topics"></a>
 
 <div class="card my-4">
-    <h5 class="card-header">Topics</h5>
+    <h5 class="card-header admin-sidebar-topics">Topics</h5>
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">

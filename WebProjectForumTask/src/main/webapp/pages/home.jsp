@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <sec:csrfMetaTags />
 
-    <title>FOUR ROOM Home</title>
+    <title>FOUR ROOM</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.css" />" rel="stylesheet">
@@ -36,37 +36,22 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="/blog/all">Start FOUR ROOM</a>
+        <a class="navbar-brand" href="/blog/all">FOUR ROOM</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <span style="float: left">
-        <a href="?lang=en_US&page=1">English</a>
+        <a href="?lang=en_US&page=1" class="admin-language-en">English</a>
         |
-        <a href="?lang=ru&page=1">Russian</a>
+        <a href="?lang=ru&page=1" class="admin-language-ru">Russian</a>
         </span>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/blog/all">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog/all">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog/all">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog/all">Contact</a>
-                </li>
-
                     <sec:authorize access="!isAuthenticated()">
                 <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                        <a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>
                 </li>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
@@ -79,12 +64,12 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">
                         <sec:authorize access="hasRole('ADMIN')">
-                        <a class="dropdown-item" href="/admin">Admin panel</a>
+                        <a class="dropdown-item admin-dropdown-admin-page" href="/admin">Admin panel</a>
                         </sec:authorize>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>
+                        <a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                        <a class="dropdown-item admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
                     </div>
                 </li>
                     </sec:authorize>
@@ -102,7 +87,7 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <div class="justify-content-between">
-                <h1 class="my-6 topicName">All Subjects </h1>
+                <h1 class="my-6 topicName user-all-subjects">All Subjects </h1>
             </div>
             <div class="aggregate-subjects"></div>
 
@@ -110,10 +95,10 @@
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">
                 <li class="page-item" id="older-page">
-                    <a class="page-link" href="#" onclick="olderPage()">&larr; Older</a>
+                    <a class="page-link user-button-older" href="#" onclick="olderPage()">&larr; Older</a>
                 </li>
                 <li class="page-item" id="newer-page">
-                    <a class="page-link" href="#" onclick="newerPage()">Newer &rarr;</a>
+                    <a class="page-link user-button-newer" href="#" onclick="newerPage()">Newer &rarr;</a>
                 </li>
             </ul>
 
@@ -124,12 +109,12 @@
 
             <!-- Search Widget -->
             <div class="card my-4">
-                <h5 class="card-header">Search</h5>
+                <h5 class="card-header user-card-head-search">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" id="search-subjects" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
+                  <button class="btn btn-secondary user-card-body-button-go" type="button" onclick="searchForm()">Go!</button>
                 </span>
                     </div>
                 </div>

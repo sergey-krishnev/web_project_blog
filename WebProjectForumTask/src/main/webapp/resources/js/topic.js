@@ -18,4 +18,22 @@ $(document).ready(function () {
             $("footer").css("display","block");
         });
     }
+    internationalization();
 });
+
+function internationalization() {
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: 'resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            var array = $.i18n.map;
+            $.each(array, function (index, value) {
+                $("." + index).text(value);
+            });
+        }
+    })
+}

@@ -468,14 +468,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update the subject</h5>
+                    <h5 class="modal-title admin-modal-update-subject-head">Update the subject</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="subjectName-update-subjects-modal">Subject name:</label>
+                        <label for="subjectName-update-subjects-modal" class="admin-data-table-head-subject">Subject name:</label>
                         <input name="subjectName" id="subjectName-update-subjects-modal" type="text"
                                class="form-control update-subjects-data" value="" placeholder="Subject name">
                         <div class="error NotEmpty-subjectDTO-subjectName"></div>
@@ -483,18 +483,18 @@
                         <div class="error SameSubjectName-subjectDTO-subject"></div>
                     </div>
                     <div class="form-group">
-                        <label for="userName-update-subjects-modal">Username:</label>
+                        <label for="userName-update-subjects-modal" class="admin-data-table-head-username">Username:</label>
                         <select name="userName" id="userName-update-subjects-modal"
                                 class="form-control users-select-update update-subjects-data"></select>
                     </div>
                     <div class="form-group">
-                        <label for="topicName-update-subjects-modal">Topic name:</label>
+                        <label for="topicName-update-subjects-modal" class="admin-data-table-head-topic">Topic name:</label>
                         <select name="topicName" id="topicName-update-subjects-modal"
                                 class="form-control topics-select-update update-subjects-data"></select>
                     </div>
                     <input id="date-update-subjects-modal" name="date" type="hidden" class="update-subjects-data" value="">
                     <div class="form-group">
-                        <label for="text-update-subjects-modal">Text</label>
+                        <label for="text-update-subjects-modal" class="admin-data-table-head-text">Text</label>
                         <textarea name="text" id="text-update-subjects-modal" type="text"
                                   class="form-control update-subjects-data" placeholder="Text" rows=5></textarea>
                         <div class="error NotEmpty-subjectDTO-text"></div>
@@ -502,8 +502,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="update-subjects-modal-button" type="button" onclick="updateSubmit(this)" data-url ="#">
+                    <button class="btn btn-secondary admin-modal-logout-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary admin-data-table-body-update" id="update-subjects-modal-button" type="button" onclick="updateSubmit(this)" data-url ="#">
                         Update
                     </button>
                 </div>
@@ -516,14 +516,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add the subject</h5>
+                    <h5 class="modal-title admin-modal-add-subject-head">Add the subject</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="subjectName-add-subjects-modal">Subject name:</label>
+                        <label for="subjectName-add-subjects-modal" class="admin-data-table-head-subject">Subject name:</label>
                         <input name="subjectName" id="subjectName-add-subjects-modal" type="text"
                                class="form-control add-subjects-data" value="" placeholder="Subject name">
                         <div class="error NotEmpty-subjectDTO-subjectName"></div>
@@ -531,20 +531,20 @@
                         <div class="error SameSubjectName-subjectDTO-subject"></div>
                     </div>
                     <div class="form-group">
-                        <label for="userName-add-subjects-modal">Username:</label>
+                        <label for="userName-add-subjects-modal" class="admin-data-table-head-username">Username:</label>
                         <select name="userName" id="userName-add-subjects-modal"
                                 class="form-control users-select-update add-subjects-data"></select>
                         <div class="error NotEmpty-subjectDTO-userName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="topicName-add-subjects-modal">Topic name:</label>
+                        <label for="topicName-add-subjects-modal" class="admin-data-table-head-topic">Topic name:</label>
                         <select name="topicName" id="topicName-add-subjects-modal"
                                 class="form-control topics-select-update add-subjects-data"></select>
                         <div class="error NotEmpty-subjectDTO-topicName"></div>
                     </div>
                     <input id="date-add-subjects-modal" name="date" type="hidden" class="add-subjects-data" value="">
                     <div class="form-group">
-                        <label for="text-add-subjects-modal">Text</label>
+                        <label for="text-add-subjects-modal" class="admin-data-table-head-text">Text</label>
                         <textarea name="text" id="text-add-subjects-modal" type="text" class="form-control add-subjects-data"
                                   placeholder="Text" rows=5></textarea>
                         <div class="error NotEmpty-subjectDTO-text"></div>
@@ -552,8 +552,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="add-subjects-modal-button" onclick="addSubmit()" type="button">Add
+                    <button class="btn btn-secondary admin-modal-delete-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary admin-modal-add-foot-button-add" id="add-subjects-modal-button" onclick="addSubmit()" type="button">Add
                     </button>
                 </div>
             </div>
@@ -581,15 +581,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete the user?</h5>
+                    <h5 class="modal-title admin-modal-delete-user-head">Delete the user?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Delete" below if you are ready to delete this user.</div>
+                <div class="modal-body admin-modal-delete-user-body">Select "Delete" below if you are ready to delete this user.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="delete-users-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
+                    <button class="btn btn-secondary admin-modal-delete-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary admin-modal-delete-foot-button-delete" id="delete-users-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -602,14 +602,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update the user?</h5>
+                    <h5 class="modal-title admin-modal-update-user-head">Update the user?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="userName-update-users-modal">Username:</label>
+                        <label for="userName-update-users-modal" class="admin-data-table-head-username">Username:</label>
                         <input name="userName" id="userName-update-users-modal" type="text"
                                class="form-control update-users-data" value="" placeholder="Username"/>
                         <div class="error NotEmpty-userDTO-userName"></div>
@@ -617,28 +617,28 @@
                         <div class="error SameUserName-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="password-update-users-modal">Password:</label>
+                        <label for="password-update-users-modal" class="admin-data-table-head-password">Password:</label>
                         <input name="password" id="password-update-users-modal" type="text"
                                class="form-control update-users-data" value="" placeholder="Password"
                                required="required"/>
                         <div class="error NotEmpty-userDTO-password"></div>
                     </div>
                     <div class="form-group">
-                        <label for="email-update-users-modal">E-mail:</label>
+                        <label for="email-update-users-modal" class="admin-data-table-head-email">E-mail:</label>
                         <input name="email" type="text" id="email-update-users-modal" class="form-control update-users-data"
                                value="" placeholder="E-mail"/>
                         <div class="error NotEmpty-userDTO-email"></div>
                         <div class="error Email-userDTO-email"></div>
                     </div>
                     <div class="form-group">
-                        <label for="firstName-update-users-modal">First name:</label>
+                        <label for="firstName-update-users-modal" class="admin-data-table-head-first-name">First name:</label>
                         <input name="firstName" type="text" id="firstName-update-users-modal"
                                class="form-control update-users-data" value="" placeholder="First name"/>
                         <div class="error NotEmpty-userDTO-firstName"></div>
                         <div class="error BadWords-userDTO-firstName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="lastName-update-users-modal">Last name:</label>
+                        <label for="lastName-update-users-modal" class="admin-data-table-head-last-name">Last name:</label>
                         <input name="lastName" type="text" id="lastName-update-users-modal"
                                class="form-control update-users-data" value="" placeholder="Last name"/>
                         <div class="error NotEmpty-userDTO-lastName"></div>
@@ -646,8 +646,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="update-users-modal-button" type="button" onclick="updateSubmit(this)" data-url ="/">
+                    <button class="btn btn-secondary admin-modal-logout-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary admin-data-table-body-update" id="update-users-modal-button" type="button" onclick="updateSubmit(this)" data-url ="/">
                         Update
                     </button>
                 </div>
@@ -660,14 +660,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add the user</h5>
+                    <h5 class="modal-title admin-modal-add-user-head">Add the user</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="userName-add-users-modal">Username:</label>
+                        <label for="userName-add-users-modal" class="admin-data-table-head-username">Username:</label>
                         <input name="userName" id="userName-add-users-modal" type="text" class="form-control add-users-data"
                                value="" placeholder="Username"/>
                         <div class="error NotEmpty-userDTO-userName"></div>
@@ -675,27 +675,27 @@
                         <div class="error SameUserName-userDTO-userName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="password-add-users-modal">Password:</label>
+                        <label for="password-add-users-modal" class="admin-data-table-head-password">Password:</label>
                         <input name="password" id="password-add-users-modal" type="text" class="form-control add-users-data"
                                value="" placeholder="Password" required="required"/>
                         <div class="error NotEmpty-userDTO-password"></div>
                     </div>
                     <div class="form-group">
-                        <label for="email-add-users-modal">E-mail:</label>
+                        <label for="email-add-users-modal" class="admin-data-table-head-email">E-mail:</label>
                         <input name="email" type="text" id="email-add-users-modal" class="form-control add-users-data"
                                value="" placeholder="E-mail"/>
                         <div class="error NotEmpty-userDTO-email"></div>
                         <div class="error Email-userDTO-email"></div>
                     </div>
                     <div class="form-group">
-                        <label for="firstName-add-users-modal">First name:</label>
+                        <label for="firstName-add-users-modal" class="admin-data-table-head-first-name">First name:</label>
                         <input name="firstName" type="text" id="firstName-add-users-modal"
                                class="form-control add-users-data" value="" placeholder="First name"/>
                         <div class="error NotEmpty-userDTO-firstName"></div>
                         <div class="error BadWords-userDTO-firstName"></div>
                     </div>
                     <div class="form-group">
-                        <label for="lastName-add-users-modal">Last name:</label>
+                        <label for="lastName-add-users-modal" class="admin-data-table-head-last-name">Last name:</label>
                         <input name="lastName" type="text" id="lastName-add-users-modal" class="form-control add-users-data"
                                value="" placeholder="Last name"/>
                         <div class="error NotEmpty-userDTO-lastName"></div>
@@ -703,8 +703,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="add-users-modal-button" onclick="addSubmit()" type="button">Add</a>
+                    <button class="btn btn-secondary admin-modal-logout-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary admin-modal-add-foot-button-add" id="add-users-modal-button" onclick="addSubmit()" type="button">Add</a>
                 </div>
             </div>
         </div>
@@ -715,15 +715,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete the topic?</h5>
+                    <h5 class="modal-title admin-modal-delete-topic-head">Delete the topic?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Delete" below if you are ready to delete this topic.</div>
+                <div class="modal-body admin-modal-delete-topic-body">Select "Delete" below if you are ready to delete this topic.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="delete-topics-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
+                    <button class="btn btn-secondary admin-modal-delete-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary admin-modal-delete-foot-button-delete" id="delete-topics-modal-button" type="button" onclick="removeSubmit(this)" data-url ="#" data-dismiss="modal">
                         Delete
                     </button>
                 </div>
@@ -736,14 +736,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update the topic?</h5>
+                    <h5 class="modal-title admin-modal-update-topic-head">Update the topic?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="topicName-update-topics-modal">Topic name:</label>
+                        <label for="topicName-update-topics-modal" class="admin-data-table-head-topic">Topic name:</label>
                         <input name="topicName" id="topicName-update-topics-modal" type="text"
                                class="form-control update-topics-fata" value="" placeholder="Topic name"/>
                         <div class="error NotEmpty-topicDTO-topicName"></div>
@@ -751,8 +751,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="update-topics-modal-button" type="button" onclick="updateSubmit(this)" data-url ="#">
+                    <button class="btn btn-secondary admin-modal-logout-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary admin-data-table-body-update" id="update-topics-modal-button" type="button" onclick="updateSubmit(this)" data-url ="#">
                         Update
                     </button>
                 </div>
@@ -765,14 +765,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add the topic</h5>
+                    <h5 class="modal-title admin-modal-add-topic-head">Add the topic</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="topicName-add-topics-modal">Topic name:</label>
+                        <label for="topicName-add-topics-modal" class="admin-data-table-head-topic">Topic name:</label>
                         <input name="topicName" id="topicName-add-topics-modal" type="text"
                                class="form-control add-topics-data" value="" placeholder="Topic name"/>
                         <div class="error NotEmpty-topicDTO-topicName"></div>
@@ -780,8 +780,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" id="add-topics-modal-button" onclick="addSubmit()" type="button">Add</a>
+                    <button class="btn btn-secondary admin-modal-logout-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary admin-modal-add-foot-button-add" id="add-topics-modal-button" onclick="addSubmit()" type="button">Add</a>
                 </div>
             </div>
         </div>
@@ -795,8 +795,8 @@
             <td>\${topicName}</td>
             <td>\${subjectName}</td>
             <td>\${date}</td>
-            <td><button type="button" class = "btn btn-primary update-comments" data-url ="/admin/comments/\${id} "id ="\${id}" data-toggle="modal" data-target="#update-comments-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-comments" data-url ="/admin/comments/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-comments-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-comments admin-data-table-body-update" data-url ="/admin/comments/\${id} "id ="\${id}" data-toggle="modal" data-target="#update-comments-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-comments admin-data-table-body-delete" data-url ="/admin/comments/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-comments-modal">Delete</button></td>
         </tr>
 
     </script>
@@ -808,9 +808,9 @@
             <td>\${userName}</td>
             <td>\${topicName}</td>
             <td>\${date}</td>
-            <td><button type="button" class = "btn btn-success read-subjects" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#read-subjects-modal">Read</button></td>
-            <td><button type="button" class = "btn btn-primary update-subjects" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-subjects-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-subjects" data-url ="/admin/subjects/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-subjects-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-success read-subjects admin-data-table-body-read" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#read-subjects-modal">Read</button></td>
+            <td><button type="button" class = "btn btn-primary update-subjects admin-data-table-body-update" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-subjects-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-subjects admin-data-table-body-delete" data-url ="/admin/subjects/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-subjects-modal">Delete</button></td>
         </tr>
 
     </script>
@@ -822,8 +822,8 @@
             <td>\${email}</td>
             <td>\${firstName}</td>
             <td>\${lastName}</td>
-            <td><button type="button" class = "btn btn-primary update-users" data-url ="/admin/users/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-users-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-users" data-url ="/admin/users/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-users-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-users admin-data-table-body-update" data-url ="/admin/users/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-users-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-users admin-data-table-body-delete" data-url ="/admin/users/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-users-modal">Delete</button></td>
         </tr>
 
     </script>
@@ -831,8 +831,8 @@
     <script id="topics-template" type="text/x-jQuery-tmpl">
         <tr id = "column\${id}">
             <td>\${topicName}</td>
-            <td><button type="button" class = "btn btn-primary update-topics" data-url ="/admin/topics/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-topics-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-topics" data-url ="/admin/topics/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-topics-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-topics admin-data-table-body-update" data-url ="/admin/topics/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-topics-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-topics admin-data-table-body-delete" data-url ="/admin/topics/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-topics-modal">Delete</button></td>
         </tr>
 
     </script>

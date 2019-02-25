@@ -1,36 +1,54 @@
 $(document).ready(function () {
 
     var pathname = window.location.pathname;
-    var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
+    var searchPage = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
     pathname = pathname.replace("all", "topics/subjects");
     var id = pathname.match("\\d+");
     if (id === null) {
-        buildSubjects(pathname + "?" + search + "&size=3");
+        buildSubjects(pathname + "?" + searchPage + "&size=3");
         $.getJSON(pathname, function (data) {
             var jsonObject = JSON.stringify(data);
             var count = JSON.parse(jsonObject).length;
             var pages = Math.floor(count / 3);
             if (count % 3 !== 0) pages++;
-        var page = parseInt(search.slice(-1));
+        var page = parseInt(searchPage.slice(-1));
         if (page === 1) $("#newer-page").addClass("disabled");
         if (page === pages) $("#older-page").addClass("disabled");
         });
     } else {
         var checkedPath = "topics/" + id;
         pathname = pathname.replace(id, checkedPath);
-        buildSubjects(pathname + "/subjects?" + search + "&size=3");
+        buildSubjects(pathname + "/subjects?" + searchPage + "&size=3");
         $.getJSON(pathname + "/subjects", function (data) {
             var jsonObject = JSON.stringify(data);
             var count = JSON.parse(jsonObject).length;
             var pages = Math.floor(count / 3);
             if ((count % 3 !== 0) || (count === 0)) pages++;
-            var page = parseInt(search.slice(-1));
+            var page = parseInt(searchPage.slice(-1));
             if (page === 1) $("#newer-page").addClass("disabled");
             if (page === pages) $("#older-page").addClass("disabled");
         });
         changeTopicName(pathname);
     }
+    internationalization();
 });
+
+function internationalization() {
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: '/resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            var array = $.i18n.map;
+            $.each(array, function (index, value) {
+                $("." + index).html(value);
+            });
+        }
+    })
+}
 
 function olderPage() {
     var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
@@ -64,4 +82,10 @@ function changeTopicName(subjectsPath) {
     $.getJSON(subjectsPath, function (data) {
         $(".topicName").text(data.topicName);
     })
+}
+
+function searchForm() {
+    var search = $("#search-subjects").val();
+    $(".topicName").text('Search by the word "'+ search +'"');
+    buildSubjects()
 }

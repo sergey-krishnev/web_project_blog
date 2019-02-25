@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <sec:csrfMetaTags />
 
-    <title>Start FOUR ROOM</title>
+    <title>FOUR ROOM</title>
 
     <style type="text/css">
         .error {
@@ -42,40 +42,23 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Start FOUR ROOM</a>
+        <a class="navbar-brand" href="#">FOUR ROOM</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <span style="float: left">
-        <a href="?lang=en_US">English</a>
+        <a href="?lang=en_US" class="admin-language-en">English</a>
         |
-        <a href="?lang=ru">Russian</a>
+        <a href="?lang=ru" class="admin-language-ru">Russian</a>
         </span>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/blog/all">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog/all">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog/all">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog/all">Contact</a>
-                </li>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>--%>
-                <%--</li>--%>
                 <sec:authorize access="!isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                        <a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
@@ -88,12 +71,12 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">
                             <sec:authorize access="hasRole('ADMIN')">
-                                <a class="dropdown-item" href="/admin">Admin panel</a>
+                                <a class="dropdown-item admin-dropdown-admin-page" href="/admin">Admin panel</a>
                             </sec:authorize>
-                            <a class="dropdown-item" href="#">Settings</a>
-                            <a class="dropdown-item" href="#">Activity Log</a>
+                            <a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>
+                            <a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                            <a class="dropdown-item admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
                         </div>
                     </li>
                 </sec:authorize>
@@ -116,32 +99,32 @@
             <div class="subject-add-form" style="display: none">
                 <h1>New subject</h1>
                 <div class="form-group">
-                <label for="subject-name-add-form">Subject name</label>
+                <label for="subject-name-add-form" class="admin-data-table-head-subject">Subject name</label>
             <input name="subjectName" class="form-control form-control-lg subject-add" id="subject-name-add-form" type="text" placeholder="Subject name">
                     <div class="error NotEmpty-subjectDTO-subjectName"></div>
                     <div class="error SameSubjectName-subjectDTO-subject"></div>
                     <div class="error BadWords-subjectDTO-subjectName"></div>
                 </div>
                 <div class="form-group">
-                <label for="topic-name-add-form">Topic name</label>
+                <label for="topic-name-add-form" class="admin-data-table-head-topic">Topic name</label>
                 <select name="topicName" class="form-control form-control-lg topics-select-update subject-add" id="topic-name-add-form">
                 </select>
                     <div class="error NotEmpty-subjectDTO-topicName"></div>
                 </div>
                 <div class="form-group">
-                    <label for="text-add-form">Text</label>
+                    <label for="text-add-form" class="admin-data-table-head-text">Text</label>
                     <textarea name="text" class="form-control subject-add" id="text-add-form" rows="12"></textarea>
                     <div class="error NotEmpty-subjectDTO-text"></div>
                     <div class="error BadWords-subjectDTO-text"></div>
                 </div>
-                <button type="button"  class="btn btn-primary" onclick="addSubjectSubmit()">Submit</button>
+                <button type="button"  class="btn btn-primary admin-modal-add-foot-button-add" onclick="addSubjectSubmit()">Add</button>
             </div>
 
             <!-- Subject Update Form -->
             <div class="subject-update-form" style="display: none">
-                <h1>Update subject</h1>
+                <h1 class="admin-modal-update-subject-head">Update the subject</h1>
                 <div class="form-group">
-                    <label for="subjectName-update-form">Subject name</label>
+                    <label for="subjectName-update-form" class="admin-data-table-head-subject">Subject name</label>
                     <input name="subjectName" class="form-control form-control-lg subject-update" id="subjectName-update-form" type="text" placeholder="Subject name">
                     <div class="error NotEmpty-subjectDTO-subjectName"></div>
                     <div class="error SameSubjectName-subjectDTO-subject"></div>
@@ -149,14 +132,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="topicName-update-form">Topic name</label>
+                    <label for="topicName-update-form" class="admin-data-table-head-topic">Topic name</label>
                     <select name="topicName" class="form-control form-control-lg topics-select-update subject-update" id="topicName-update-form">
                     </select>
                     <div class="error NotEmpty-subjectDTO-topicName"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="text-update-form">Text</label>
+                    <label for="text-update-form" class="admin-data-table-head-text">Text</label>
                     <textarea name="text" class="form-control subject-update" id="text-update-form" rows="12"></textarea>
                     <div class="error NotEmpty-subjectDTO-text"></div>
                     <div class="error BadWords-subjectDTO-text"></div>
@@ -164,14 +147,14 @@
 
                 <input class="subject-update" id="userName-update-form" name="userName" type="hidden" value="">
 
-                <button type="button" data-url = "#" class="btn btn-primary update-subject-submit" onclick="updateSubjectSubmit(this)">Submit</button>
+                <button type="button" data-url = "#" class="btn btn-primary update-subject-submit admin-data-table-body-update" onclick="updateSubjectSubmit(this)">Update</button>
 
             </div>
 
 
             <!-- Comments Form -->
             <sec:authorize access="!isAuthenticated()">
-            <div class="error">Have to log in to leave comment</div>
+            <div class="error user-message-login">Have to log in to leave comment</div>
             </sec:authorize>
             <div class="error NotEmpty-commentDTO-message"></div>
             <div class="error BadWords-commentDTO-message"></div>
@@ -182,7 +165,7 @@
                         <div class="form-group">
                             <textarea class="form-control text-message" rows="3"></textarea>
                         </div>
-                        <button type="button" class="btn btn-primary add-comment">Submit</button>
+                        <button type="button" class="btn btn-primary add-comment admin-modal-add-foot-button-add">Add</button>
                     </form>
                 </div>
             </div>
@@ -199,12 +182,12 @@
 
             <!-- Search Widget -->
             <div class="card my-4">
-                <h5 class="card-header">Search</h5>
+                <h5 class="card-header user-card-head-search">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
+                  <button class="btn btn-secondary user-card-body-button-go" type="button">Go!</button>
                 </span>
                     </div>
                 </div>

@@ -12,8 +12,26 @@ $(document).ready(function () {
         addComment(data.topicName, data.subjectName, subjectPath + "/comments");
     });
     addSubjectForm(pathname);
-    updateSubjectForm(pathname)
+    updateSubjectForm(pathname);
+    internationalization();
 });
+
+function internationalization() {
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: 'resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            var array = $.i18n.map;
+            $.each(array, function (index, value) {
+                $("." + index).text(value);
+            });
+        }
+    })
+}
 
 function addSubjectForm(pathname) {
     if (pathname.includes("add")) {
@@ -22,8 +40,6 @@ function addSubjectForm(pathname) {
         selectTopics();
     }
 }
-
-
 
 function addSubjectSubmit() {
     var today = new Date();

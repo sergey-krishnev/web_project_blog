@@ -6,6 +6,7 @@ import hibernate.model.*;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,14 @@ public class CriteriaDaoImpl implements CRUDDao {
         Criteria cr = session.createCriteria(Subject.class);
         cr.add(Restrictions.eq("name", subjectName));
         return (Subject) cr.list().get(0);
+    }
+
+    @Override
+    public List<Subject> searchLikeSubjectName(String search) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(Subject.class);
+        cr.add(Restrictions.ilike("name", search, MatchMode.ANYWHERE));
+        return cr.list();
     }
 
     @Override
