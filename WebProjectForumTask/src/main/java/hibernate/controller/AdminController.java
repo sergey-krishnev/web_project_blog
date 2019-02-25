@@ -91,6 +91,15 @@ public class AdminController {
         return crudService.searchAllSubject();
     }
 
+    @RequestMapping(value = "/subjects", params = {"search", "page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<SubjectDTO> getSearchedSubjects(@RequestParam("search") String search, @RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchLikeSubjectNamePaginated(page, size, search);
+        }
+        return crudService.searchLikeSubjectName(search);
+    }
+
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.GET)
     public SubjectDTO getSubjectDTO(@PathVariable int subjectId) {
         return crudService.searchSubjectById(subjectId);
@@ -133,6 +142,15 @@ public class AdminController {
         return crudService.searchAllTopic();
     }
 
+    @RequestMapping(value = "/topics", params = {"search", "page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<TopicDTO> getSearchedTopics(@RequestParam("search") String search, @RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchLikeTopicPaginated(page, size, search);
+        }
+        return crudService.searchLikeTopicName(search);
+    }
+
     @RequestMapping(value = "/topics/{topicId}", method = RequestMethod.GET)
     public TopicDTO getTopicDTO(@PathVariable int topicId) {
         return crudService.searchTopicById(topicId);
@@ -172,6 +190,15 @@ public class AdminController {
             return crudService.searchAllUsersPaginated(page, size);
         }
         return crudService.searchAllUsers();
+    }
+
+    @RequestMapping(value = "/users", params = {"search", "page", "size"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<UsersDTO> getSearchedUsers(@RequestParam("search") String search, @RequestParam("page") int page, @RequestParam("size") int size) {
+        if (page > 0 && size > 0) {
+            return crudService.searchLikeUserPaginated(page, size, search);
+        }
+        return crudService.searchLikeUserName(search);
     }
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)

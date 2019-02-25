@@ -26,6 +26,10 @@ public interface CRUDService {
 
     List<TopicDTO> searchAllTopicPaginated(int page, int size);
 
+    List<TopicDTO> searchLikeTopicPaginated(int page, int size, String search);
+
+    List<TopicDTO> searchLikeTopicName(String search);
+
     List<SubjectDTO> searchAllSubject();
 
     List<SubjectDTO> searchLikeSubjectName(String search);
@@ -51,6 +55,10 @@ public interface CRUDService {
     List<UsersDTO> searchAllUsers();
 
     List<UsersDTO> searchAllUsersPaginated(int page, int size);
+
+    List<UsersDTO> searchLikeUserPaginated(int page, int size, String search);
+
+    List<UsersDTO> searchLikeUserName(String search);
 
     Boolean searchByUserName(String username);
 

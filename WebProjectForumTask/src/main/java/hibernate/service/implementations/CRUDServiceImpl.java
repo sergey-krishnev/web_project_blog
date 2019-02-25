@@ -116,6 +116,30 @@ public class CRUDServiceImpl implements CRUDService {
         return topics.subList(start, start + size);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<TopicDTO> searchLikeTopicPaginated(int page, int size, String search) {
+        List<Topic> topicList = crudDao.searchLikeTopicName(search);
+        List<TopicDTO> topics = new ArrayList<>();
+        topicToTopicDTO(topicList, topics);
+        int start = 0;
+        start += (page-1) * size;
+        int div = topics.size()/size;
+        int mod = topics.size()%size;
+        if (page-1 == div) return topics.subList(start,start + mod);
+        if (start + size > topics.size()) return new ArrayList<>();
+        return topics.subList(start, start + size);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<TopicDTO> searchLikeTopicName(String search) {
+        List<Topic> topics = crudDao.searchLikeTopicName(search);
+        List<TopicDTO> topicDTOList = new ArrayList<>();
+        topicToTopicDTO(topics, topicDTOList);
+        return topicDTOList;
+    }
+
     private void topicToTopicDTO(List<Topic> topicList, List<TopicDTO> topics) {
         for (Topic topic : topicList) {
             TopicDTO topicDTO = new TopicDTO();
@@ -288,6 +312,30 @@ public class CRUDServiceImpl implements CRUDService {
         if (page-1 == div) return users.subList(start,start + mod);
         if (start + size > users.size()) return new ArrayList<>();
         return users.subList(start, start + size);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UsersDTO> searchLikeUserPaginated(int page, int size, String search) {
+        List<Users> userList = crudDao.searchLikeUser(search);
+        List<UsersDTO> users = new ArrayList<>();
+        userToUserDTO(userList, users);
+        int start = 0;
+        start += (page-1) * size;
+        int div = users.size()/size;
+        int mod = users.size()%size;
+        if (page-1 == div) return users.subList(start,start + mod);
+        if (start + size > users.size()) return new ArrayList<>();
+        return users.subList(start, start + size);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UsersDTO> searchLikeUserName(String search) {
+        List<Users> userList = crudDao.searchLikeUser(search);
+        List<UsersDTO> users = new ArrayList<>();
+        userToUserDTO(userList, users);
+        return users;
     }
 
     private void userToUserDTO(List<Users> usersList, List<UsersDTO> users) {

@@ -108,6 +108,22 @@ public class CriteriaDaoImpl implements CRUDDao {
     }
 
     @Override
+    public List<Topic> searchLikeTopicName(String search) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(Topic.class);
+        cr.add(Restrictions.ilike("name", search, MatchMode.ANYWHERE));
+        return cr.list();
+    }
+
+    @Override
+    public List<Users> searchLikeUser(String search) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(Users.class);
+        cr.add(Restrictions.ilike("nickname", search, MatchMode.ANYWHERE));
+        return cr.list();
+    }
+
+    @Override
     public void insertTopic(String topicName) {
         Session session = sessionFactory.getCurrentSession();
         Topic topic = new Topic();
