@@ -88,6 +88,18 @@ function buildShowingNumberInfo(start, end) {
     });
 }
 
+function buildSearchShowingNumberInfo(start, end) {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    var searchPath = path + "?search=" + $('#search-path').attr("data-id") + "&page=0&size=0";
+    $.getJSON(searchPath, function (data) {
+        var jsonObject= JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var showingNumberInfo = 'Showing ' + start + ' to ' + end + ' of ' + count + ' entries';
+        $("#showing-numbers-"+pathname).text(showingNumberInfo);
+    });
+}
+
 function buildShowingNumberButtons() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
@@ -440,8 +452,13 @@ function getCurrentDate() {
 }
 
 function buildSearchTable() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    var pathnameCapital = pathname.charAt(0).toUpperCase() + pathname.slice(1);
     var searchWord = $('#word-search').val();
     $('#search-path').attr("data-id", searchWord);
     var searchQuery = "?search=" + searchWord + "&page=1&size=5";
     buildTable(searchQuery);
+    $(".pathname-capital").text(pathnameCapital + ': Search by word "'+ searchWord +'"');
+    buildSearchShowingNumberInfo(1,5);
 }
