@@ -114,7 +114,7 @@
                     <div class="input-group">
                         <input type="text" id="search-subjects" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                  <button class="btn btn-secondary user-card-body-button-go" type="button" onclick="searchForm()">Go!</button>
+                  <button class="btn btn-secondary user-card-body-button-go" type="button" onclick="searchPage()">Go!</button>
                 </span>
                     </div>
                 </div>

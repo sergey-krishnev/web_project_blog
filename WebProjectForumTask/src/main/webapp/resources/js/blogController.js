@@ -2,15 +2,17 @@ $(document).ready(function () {
 
     var pathname = window.location.pathname;
     var searchPage = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
+    var onlySearch = searchPage.replace("&page=1", "");
     pathname = pathname.replace("all", "topics/subjects");
     var id = pathname.match("\\d+");
     if (id === null) {
         buildSubjects(pathname + "?" + searchPage + "&size=3");
-        $.getJSON(pathname, function (data) {
+        $.getJSON(pathname + "?" + onlySearch + "&page=0&size=0", function (data) {
             var jsonObject = JSON.stringify(data);
             var count = JSON.parse(jsonObject).length;
             var pages = Math.floor(count / 3);
-            if (count % 3 !== 0) pages++;
+            if ((count % 3 !== 0) || (count === 0)) pages++;
+            changeTopicNameToSearch(onlySearch,count);
         var page = parseInt(searchPage.slice(-1));
         if (page === 1) $("#newer-page").addClass("disabled");
         if (page === pages) $("#older-page").addClass("disabled");
@@ -30,7 +32,7 @@ $(document).ready(function () {
         });
         changeTopicName(pathname);
     }
-    internationalization();
+    // internationalization();
 });
 
 function internationalization() {
@@ -84,8 +86,17 @@ function changeTopicName(subjectsPath) {
     })
 }
 
-function searchForm() {
+function searchPage() {
     var search = $("#search-subjects").val();
-    $(".topicName").text('Search by the word "'+ search +'"');
-    buildSubjects()
+    location.href = "?search=" + search + "&page=1";
+}
+
+function changeTopicNameToSearch(onlySearch,count) {
+    if(onlySearch.includes("search=")) {
+        var word = onlySearch.replace("search=","");
+        $(".topicName").text('Search by word "'+ word +'"');
+    }
+    if (count === 0) {
+        $(".topicName").text('No results with word "'+ word +'"');
+    }
 }
