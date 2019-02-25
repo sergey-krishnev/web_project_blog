@@ -8,27 +8,25 @@ $(document).ready(function () {
     updateModal();
     read();
     switchNumberPage();
-    internationalization();
-    // nextPage();
-    // previousPage();
+    // internationalization();
 });
 
-function internationalization() {
-    var lang = $("#lang").val();
-    $.i18n.properties({
-        name: 'admin',
-        path: 'resources/bundle',
-        mode: 'both',
-        cache: true,
-        language: lang,
-        callback: function () {
-           var array = $.i18n.map;
-            $.each(array, function (index, value) {
-                $("." + index).text(value);
-            });
-        }
-    })
-}
+// function internationalization() {
+//     var lang = $("#lang").val();
+//     $.i18n.properties({
+//         name: 'admin',
+//         path: 'resources/bundle',
+//         mode: 'both',
+//         cache: true,
+//         language: lang,
+//         callback: function () {
+//             var array = $.i18n.map;
+//             $.each(array, function (index, value) {
+//                 $("." + index).text(value);
+//             });
+//         }
+//     })
+// }
 
 function removeModal() {
     var path = $('#default-path').attr("href");
@@ -43,6 +41,7 @@ function removeModal() {
 function switchDashboard() {
     $(document).on('click','.nav-link',function (event) {
         event.preventDefault();
+        $('#search-path').attr("data-id","");
         $('#default-path').attr("href",$(this).attr("data-url"));
         var path = $(this).attr("data-url");
         var pathname = path.toString().replace("admin/", "");
@@ -55,7 +54,7 @@ function switchDashboard() {
         addModal();
         updateModal();
         read();
-        internationalization();
+        // internationalization();
     });
 }
 
@@ -106,7 +105,11 @@ function buildShowingNumberButtons() {
         for (var i = 1; i <= pages; i++) {
             showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
         }
-        showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
+        if (pages === 1) {
+            showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
+        } else {
+            showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
+        }
         showingNumberButtons += '</ul>';
         showingNumberButtons += '</nav>';
         $("#buttons-numbers-"+pathname).html(showingNumberButtons);
@@ -123,32 +126,19 @@ function switchNumberPage() {
         $("#" + pathname + "-current-page").attr("data-id",page);
         buildTable(pageQuery);
         buildShowingNumberInfo(1+(page-1)*5,5+(page-1)*5);
-        $.getJSON(path, function (data) {
-            var jsonObject = JSON.stringify(data);
-            var count = JSON.parse(jsonObject).length;
-            var pages = Math.floor(count / 5);
-            if (count % 5 !== 0) pages++;
-
-            if (page === pages) $(".next-link").addClass("disabled"); else {
-                $(".next-link").removeClass("disabled")
-            }
-            if (page !== 1) {$(".previous-link").removeClass("disabled")} else {
-             $(".previous-link").addClass("disabled")
-            }
-        })
     });
 }
 
 function nextPage(event) {
     event.preventDefault();
     var path = $('#default-path').attr("href");
-        var pathname = path.toString().replace("admin/","").toString();
-        var hiddenPage = $("#" + pathname + "-current-page");
-        var currentPage = parseInt(hiddenPage.attr("data-id"));
-        hiddenPage.attr("data-id", parseInt(currentPage)+1);
-        var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
-        buildTable(pageQuery);
-        buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
+    var pathname = path.toString().replace("admin/","").toString();
+    var hiddenPage = $("#" + pathname + "-current-page");
+    var currentPage = parseInt(hiddenPage.attr("data-id"));
+    hiddenPage.attr("data-id", parseInt(currentPage)+1);
+    var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
+    buildTable(pageQuery);
+    buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
     $.getJSON(path, function (data) {
         var jsonObject = JSON.stringify(data);
         var count = JSON.parse(jsonObject).length;
@@ -167,13 +157,13 @@ function nextPage(event) {
 function previousPage(event) {
     event.preventDefault();
     var path = $('#default-path').attr("href");
-        var pathname = path.toString().replace("admin/","").toString();
-        var hiddenPage = $("#" + pathname + "-current-page");
-        var currentPage = parseInt(hiddenPage.attr("data-id"));
-        hiddenPage.attr("data-id", parseInt(currentPage)-1);
-        var pageQuery = "?page=" + (parseInt(currentPage)-1) + "&&size=5";
-        buildTable(pageQuery);
-        buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
+    var pathname = path.toString().replace("admin/","").toString();
+    var hiddenPage = $("#" + pathname + "-current-page");
+    var currentPage = parseInt(hiddenPage.attr("data-id"));
+    hiddenPage.attr("data-id", parseInt(currentPage)-1);
+    var pageQuery = "?page=" + (parseInt(currentPage)-1) + "&&size=5";
+    buildTable(pageQuery);
+    buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
     $.getJSON(path, function (data) {
         var jsonObject = JSON.stringify(data);
         var count = JSON.parse(jsonObject).length;
@@ -434,4 +424,11 @@ function getCurrentDate() {
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     return date + ' ' + time;
+}
+
+function buildSearchTable() {
+    var searchWord = $('#word-search').val();
+    $('#search-path').attr("data-id", searchWord);
+    var searchQuery = "?search=" + searchWord + "&page=1&size=5";
+    buildTable(searchQuery);
 }

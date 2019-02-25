@@ -185,9 +185,9 @@
                 <h5 class="card-header user-card-head-search">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" id="search-subjects" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                  <button class="btn btn-secondary user-card-body-button-go" type="button">Go!</button>
+                  <button class="btn btn-secondary user-card-body-button-go" type="button" onclick="searchPage()">Go!</button>
                 </span>
                     </div>
                 </div>

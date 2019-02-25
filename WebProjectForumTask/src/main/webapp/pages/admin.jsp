@@ -42,6 +42,7 @@
 
 <a hidden name="url" id="url" href="${pageContext.request.contextPath}/"></a>
 <a type="hidden" id="default-path" href="admin/comments"></a>
+<a type="hidden" id="search-path" data-id=""></a>
 <input type="hidden" id ="lang" value="${pageContext.response.locale}"/>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -61,10 +62,10 @@
         <!-- Navbar Search -->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input type="text" class="form-control admin-search" placeholder="Search for..." aria-label="Search"
+                <input type="text" class="form-control admin-search" id="word-search" placeholder="Search for..." aria-label="Search"
                        aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
+                    <button class="btn btn-primary" type="button" onclick="buildSearchTable()">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>

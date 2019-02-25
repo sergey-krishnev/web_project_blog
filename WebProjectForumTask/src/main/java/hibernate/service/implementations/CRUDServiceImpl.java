@@ -220,14 +220,29 @@ public class CRUDServiceImpl implements CRUDService {
         return comments;
     }
 
-//    @Transactional(readOnly = true)
-//    @Override
-//    public List<CommentDTO> searchCommentBySearch(String search) {
-//        List<Comment> commentList = crudDao.searchCommentBySearch(search);
-//        List<CommentDTO> comments = new ArrayList<>();
-//        commentToCommentDTO(commentList, comments);
-//        return comments;
-//    }
+    @Transactional(readOnly = true)
+    @Override
+    public List<CommentDTO> searchLikeComment(String search) {
+        List<Comment> commentList = crudDao.searchLikeComment(search);
+        List<CommentDTO> comments = new ArrayList<>();
+        commentToCommentDTO(commentList, comments);
+        return comments;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<CommentDTO> searchLikeCommentPaginated(int page, int size, String search) {
+        List<Comment> commentList = crudDao.searchLikeComment(search);
+        List<CommentDTO> comments = new ArrayList<>();
+        commentToCommentDTO(commentList, comments);
+        int start = 0;
+        start += (page-1) * size;
+        int div = comments.size()/size;
+        int mod = comments.size()%size;
+        if (page-1 == div) return comments.subList(start,start + mod);
+        if (start + size > comments.size()) return new ArrayList<>();
+        return comments.subList(start, start + size);
+    }
 
     @Transactional(readOnly = true)
     @Override

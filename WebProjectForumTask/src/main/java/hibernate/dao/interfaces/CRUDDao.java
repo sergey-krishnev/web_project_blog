@@ -21,7 +21,7 @@ public interface CRUDDao{
 
     List<Comment> searchAllComment();
 
-//    List<Comment> searchCommentBySearch(String search);
+    List<Comment> searchLikeComment(String search);
 
     List<Users> searchAllUsers();
 

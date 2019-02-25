@@ -235,3 +235,8 @@ function selectWithSelectedTopics(topic) {
         $(".topics-select-update").html(topicDTO_data);
     });
 }
+
+function searchPage() {
+    var search = $("#search-subjects").val();
+    location.href = "/blog/all?search=" + search + "&page=1";
+}

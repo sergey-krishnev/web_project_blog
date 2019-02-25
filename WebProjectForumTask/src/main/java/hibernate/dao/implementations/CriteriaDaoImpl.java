@@ -61,16 +61,13 @@ public class CriteriaDaoImpl implements CRUDDao {
         return cr.list();
     }
 
-//    @Override
-//    public List<Comment> searchCommentBySearch(String search) {
-//        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Comment.class);
-//        Criterion criterionMessage = Restrictions.ilike("message", search);
-//        Criterion criterionUserId = Restrictions.eq("user_id", searchByUserName(search).getId());
-//        Criterion criterionSubjectId = Restrictions.eq("subject_id", searchBySubjectName(search).getId());
-//        Criterion criterionOr = Restrictions.or(criterionMessage,criterionUserId,criterionSubjectId);
-//        cr.add(criterionOr);
-//        return cr.list();
-//    }
+    @Override
+    public List<Comment> searchLikeComment(String search) {
+        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Comment.class);
+        cr.add(Restrictions.ilike("message", search, MatchMode.ANYWHERE));
+        return cr.list();
+    }
+
 
     @Override
     public List<Users> searchAllUsers() {

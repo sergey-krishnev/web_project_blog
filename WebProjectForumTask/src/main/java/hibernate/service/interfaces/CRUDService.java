@@ -40,7 +40,9 @@ public interface CRUDService {
 
     List<CommentDTO> searchAllComment();
 
-//    List<CommentDTO> searchCommentBySearch(String search);
+    List<CommentDTO> searchLikeComment(String search);
+
+    List<CommentDTO> searchLikeCommentPaginated(int page, int size, String search);
 
     List<CommentDTO> searchAllCommentPaginated(int page, int size);
 
