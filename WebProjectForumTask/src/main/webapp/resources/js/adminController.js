@@ -145,7 +145,7 @@ function buildSearchShowingNumberButtons() {
         showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="previousPage(event)">Previous</a>';
         showingNumberButtons += '</li>';
         for (var i = 1; i <= pages; i++) {
-            showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?search='+ search +'&page=' + i + '&&size=5">' + i + '</a></li>';
+            showingNumberButtons += '<li class="page-item"><a class="page-link search-number-link" id="' + i + '" data-href="?search='+ search +'&page=' + i + '&&size=5">' + i + '</a></li>';
         }
         if (pages === 1) {
             showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
@@ -169,6 +169,34 @@ function switchNumberPage() {
         buildTable(pageQuery);
         buildShowingNumberInfo(1+(page-1)*5,5+(page-1)*5);
         $.getJSON(path, function (data) {
+            var jsonObject = JSON.stringify(data);
+            var count = JSON.parse(jsonObject).length;
+            var pages = Math.floor(count / 5);
+            if (count % 5 !== 0) pages++;
+
+            if (page === pages) $(".next-link").addClass("disabled"); else {
+                $(".next-link").removeClass("disabled")
+            }
+            if (page !== 1) {$(".previous-link").removeClass("disabled")} else {
+                $(".previous-link").addClass("disabled")
+            }
+        })
+    });
+}
+
+function switchSearchNumberPage() {
+    $(document).on('click','.search-number-link',function (event) {
+        event.preventDefault();
+        var path = $('#default-path').attr("href");
+        var pathname = path.toString().replace("admin/","").toString();
+        var pageQuery = $(this).attr("data-href");
+        var page = parseInt($(this).attr("id"));
+        $("#" + pathname + "-current-page").attr("data-id",page);
+        var search = $('#search-path').attr("data-id");
+        var searchPath = path + "?search=" + search + "&page=0&size=0";
+        buildTable(pageQuery);
+        buildSearchShowingNumberInfo(1+(page-1)*5,5+(page-1)*5);
+        $.getJSON(searchPath, function (data) {
             var jsonObject = JSON.stringify(data);
             var count = JSON.parse(jsonObject).length;
             var pages = Math.floor(count / 5);
@@ -492,4 +520,5 @@ function buildSearchTable() {
     $(".pathname-capital").text(pathnameCapital + ': Search by word "'+ searchWord +'"');
     buildSearchShowingNumberInfo(1,5);
     buildSearchShowingNumberButtons();
+    switchSearchNumberPage();
 }
