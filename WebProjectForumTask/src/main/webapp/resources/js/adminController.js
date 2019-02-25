@@ -106,7 +106,36 @@ function buildShowingNumberButtons() {
     $.getJSON(path, function (data) {
         var jsonObject = JSON.stringify(data);
         var count = JSON.parse(jsonObject).length;
-        var pages = count/5;
+        var pages = Math.floor(count/5);
+        if(count%5 !== 0) pages++;
+        var showingNumberButtons = '';
+        showingNumberButtons += '<nav aria-label="Page navigation">';
+        showingNumberButtons += '<ul class="pagination justify-content-end">';
+        showingNumberButtons += '<li class="page-item previous-link disabled">';
+        showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="previousPage(event)">Previous</a>';
+        showingNumberButtons += '</li>';
+        for (var i = 1; i <= pages; i++) {
+            showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
+        }
+        if (pages === 1) {
+            showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
+        } else {
+            showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
+        }
+        showingNumberButtons += '</ul>';
+        showingNumberButtons += '</nav>';
+        $("#buttons-numbers-"+pathname).html(showingNumberButtons);
+    });
+}
+
+function buildSearchShowingNumberButtons() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    var searchPath = path + "?search=" + $('#search-path').attr("data-id") + "&page=0&size=0";
+    $.getJSON(searchPath, function (data) {
+        var jsonObject = JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var pages = Math.floor(count/5);
         if(count%5 !== 0) pages++;
         var showingNumberButtons = '';
         showingNumberButtons += '<nav aria-label="Page navigation">';
@@ -461,4 +490,5 @@ function buildSearchTable() {
     buildTable(searchQuery);
     $(".pathname-capital").text(pathnameCapital + ': Search by word "'+ searchWord +'"');
     buildSearchShowingNumberInfo(1,5);
+    buildSearchShowingNumberButtons();
 }
