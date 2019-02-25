@@ -131,7 +131,8 @@ function buildShowingNumberButtons() {
 function buildSearchShowingNumberButtons() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/","").toString();
-    var searchPath = path + "?search=" + $('#search-path').attr("data-id") + "&page=0&size=0";
+    var search = $('#search-path').attr("data-id");
+    var searchPath = path + "?search=" + search + "&page=0&size=0";
     $.getJSON(searchPath, function (data) {
         var jsonObject = JSON.stringify(data);
         var count = JSON.parse(jsonObject).length;
@@ -144,7 +145,7 @@ function buildSearchShowingNumberButtons() {
         showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="previousPage(event)">Previous</a>';
         showingNumberButtons += '</li>';
         for (var i = 1; i <= pages; i++) {
-            showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
+            showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?search='+ search +'&page=' + i + '&&size=5">' + i + '</a></li>';
         }
         if (pages === 1) {
             showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
