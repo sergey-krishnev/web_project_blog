@@ -126,6 +126,19 @@ function switchNumberPage() {
         $("#" + pathname + "-current-page").attr("data-id",page);
         buildTable(pageQuery);
         buildShowingNumberInfo(1+(page-1)*5,5+(page-1)*5);
+        $.getJSON(path, function (data) {
+            var jsonObject = JSON.stringify(data);
+            var count = JSON.parse(jsonObject).length;
+            var pages = Math.floor(count / 5);
+            if (count % 5 !== 0) pages++;
+
+            if (page === pages) $(".next-link").addClass("disabled"); else {
+                $(".next-link").removeClass("disabled")
+            }
+            if (page !== 1) {$(".previous-link").removeClass("disabled")} else {
+                $(".previous-link").addClass("disabled")
+            }
+        })
     });
 }
 
