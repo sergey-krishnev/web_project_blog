@@ -580,6 +580,12 @@ function buildSearchTable() {
     switchSearchNumberPage();
 }
 
+function searchPagination() {
+    var searchWord = $('#word-search').val();
+    pastePagination();
+    paginations(searchWord);
+}
+
 function pastePagination() {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/", "").toString();
@@ -588,9 +594,12 @@ function pastePagination() {
     $(".paginate-"+pathname).html(data);
 }
 
-function paginations() {
+function paginations(search) {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/", "").toString();
+    if (search !== undefined) {
+        path = path + "?search=" + search;
+    }
     $("#" + pathname + "-body").empty();
     var idDispl = "#display-" + pathname + "-table";
     $(idDispl).css("display", "block");

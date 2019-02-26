@@ -67,7 +67,7 @@
                 <input type="text" class="form-control admin-search" id="word-search" placeholder="Search for..." aria-label="Search"
                        aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" onclick="buildSearchTable()">
+                    <button class="btn btn-primary" type="button" onclick="searchPagination()">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
