@@ -100,22 +100,22 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-url="admin/comments" href="#">
+                <a class="nav-link entities-link" data-url="admin/comments" href="#">
                     <i class="fas fa-fw fa-comments"></i>
                     <span class="admin-sidebar-comments">Comments</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " data-url="admin/subjects" href="#">
+                <a class="nav-link entities-link" data-url="admin/subjects" href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span class="admin-sidebar-subjects">Subjects</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-url="admin/users" href="#">
+                <a class="nav-link entities-link" data-url="admin/users" href="#">
                     <i class="fas fa-fw fa-users"></i>
                     <span class="admin-sidebar-users">Users</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-url="admin/topics"  href="#">
+                <a class="nav-link entities-link" data-url="admin/topics"  href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span class="admin-sidebar-topics">Topics</span></a>
             </li>

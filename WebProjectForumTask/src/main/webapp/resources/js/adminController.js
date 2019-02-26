@@ -8,27 +8,28 @@ $(document).ready(function () {
     updateModal();
     read();
     // switchNumberPage();
-    // internationalization();
     pastePagination();
     paginations();
+    internationalization();
 });
 
-// function internationalization() {
-//     var lang = $("#lang").val();
-//     $.i18n.properties({
-//         name: 'admin',
-//         path: '/resources/bundle',
-//         mode: 'both',
-//         cache: true,
-//         language: lang,
-//         callback: function () {
-//             var array = $.i18n.map;
-//             $.each(array, function (index, value) {
-//                 $("." + index).text(value);
-//             });
-//         }
-//     })
-// }
+function internationalization() {
+    var lang = $("#lang").val();
+    var array;
+    $.i18n.properties({
+        name: 'admin',
+        path: '/resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            array = $.i18n.map;
+            $.each(array, function (index, value) {
+                $("." + index).text(value);
+            });
+        }
+    })
+}
 
 function removeModal() {
     var path = $('#default-path').attr("href");
@@ -41,7 +42,7 @@ function removeModal() {
 }
 
 function switchDashboard() {
-    $(document).on('click','.nav-link',function (event) {
+    $(document).on('click','.entities-link',function (event) {
         event.preventDefault();
         var oldPath = $('#default-path').attr("href");
         var oldPathname = oldPath.toString().replace("admin/", "");
@@ -628,6 +629,7 @@ function paginations(search) {
             $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
             $("#format-navigator-" + pathname).html($(".paginationjs-nav").html());
             $(".paginationjs-nav").hide();
+            internationalization();
         }
     })
 }
