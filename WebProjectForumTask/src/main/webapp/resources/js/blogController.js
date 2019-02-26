@@ -32,7 +32,7 @@ $(document).ready(function () {
         });
         changeTopicName(pathname);
     }
-    // internationalization();
+    internationalization();
 });
 
 function internationalization() {

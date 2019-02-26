@@ -8,25 +8,25 @@ $(document).ready(function () {
     updateModal();
     read();
     switchNumberPage();
-    // internationalization();
+    internationalization();
 });
 
-// function internationalization() {
-//     var lang = $("#lang").val();
-//     $.i18n.properties({
-//         name: 'admin',
-//         path: 'resources/bundle',
-//         mode: 'both',
-//         cache: true,
-//         language: lang,
-//         callback: function () {
-//             var array = $.i18n.map;
-//             $.each(array, function (index, value) {
-//                 $("." + index).text(value);
-//             });
-//         }
-//     })
-// }
+function internationalization() {
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: 'resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            var array = $.i18n.map;
+            $.each(array, function (index, value) {
+                $("." + index).text(value);
+            });
+        }
+    })
+}
 
 function removeModal() {
     var path = $('#default-path').attr("href");
@@ -41,6 +41,7 @@ function removeModal() {
 function switchDashboard() {
     $(document).on('click','.nav-link',function (event) {
         event.preventDefault();
+        $('#word-search').val("");
         $('#search-path').attr("data-id","");
         $('#default-path').attr("href",$(this).attr("data-url"));
         var path = $(this).attr("data-url");
