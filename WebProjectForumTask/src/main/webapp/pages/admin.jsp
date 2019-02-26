@@ -34,6 +34,8 @@
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/css/sb-admin.css" />" rel="stylesheet">
 
+    <link href="<c:url value="/resources/vendor/bootstrap/css/pagination.css" />" rel="stylesheet">
+
     <link rel="shortcut icon" href="#" />
 
 </head>
@@ -133,6 +135,14 @@
 
                 <!-- Comments DataTables Example -->
 
+                <%--<div class="container" style="margin-top:150px;">--%>
+                    <%--<h1>jQuery Twbs Pagination Plugin Demo</h1>--%>
+                    <%--<div id="page-content" class="well text-center">Page 1</div>--%>
+                    <%--<div class="text-center">--%>
+                        <%--<ul id="pagination-demo" class="pagination-lg"></ul>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+
                 <div id="adminTables">
                     <div id="display-comments-table" class="display-tables" style="display: none">
                         <div class="card mb-3">
@@ -156,14 +166,7 @@
                                         <tbody id="comments-body"></tbody>
                                     </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div id="showing-numbers-comments">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-7" id="buttons-numbers-comments">
-                                    </div>
-                                    <input id="comments-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
+                                <div class="d-flex justify-content-between paginate-comments">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-comment" id="add-comments"
                                         data-url="/admin/comments" onclick="addModal()" data-toggle="modal"
@@ -194,14 +197,7 @@
                                         <tbody id="subjects-body"></tbody>
                                     </table>
                                         </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div id="showing-numbers-subjects">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-7" id="buttons-numbers-subjects">
-                                    </div>
-                                    <input id="subjects-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
+                                <div class="d-flex justify-content-between paginate-subjects">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-subject" id="add-subjects"
                                         data-url="/admin/subjects" onclick="addModal()" data-toggle="modal"
@@ -232,14 +228,7 @@
                                         <tbody id="users-body"></tbody>
                                     </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div id="showing-numbers-users">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-7" id="buttons-numbers-users">
-                                    </div>
-                                    <input id="users-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
+                                <div class="d-flex justify-content-between paginate-users">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-user" id="add-users"
                                         data-url="/admin/users" onclick="addModal()" data-toggle="modal"
@@ -266,14 +255,7 @@
                                         <tbody id="topics-body"></tbody>
                                     </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div id="showing-numbers-topics">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-7" id="buttons-numbers-topics">
-                                    </div>
-                                    <input id="topics-current-page" data-id ="1" type="hidden" value="?page=1&&size=5">
+                                <div class="d-flex justify-content-between paginate-topics">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-topic" id="add-topics"
                                         data-url="/admin/topics" onclick="addModal()" data-toggle="modal"
@@ -843,7 +825,9 @@
     <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
     <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
     <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
-
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>--%>
+    <%--<script src="<c:url value="/resources/vendor/bootstrap/js/pagination.js" />"></script>--%>
+    <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />"></script>
 

@@ -84,12 +84,14 @@
 
     <div class="row">
 
+
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <div class="justify-content-between">
                 <h1 class="my-6 topicName user-all-subjects">All Subjects </h1>
             </div>
             <div class="aggregate-subjects"></div>
+
 
 
             <!-- Pagination -->
@@ -192,7 +194,8 @@
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
 <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>
+<script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 <script src="<c:url value="/resources/js/blogController.js" />"></script>
 

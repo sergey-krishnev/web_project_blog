@@ -88,15 +88,18 @@ function changeTopicName(subjectsPath) {
 
 function searchPage() {
     var search = $("#search-subjects").val();
-    location.href = "?search=" + search + "&page=1";
+    location.href = "?search=" + search;
 }
 
 function changeTopicNameToSearch(onlySearch,count) {
     if(onlySearch.includes("search=")) {
+        alert(searchPage);
         var word = onlySearch.replace("search=","");
-        $(".topicName").text('Search by word "'+ word +'"');
+
+        var newWord = word.replace("&page=/\\d/g","");
+        $(".topicName").text('Search by word "'+ newWord +'"');
     }
     if (count === 0) {
-        $(".topicName").text('No results with word "'+ word +'"');
+        $(".topicName").text('No results with word "'+ newWord +'"');
     }
 }

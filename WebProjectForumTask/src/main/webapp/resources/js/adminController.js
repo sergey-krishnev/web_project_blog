@@ -1,32 +1,34 @@
 $(document).ready(function () {
     switchDashboard();
-    buildTable("?page=1&&size=5");
-    buildShowingNumberInfo(1,5);
-    buildShowingNumberButtons();
+    //buildTable("?page=1&&size=5");
+    // buildShowingNumberInfo(1,5);
+    // buildShowingNumberButtons();
     removeModal();
     addModal();
     updateModal();
     read();
-    switchNumberPage();
-    internationalization();
+    // switchNumberPage();
+    // internationalization();
+    pastePagination();
+    paginations();
 });
 
-function internationalization() {
-    var lang = $("#lang").val();
-    $.i18n.properties({
-        name: 'admin',
-        path: 'resources/bundle',
-        mode: 'both',
-        cache: true,
-        language: lang,
-        callback: function () {
-            var array = $.i18n.map;
-            $.each(array, function (index, value) {
-                $("." + index).text(value);
-            });
-        }
-    })
-}
+// function internationalization() {
+//     var lang = $("#lang").val();
+//     $.i18n.properties({
+//         name: 'admin',
+//         path: '/resources/bundle',
+//         mode: 'both',
+//         cache: true,
+//         language: lang,
+//         callback: function () {
+//             var array = $.i18n.map;
+//             $.each(array, function (index, value) {
+//                 $("." + index).text(value);
+//             });
+//         }
+//     })
+// }
 
 function removeModal() {
     var path = $('#default-path').attr("href");
@@ -41,6 +43,9 @@ function removeModal() {
 function switchDashboard() {
     $(document).on('click','.nav-link',function (event) {
         event.preventDefault();
+        var oldPath = $('#default-path').attr("href");
+        var oldPathname = oldPath.toString().replace("admin/", "");
+        $(".paginate-"+oldPathname).empty();
         $('#word-search').val("");
         $('#search-path').attr("data-id","");
         $('#default-path').attr("href",$(this).attr("data-url"));
@@ -48,13 +53,15 @@ function switchDashboard() {
         var pathname = path.toString().replace("admin/", "");
         $(".display-tables").css("display", "none");
         $("#" + pathname + "-body").empty();
-        buildTable("?page=1&&size=5");
-        buildShowingNumberInfo(1,5);
-        buildShowingNumberButtons();
+        // buildTable("?page=1&&size=5");
+        // buildShowingNumberInfo(1,5);
+        // buildShowingNumberButtons();
         removeModal();
         addModal();
         updateModal();
         read();
+        pastePagination();
+        paginations();
         // internationalization();
     });
 }
@@ -213,30 +220,30 @@ function switchSearchNumberPage(value,event) {
         })
 }
 
-function nextPage(event) {
-    event.preventDefault();
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var hiddenPage = $("#" + pathname + "-current-page");
-    var currentPage = parseInt(hiddenPage.attr("data-id"));
-    hiddenPage.attr("data-id", parseInt(currentPage)+1);
-    var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
-    buildTable(pageQuery);
-    buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
-    $.getJSON(path, function (data) {
-        var jsonObject = JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var pages = Math.floor(count / 5);
-        if (count % 5 !== 0) pages++;
-
-        if (parseInt(currentPage)+1 === pages) $(".next-link").addClass("disabled"); else {
-            $(".next-link").removeClass("disabled")
-        }
-        if (parseInt(currentPage)+1 !== 1) {$(".previous-link").removeClass("disabled")} else {
-            $(".previous-link").addClass("disabled")
-        }
-    })
-}
+// function nextPage(event) {
+//     event.preventDefault();
+//     var path = $('#default-path').attr("href");
+//     var pathname = path.toString().replace("admin/","").toString();
+//     var hiddenPage = $("#" + pathname + "-current-page");
+//     var currentPage = parseInt(hiddenPage.attr("data-id"));
+//     hiddenPage.attr("data-id", parseInt(currentPage)+1);
+//     var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
+//     buildTable(pageQuery);
+//     buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
+//     $.getJSON(path, function (data) {
+//         var jsonObject = JSON.stringify(data);
+//         var count = JSON.parse(jsonObject).length;
+//         var pages = Math.floor(count / 5);
+//         if (count % 5 !== 0) pages++;
+//
+//         if (parseInt(currentPage)+1 === pages) $(".next-link").addClass("disabled"); else {
+//             $(".next-link").removeClass("disabled")
+//         }
+//         if (parseInt(currentPage)+1 !== 1) {$(".previous-link").removeClass("disabled")} else {
+//             $(".previous-link").addClass("disabled")
+//         }
+//     })
+// }
 
 function searchNextPage(event) {
     event.preventDefault();
@@ -265,30 +272,30 @@ function searchNextPage(event) {
     })
 }
 
-function previousPage(event) {
-    event.preventDefault();
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var hiddenPage = $("#" + pathname + "-current-page");
-    var currentPage = parseInt(hiddenPage.attr("data-id"));
-    hiddenPage.attr("data-id", parseInt(currentPage)-1);
-    var pageQuery = "?page=" + (parseInt(currentPage)-1) + "&&size=5";
-    buildTable(pageQuery);
-    buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
-    $.getJSON(path, function (data) {
-        var jsonObject = JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var pages = Math.floor(count / 5);
-        if (count % 5 !== 0) pages++;
-
-        if (parseInt(currentPage)-1 === pages) $(".next-link").addClass("disabled"); else {
-            $(".next-link").removeClass("disabled")
-        }
-        if (parseInt(currentPage)-1 !== 1) {$(".previous-link").removeClass("disabled")} else {
-            $(".previous-link").addClass("disabled")
-        }
-    })
-}
+// function previousPage(event) {
+//     event.preventDefault();
+//     var path = $('#default-path').attr("href");
+//     var pathname = path.toString().replace("admin/","").toString();
+//     var hiddenPage = $("#" + pathname + "-current-page");
+//     var currentPage = parseInt(hiddenPage.attr("data-id"));
+//     hiddenPage.attr("data-id", parseInt(currentPage)-1);
+//     var pageQuery = "?page=" + (parseInt(currentPage)-1) + "&&size=5";
+//     buildTable(pageQuery);
+//     buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
+//     $.getJSON(path, function (data) {
+//         var jsonObject = JSON.stringify(data);
+//         var count = JSON.parse(jsonObject).length;
+//         var pages = Math.floor(count / 5);
+//         if (count % 5 !== 0) pages++;
+//
+//         if (parseInt(currentPage)-1 === pages) $(".next-link").addClass("disabled"); else {
+//             $(".next-link").removeClass("disabled")
+//         }
+//         if (parseInt(currentPage)-1 !== 1) {$(".previous-link").removeClass("disabled")} else {
+//             $(".previous-link").addClass("disabled")
+//         }
+//     })
+// }
 
 function searchPreviousPage(event) {
     event.preventDefault();
@@ -326,9 +333,7 @@ function removeSubmit(value) {
             "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
         },
         success: function () {
-            buildTable("?page=1&&size=5");
-            buildShowingNumberInfo(1,5);
-            buildShowingNumberButtons();
+            paginations();
         },
         error: function () {
             alert('Error in Operation');
@@ -369,9 +374,7 @@ function addSubmit() {
         dataType: "json",
         success: function () {
             $('#add-' + pathname + "-modal").modal('hide');
-            buildTable("?page=1&&size=5");
-            buildShowingNumberInfo(1,5);
-            buildShowingNumberButtons();
+            paginations()
         },
         error: function (jqXHR) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -442,9 +445,7 @@ function updateSubmit(value) {
         dataType: "json",
         success: function (data, textStatus, xhr) {
             $('#update-' + pathname + "-modal").modal('hide');
-            buildTable("?page=1&&size=5");
-            buildShowingNumberInfo(1,5);
-            buildShowingNumberButtons();
+            paginations();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -577,4 +578,47 @@ function buildSearchTable() {
     buildSearchShowingNumberInfo(1,5);
     buildSearchShowingNumberButtons();
     switchSearchNumberPage();
+}
+
+function pastePagination() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/", "").toString();
+    var data ='<div id="format-navigator-'+ pathname +'"></div>';
+    data +='<ul id="paginate-'+ pathname +'" class="pagination"></ul>';
+    $(".paginate-"+pathname).html(data);
+}
+
+function paginations() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/", "").toString();
+    $("#" + pathname + "-body").empty();
+    var idDispl = "#display-" + pathname + "-table";
+    $(idDispl).css("display", "block");
+    $('#paginate-' + pathname).pagination({
+        dataSource: function(done) {
+            $.ajax({
+                type: 'GET',
+                url: path,
+                success: function(response) {
+                    done(response);
+                }
+            });
+        },
+        pageSize: 5,
+        showNavigator: true,
+        formatNavigator: 'Showing <span style="color: #f00"><%= currentPage %></span> st/rd/th, <%= totalPage %> pages, <%= totalNumber %> entries',
+        position: 'top',
+        callback: function (data, pagination) {
+            // template method of yourself
+            if (pathname === "subjects") {
+                $.each(data, function (key, value) {
+                    value.text = value.text.split(".")[0] + ".";
+                });
+            }
+            $("#" + pathname + "-body").empty();
+            $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
+            $("#format-navigator-" + pathname).html($(".paginationjs-nav").html());
+            $(".paginationjs-nav").hide();
+        }
+    })
 }
