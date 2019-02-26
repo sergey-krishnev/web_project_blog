@@ -142,15 +142,16 @@ function buildSearchShowingNumberButtons() {
         showingNumberButtons += '<nav aria-label="Page navigation">';
         showingNumberButtons += '<ul class="pagination justify-content-end">';
         showingNumberButtons += '<li class="page-item previous-link disabled">';
-        showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="previousPage(event)">Previous</a>';
+        showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="searchPreviousPage(event)">Previous</a>';
         showingNumberButtons += '</li>';
         for (var i = 1; i <= pages; i++) {
-            showingNumberButtons += '<li class="page-item"><a class="page-link search-number-link" id="' + i + '" data-href="?search='+ search +'&page=' + i + '&&size=5">' + i + '</a></li>';
+            showingNumberButtons += '<li class="page-item"><a class="page-link search-number-link" id="' + i + '" data-href="?search='+ search +'&page=' + i + '&&size=5" ' +
+                'onclick="switchSearchNumberPage(this,event)">' + i + '</a></li>';
         }
         if (pages === 1) {
-            showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
+            showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="searchNextPage(event)">Next</a></li>';
         } else {
-            showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
+            showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="searchNextPage(event)">Next</a></li>';
         }
         showingNumberButtons += '</ul>';
         showingNumberButtons += '</nav>';
@@ -184,13 +185,13 @@ function switchNumberPage() {
     });
 }
 
-function switchSearchNumberPage() {
-    $(document).on('click','.search-number-link',function (event) {
+function switchSearchNumberPage(value,event) {
         event.preventDefault();
         var path = $('#default-path').attr("href");
         var pathname = path.toString().replace("admin/","").toString();
-        var pageQuery = $(this).attr("data-href");
-        var page = parseInt($(this).attr("id"));
+        var pageQuery = $(value).attr("data-href");
+        var page = parseInt($(value).attr("id"));
+        $("#" + pathname + "-body").empty();
         $("#" + pathname + "-current-page").attr("data-id",page);
         var search = $('#search-path').attr("data-id");
         var searchPath = path + "?search=" + search + "&page=0&size=0";
@@ -209,7 +210,6 @@ function switchSearchNumberPage() {
                 $(".previous-link").addClass("disabled")
             }
         })
-    });
 }
 
 function nextPage(event) {
@@ -237,6 +237,33 @@ function nextPage(event) {
     })
 }
 
+function searchNextPage(event) {
+    event.preventDefault();
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    var hiddenPage = $("#" + pathname + "-current-page");
+    var currentPage = parseInt(hiddenPage.attr("data-id"));
+    var searchWord = $('#word-search').val();
+    var searchPath = path + "?search=" + searchWord + "&page=0&size=0";
+    hiddenPage.attr("data-id", parseInt(currentPage)+1);
+    var pageQuery = "?search="+ searchWord +"&page=" + (parseInt(currentPage)+1) + "&&size=5";
+    buildTable(pageQuery);
+    buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
+    $.getJSON(searchPath, function (data) {
+        var jsonObject = JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var pages = Math.floor(count / 5);
+        if (count % 5 !== 0) pages++;
+
+        if (parseInt(currentPage)+1 === pages) $(".next-link").addClass("disabled"); else {
+            $(".next-link").removeClass("disabled")
+        }
+        if (parseInt(currentPage)+1 !== 1) {$(".previous-link").removeClass("disabled")} else {
+            $(".previous-link").addClass("disabled")
+        }
+    })
+}
+
 function previousPage(event) {
     event.preventDefault();
     var path = $('#default-path').attr("href");
@@ -248,6 +275,33 @@ function previousPage(event) {
     buildTable(pageQuery);
     buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
     $.getJSON(path, function (data) {
+        var jsonObject = JSON.stringify(data);
+        var count = JSON.parse(jsonObject).length;
+        var pages = Math.floor(count / 5);
+        if (count % 5 !== 0) pages++;
+
+        if (parseInt(currentPage)-1 === pages) $(".next-link").addClass("disabled"); else {
+            $(".next-link").removeClass("disabled")
+        }
+        if (parseInt(currentPage)-1 !== 1) {$(".previous-link").removeClass("disabled")} else {
+            $(".previous-link").addClass("disabled")
+        }
+    })
+}
+
+function searchPreviousPage(event) {
+    event.preventDefault();
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/","").toString();
+    var hiddenPage = $("#" + pathname + "-current-page");
+    var currentPage = parseInt(hiddenPage.attr("data-id"));
+    var searchWord = $('#word-search').val();
+    var searchPath = path + "?search=" + searchWord + "&page=0&size=0";
+    hiddenPage.attr("data-id", parseInt(currentPage)-1);
+    var pageQuery = "?search="+ searchWord +"&page=" + (parseInt(currentPage)-1) + "&&size=5";
+    buildTable(pageQuery);
+    buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
+    $.getJSON(searchPath, function (data) {
         var jsonObject = JSON.stringify(data);
         var count = JSON.parse(jsonObject).length;
         var pages = Math.floor(count / 5);
@@ -516,6 +570,7 @@ function buildSearchTable() {
     var searchWord = $('#word-search').val();
     $('#search-path').attr("data-id", searchWord);
     var searchQuery = "?search=" + searchWord + "&page=1&size=5";
+    $("#" + pathname + "-body").empty();
     buildTable(searchQuery);
     $(".pathname-capital").text(pathnameCapital + ': Search by word "'+ searchWord +'"');
     buildSearchShowingNumberInfo(1,5);
