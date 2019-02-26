@@ -222,7 +222,7 @@
                                             <th class="admin-data-table-head-email">Email</th>
                                             <th class="admin-data-table-head-first-name">First name</th>
                                             <th class="admin-data-table-head-last-name">Last name</th>
-                                            <th class="admin-data-table-head-action"colspan="2">Action</th>
+                                            <th class="admin-data-table-head-action" colspan="2">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody id="users-body"></tbody>
@@ -239,7 +239,7 @@
                     </div>
                     <div id="display-topics-table" class="display-tables" style="display: none">
                         <div class="card mb-3">
-                            <div class="card-header">
+                            <div class="card-header admin-card-head-topics">
                                 <i class="fas fa-list"></i>
                                 Topics Data Table
                             </div>
@@ -248,8 +248,8 @@
                                     <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
-                                            <th>Topic name</th>
-                                            <th colspan="2">Action</th>
+                                            <th class="admin-data-table-head-topic">Topic name</th>
+                                            <th class="admin-data-table-head-action" colspan="2">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody id="topics-body"></tbody>
@@ -687,7 +687,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary admin-modal-logout-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary admin-modal-add-foot-button-add" id="add-users-modal-button" onclick="addSubmit()" type="button">Add</a>
+                    <button class="btn btn-primary admin-modal-add-foot-button-add" id="add-users-modal-button" onclick="addSubmit()" type="button">Add</button>
                 </div>
             </div>
         </div>
@@ -764,7 +764,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary admin-modal-logout-foot-button-cancel" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary admin-modal-add-foot-button-add" id="add-topics-modal-button" onclick="addSubmit()" type="button">Add</a>
+                    <button class="btn btn-primary admin-modal-add-foot-button-add" id="add-topics-modal-button" onclick="addSubmit()" type="button">Add</button>
                 </div>
             </div>
         </div>

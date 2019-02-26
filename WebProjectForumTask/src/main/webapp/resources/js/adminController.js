@@ -9,7 +9,7 @@ $(document).ready(function () {
     read();
     // switchNumberPage();
     pastePagination();
-    paginations();
+    buildTable();
     internationalization();
 });
 
@@ -27,6 +27,18 @@ function internationalization() {
             $.each(array, function (index, value) {
                 $("." + index).text(value);
             });
+
+            $(".admin-search").attr("placeholder",$.i18n.prop("admin-search"));
+            $("#message-add-comments-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-comment"));
+            $("#subjectName-add-subjects-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-subject"));
+            $("#text-add-subjects-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-text"));
+            $("#userName-add-users-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-username"));
+            $("#password-add-users-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-password"));
+            $("#email-add-users-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-email"));
+            $("#firstName-add-users-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-first-name"));
+            $("#lastName-add-users-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-last-name"));
+            $("#topicName-add-topics-modal").attr("placeholder",$.i18n.prop("admin-data-table-head-topic"));
+
         }
     })
 }
@@ -54,275 +66,13 @@ function switchDashboard() {
         var pathname = path.toString().replace("admin/", "");
         $(".display-tables").css("display", "none");
         $("#" + pathname + "-body").empty();
-        // buildTable("?page=1&&size=5");
-        // buildShowingNumberInfo(1,5);
-        // buildShowingNumberButtons();
         removeModal();
         addModal();
         updateModal();
         read();
         pastePagination();
-        paginations();
-        // internationalization();
+        buildTable();
     });
-}
-
-function buildTable(page) {
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var pathnameCapital = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    $("#" + pathname + "-body").empty();
-    var idDispl = "#display-" + pathname + "-table";
-    $(".pathname-capital").text(pathnameCapital);
-    $("#" + pathname + "-current-page").val(page);
-    $(idDispl).css("display", "block");
-    $.getJSON(path + page, function (data) {
-        if (pathname === "subjects") {
-            $.each(data, function (key, value) {
-                value.text = value.text.split(".")[0] + ".";
-            });
-        }
-        $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
-    });
-}
-
-function buildShowingNumberInfo(start, end) {
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    $.getJSON(path, function (data) {
-        var jsonObject= JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var showingNumberInfo = 'Showing ' + start + ' to ' + end + ' of ' + count + ' entries';
-        $("#showing-numbers-"+pathname).text(showingNumberInfo);
-    });
-}
-
-function buildSearchShowingNumberInfo(start, end) {
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var searchPath = path + "?search=" + $('#search-path').attr("data-id") + "&page=0&size=0";
-    $.getJSON(searchPath, function (data) {
-        var jsonObject= JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var showingNumberInfo = 'Showing ' + start + ' to ' + end + ' of ' + count + ' entries';
-        $("#showing-numbers-"+pathname).text(showingNumberInfo);
-    });
-}
-
-function buildShowingNumberButtons() {
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    $.getJSON(path, function (data) {
-        var jsonObject = JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var pages = Math.floor(count/5);
-        if(count%5 !== 0) pages++;
-        var showingNumberButtons = '';
-        showingNumberButtons += '<nav aria-label="Page navigation">';
-        showingNumberButtons += '<ul class="pagination justify-content-end">';
-        showingNumberButtons += '<li class="page-item previous-link disabled">';
-        showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="previousPage(event)">Previous</a>';
-        showingNumberButtons += '</li>';
-        for (var i = 1; i <= pages; i++) {
-            showingNumberButtons += '<li class="page-item"><a class="page-link number-link" id="' + i + '" data-href="?page=' + i + '&&size=5">' + i + '</a></li>';
-        }
-        if (pages === 1) {
-            showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
-        } else {
-            showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="nextPage(event)">Next</a></li>';
-        }
-        showingNumberButtons += '</ul>';
-        showingNumberButtons += '</nav>';
-        $("#buttons-numbers-"+pathname).html(showingNumberButtons);
-    });
-}
-
-function buildSearchShowingNumberButtons() {
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var search = $('#search-path').attr("data-id");
-    var searchPath = path + "?search=" + search + "&page=0&size=0";
-    $.getJSON(searchPath, function (data) {
-        var jsonObject = JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var pages = Math.floor(count/5);
-        if(count%5 !== 0) pages++;
-        var showingNumberButtons = '';
-        showingNumberButtons += '<nav aria-label="Page navigation">';
-        showingNumberButtons += '<ul class="pagination justify-content-end">';
-        showingNumberButtons += '<li class="page-item previous-link disabled">';
-        showingNumberButtons += '<a class="page-link " href="#" tabindex="-1" onclick="searchPreviousPage(event)">Previous</a>';
-        showingNumberButtons += '</li>';
-        for (var i = 1; i <= pages; i++) {
-            showingNumberButtons += '<li class="page-item"><a class="page-link search-number-link" id="' + i + '" data-href="?search='+ search +'&page=' + i + '&&size=5" ' +
-                'onclick="switchSearchNumberPage(this,event)">' + i + '</a></li>';
-        }
-        if (pages === 1) {
-            showingNumberButtons += '<li class="page-item next-link disabled"><a class="page-link" href="#" onclick="searchNextPage(event)">Next</a></li>';
-        } else {
-            showingNumberButtons += '<li class="page-item next-link"><a class="page-link" href="#" onclick="searchNextPage(event)">Next</a></li>';
-        }
-        showingNumberButtons += '</ul>';
-        showingNumberButtons += '</nav>';
-        $("#buttons-numbers-"+pathname).html(showingNumberButtons);
-    });
-}
-
-function switchNumberPage() {
-    $(document).on('click','.number-link',function (event) {
-        event.preventDefault();
-        var path = $('#default-path').attr("href");
-        var pathname = path.toString().replace("admin/","").toString();
-        var pageQuery = $(this).attr("data-href");
-        var page = parseInt($(this).attr("id"));
-        $("#" + pathname + "-current-page").attr("data-id",page);
-        buildTable(pageQuery);
-        buildShowingNumberInfo(1+(page-1)*5,5+(page-1)*5);
-        $.getJSON(path, function (data) {
-            var jsonObject = JSON.stringify(data);
-            var count = JSON.parse(jsonObject).length;
-            var pages = Math.floor(count / 5);
-            if (count % 5 !== 0) pages++;
-
-            if (page === pages) $(".next-link").addClass("disabled"); else {
-                $(".next-link").removeClass("disabled")
-            }
-            if (page !== 1) {$(".previous-link").removeClass("disabled")} else {
-                $(".previous-link").addClass("disabled")
-            }
-        })
-    });
-}
-
-function switchSearchNumberPage(value,event) {
-        event.preventDefault();
-        var path = $('#default-path').attr("href");
-        var pathname = path.toString().replace("admin/","").toString();
-        var pageQuery = $(value).attr("data-href");
-        var page = parseInt($(value).attr("id"));
-        $("#" + pathname + "-body").empty();
-        $("#" + pathname + "-current-page").attr("data-id",page);
-        var search = $('#search-path').attr("data-id");
-        var searchPath = path + "?search=" + search + "&page=0&size=0";
-        buildTable(pageQuery);
-        buildSearchShowingNumberInfo(1+(page-1)*5,5+(page-1)*5);
-        $.getJSON(searchPath, function (data) {
-            var jsonObject = JSON.stringify(data);
-            var count = JSON.parse(jsonObject).length;
-            var pages = Math.floor(count / 5);
-            if (count % 5 !== 0) pages++;
-
-            if (page === pages) $(".next-link").addClass("disabled"); else {
-                $(".next-link").removeClass("disabled")
-            }
-            if (page !== 1) {$(".previous-link").removeClass("disabled")} else {
-                $(".previous-link").addClass("disabled")
-            }
-        })
-}
-
-// function nextPage(event) {
-//     event.preventDefault();
-//     var path = $('#default-path').attr("href");
-//     var pathname = path.toString().replace("admin/","").toString();
-//     var hiddenPage = $("#" + pathname + "-current-page");
-//     var currentPage = parseInt(hiddenPage.attr("data-id"));
-//     hiddenPage.attr("data-id", parseInt(currentPage)+1);
-//     var pageQuery = "?page=" + (parseInt(currentPage)+1) + "&&size=5";
-//     buildTable(pageQuery);
-//     buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
-//     $.getJSON(path, function (data) {
-//         var jsonObject = JSON.stringify(data);
-//         var count = JSON.parse(jsonObject).length;
-//         var pages = Math.floor(count / 5);
-//         if (count % 5 !== 0) pages++;
-//
-//         if (parseInt(currentPage)+1 === pages) $(".next-link").addClass("disabled"); else {
-//             $(".next-link").removeClass("disabled")
-//         }
-//         if (parseInt(currentPage)+1 !== 1) {$(".previous-link").removeClass("disabled")} else {
-//             $(".previous-link").addClass("disabled")
-//         }
-//     })
-// }
-
-function searchNextPage(event) {
-    event.preventDefault();
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var hiddenPage = $("#" + pathname + "-current-page");
-    var currentPage = parseInt(hiddenPage.attr("data-id"));
-    var searchWord = $('#word-search').val();
-    var searchPath = path + "?search=" + searchWord + "&page=0&size=0";
-    hiddenPage.attr("data-id", parseInt(currentPage)+1);
-    var pageQuery = "?search="+ searchWord +"&page=" + (parseInt(currentPage)+1) + "&&size=5";
-    buildTable(pageQuery);
-    buildShowingNumberInfo(1+(currentPage)*5,5+(currentPage)*5);
-    $.getJSON(searchPath, function (data) {
-        var jsonObject = JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var pages = Math.floor(count / 5);
-        if (count % 5 !== 0) pages++;
-
-        if (parseInt(currentPage)+1 === pages) $(".next-link").addClass("disabled"); else {
-            $(".next-link").removeClass("disabled")
-        }
-        if (parseInt(currentPage)+1 !== 1) {$(".previous-link").removeClass("disabled")} else {
-            $(".previous-link").addClass("disabled")
-        }
-    })
-}
-
-// function previousPage(event) {
-//     event.preventDefault();
-//     var path = $('#default-path').attr("href");
-//     var pathname = path.toString().replace("admin/","").toString();
-//     var hiddenPage = $("#" + pathname + "-current-page");
-//     var currentPage = parseInt(hiddenPage.attr("data-id"));
-//     hiddenPage.attr("data-id", parseInt(currentPage)-1);
-//     var pageQuery = "?page=" + (parseInt(currentPage)-1) + "&&size=5";
-//     buildTable(pageQuery);
-//     buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
-//     $.getJSON(path, function (data) {
-//         var jsonObject = JSON.stringify(data);
-//         var count = JSON.parse(jsonObject).length;
-//         var pages = Math.floor(count / 5);
-//         if (count % 5 !== 0) pages++;
-//
-//         if (parseInt(currentPage)-1 === pages) $(".next-link").addClass("disabled"); else {
-//             $(".next-link").removeClass("disabled")
-//         }
-//         if (parseInt(currentPage)-1 !== 1) {$(".previous-link").removeClass("disabled")} else {
-//             $(".previous-link").addClass("disabled")
-//         }
-//     })
-// }
-
-function searchPreviousPage(event) {
-    event.preventDefault();
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var hiddenPage = $("#" + pathname + "-current-page");
-    var currentPage = parseInt(hiddenPage.attr("data-id"));
-    var searchWord = $('#word-search').val();
-    var searchPath = path + "?search=" + searchWord + "&page=0&size=0";
-    hiddenPage.attr("data-id", parseInt(currentPage)-1);
-    var pageQuery = "?search="+ searchWord +"&page=" + (parseInt(currentPage)-1) + "&&size=5";
-    buildTable(pageQuery);
-    buildShowingNumberInfo(1+(currentPage-2)*5,5+(currentPage-2)*5);
-    $.getJSON(searchPath, function (data) {
-        var jsonObject = JSON.stringify(data);
-        var count = JSON.parse(jsonObject).length;
-        var pages = Math.floor(count / 5);
-        if (count % 5 !== 0) pages++;
-
-        if (parseInt(currentPage)-1 === pages) $(".next-link").addClass("disabled"); else {
-            $(".next-link").removeClass("disabled")
-        }
-        if (parseInt(currentPage)-1 !== 1) {$(".previous-link").removeClass("disabled")} else {
-            $(".previous-link").addClass("disabled")
-        }
-    })
 }
 
 function removeSubmit(value) {
@@ -334,7 +84,7 @@ function removeSubmit(value) {
             "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
         },
         success: function () {
-            paginations();
+            buildTable();
         },
         error: function () {
             alert('Error in Operation');
@@ -375,7 +125,7 @@ function addSubmit() {
         dataType: "json",
         success: function () {
             $('#add-' + pathname + "-modal").modal('hide');
-            paginations()
+            buildTable()
         },
         error: function (jqXHR) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -446,7 +196,7 @@ function updateSubmit(value) {
         dataType: "json",
         success: function (data, textStatus, xhr) {
             $('#update-' + pathname + "-modal").modal('hide');
-            paginations();
+            buildTable();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             var obj = JSON.parse(jqXHR.responseText);
@@ -484,36 +234,66 @@ function read() {
 }
 
 function selectSubjects() {
-    $.getJSON("/admin/subjects", function (data) {
-        var subjectDTO_data = '';
-        subjectDTO_data += '<option selected disabled>Select the subject</option>';
-        $.each(data, function (key, value) {
-            subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
-        });
-        $(".subjects-select-update").html(subjectDTO_data);
-    });
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: '/resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            $.getJSON("/admin/subjects", function (data) {
+                var subjectDTO_data = '';
+                subjectDTO_data += '<option selected disabled>' + $.i18n.prop("admin-modal-select-subject") + '</option>';
+                $.each(data, function (key, value) {
+                    subjectDTO_data += '<option value="' + value.subjectName + '">' + value.subjectName + '</option>';
+                });
+                $(".subjects-select-update").html(subjectDTO_data);
+            });
+        }
+    })
 }
 
 function selectTopics() {
-    $.getJSON("/admin/topics", function (data) {
-        var topicDTO_data = '<option selected disabled>Select the topic</option>';
-        topicDTO_data += '';
-        $.each(data, function (key, value) {
-            topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
-        });
-        $(".topics-select-update").html(topicDTO_data);
-    });
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: '/resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            $.getJSON("/admin/topics", function (data) {
+                var topicDTO_data = '<option selected disabled>' + $.i18n.prop("admin-modal-select-topic") + '</option>';
+                topicDTO_data += '';
+                $.each(data, function (key, value) {
+                    topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
+                });
+                $(".topics-select-update").html(topicDTO_data);
+            });
+        }
+    })
 }
 
 function selectUsers() {
-    $.getJSON("/admin/users", function (data) {
-        var userDTO_data = '<option selected disabled>Select the user</option>';
-        userDTO_data += '';
-        $.each(data, function (key, value) {
-            userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
-        });
-        $(".users-select-update").html(userDTO_data);
-    });
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: '/resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            $.getJSON("/admin/users", function (data) {
+                var userDTO_data = '<option selected disabled>' + $.i18n.prop("admin-modal-select-user") + '</option>';
+                userDTO_data += '';
+                $.each(data, function (key, value) {
+                    userDTO_data += '<option value="' + value.userName + '">' + value.userName + '</option>';
+                });
+                $(".users-select-update").html(userDTO_data);
+            });
+        }
+    })
 }
 
 function selectWithSelectedSubjects(subject) {
@@ -566,25 +346,10 @@ function getCurrentDate() {
     return date + ' ' + time;
 }
 
-function buildSearchTable() {
-    var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
-    var pathnameCapital = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-    var searchWord = $('#word-search').val();
-    $('#search-path').attr("data-id", searchWord);
-    var searchQuery = "?search=" + searchWord + "&page=1&size=5";
-    $("#" + pathname + "-body").empty();
-    buildTable(searchQuery);
-    $(".pathname-capital").text(pathnameCapital + ': Search by word "'+ searchWord +'"');
-    buildSearchShowingNumberInfo(1,5);
-    buildSearchShowingNumberButtons();
-    switchSearchNumberPage();
-}
-
 function searchPagination() {
     var searchWord = $('#word-search').val();
     pastePagination();
-    paginations(searchWord);
+    buildTable(searchWord);
 }
 
 function pastePagination() {
@@ -595,7 +360,15 @@ function pastePagination() {
     $(".paginate-"+pathname).html(data);
 }
 
-function paginations(search) {
+function moveFormatNavigator() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/", "").toString();
+    var navPagination = $(".paginationjs-nav");
+    $("#format-navigator-" + pathname).html(navPagination.html());
+    navPagination.hide();
+}
+
+function buildTable(search) {
     var path = $('#default-path').attr("href");
     var pathname = path.toString().replace("admin/", "").toString();
     if (search !== undefined) {
@@ -616,10 +389,10 @@ function paginations(search) {
         },
         pageSize: 5,
         showNavigator: true,
-        formatNavigator: 'Showing <span style="color: #f00"><%= currentPage %></span> st/rd/th, <%= totalPage %> pages, <%= totalNumber %> entries',
+        formatNavigator: '<span class="admin-format-navigator-showing">Showing</span> <%= currentPage %> <span class="admin-format-navigator-page">page</span>,' +
+            ' <%= totalPage %> <span class="admin-format-navigator-pages">pages</span>, <%= totalNumber %> <span class="admin-format-navigator-entries">entries</span>',
         position: 'top',
-        callback: function (data, pagination) {
-            // template method of yourself
+        callback: function (data) {
             if (pathname === "subjects") {
                 $.each(data, function (key, value) {
                     value.text = value.text.split(".")[0] + ".";
@@ -627,8 +400,7 @@ function paginations(search) {
             }
             $("#" + pathname + "-body").empty();
             $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
-            $("#format-navigator-" + pathname).html($(".paginationjs-nav").html());
-            $(".paginationjs-nav").hide();
+            moveFormatNavigator();
             internationalization();
         }
     })
