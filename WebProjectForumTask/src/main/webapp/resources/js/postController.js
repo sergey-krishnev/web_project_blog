@@ -29,6 +29,7 @@ function internationalization() {
             $.each(array, function (index, value) {
                 $("." + index).text(value);
             });
+            $(".admin-search").attr("placeholder",$.i18n.prop("admin-search"));
         }
     })
 }

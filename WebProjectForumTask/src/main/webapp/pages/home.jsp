@@ -50,9 +50,9 @@
         </button>
 
         <span style="float: left">
-        <a href="?lang=en_US&page=1" class="admin-language-en">English</a>
+        <a href="?lang=en_US" class="admin-language-en">English</a>
         |
-        <a href="?lang=ru&page=1" class="admin-language-ru">Russian</a>
+        <a href="?lang=ru" class="admin-language-ru">Russian</a>
         </span>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -125,7 +125,7 @@
                 <h5 class="card-header user-card-head-search">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" id="search-subjects" class="form-control" placeholder="Search for...">
+                        <input type="text" id="search-subjects" class="form-control admin-search" placeholder="Search for...">
                         <span class="input-group-btn">
                   <button class="btn btn-secondary user-card-body-button-go" type="button" onclick="searchPage()">Go!</button>
                 </span>

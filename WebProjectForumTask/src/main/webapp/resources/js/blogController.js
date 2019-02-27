@@ -9,7 +9,7 @@ $(document).ready(function () {
         id = pathname;
         numberPage = 1;
     }
-    paginate(id, numberPage);
+    paginate(id, numberPage,searchPage);
     // if (id === null) {
         // buildSubjects(pathname + "?" + searchPage + "&size=3");
         // $.getJSON(pathname + "?" + onlySearch + "&page=0&size=0", function (data) {
@@ -53,36 +53,9 @@ function internationalization() {
             $.each(array, function (index, value) {
                 $("." + index).html(value);
             });
+            $(".admin-search").attr("placeholder",$.i18n.prop("admin-search"));
         }
     })
-}
-
-function olderPage() {
-    var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
-    var page = parseInt(search.slice(-1));
-    page++;
-    search = search.replace(/.$/,page);
-    window.location.href = window.location.pathname + "?" + search;
-}
-
-function newerPage() {
-    var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
-    var page = parseInt(search.slice(-1));
-    page--;
-    search = search.replace(/.$/,page);
-    window.location.href = window.location.pathname + "?" + search;
-}
-
-function buildSubjects(subjectsPath) {
-    var currentSubject = $("#username").val();
-    $.getJSON(subjectsPath, function (data) {
-        $.each(data, function (key, value) {
-            value.text = value.text.split(".")[0] + ".";
-        });
-        $("#subjectsTemplate").tmpl(data).appendTo(".aggregate-subjects");
-        $('.subject-update[name = ' + currentSubject + ']').show();
-        $('.admin-update[name = ' + currentSubject + ']').hide();
-    });
 }
 
 function changeTopicName(subjectsPath) {
@@ -94,39 +67,30 @@ function changeTopicName(subjectsPath) {
 
 function searchPage() {
     var search = $("#search-subjects").val();
-    location.href = "?search=" + search;
+    window.location.href = window.location.href + "?search=" + search;
 }
 
-function changeTopicNameToSearch(onlySearch,count) {
-    if(onlySearch.includes("search=")) {
-        alert(searchPage);
-        var word = onlySearch.replace("search=","");
-
-        var newWord = word.replace("&page=/\\d/g","");
-        $(".topicName").text('Search by word "'+ newWord +'"');
-    }
-    if (count === 0) {
-        $(".topicName").text('No results with word "'+ newWord +'"');
-    }
-}
-function movePages(page,numberPage) {
+function movePages(page,numberPage,id) {
     if (page === 1) {
         window.location.href = window.location.href.replace("/page"+numberPage,"");
     } else {
         window.location.href = window.location.href.replace("page" + numberPage, "page" + page);
     }
     if (numberPage === 1) {
-        window.location.href = window.location.href + ("/page"+page);
+        window.location.href = window.location.href.replace(id,id+"/page"+page);
     }
 }
-function paginate(id, numberPage) {
+function paginate(id, numberPage,search) {
     var path;
     var home;
+    if (search !== "") {
+        search = "?" + search;
+    }
     if (id === "all") {
-        path = $('#subject-all-path').attr("href");
+        path = $('#subject-all-path').attr("href") + search;
         home = $('#home-path').attr("href");
     } else {
-        path = $('#subject-id-path').attr("href");
+        path = $('#subject-id-path').attr("href") + search;
         path = path.replace("id",id);
         home = $('#home-id-path').attr("href");
         home = home.replace("id",id);
@@ -158,19 +122,21 @@ function paginate(id, numberPage) {
             $("#subjectsTemplate").tmpl(data).appendTo(".aggregate-subjects");
             $('.subject-update[name = ' + currentSubject + ']').show();
             $('.admin-update[name = ' + currentSubject + ']').hide();
+            internationalization();
         }
     });
     container.addHook('afterPageOnClick', function() {
         var page = container.pagination('getSelectedPageNum');
-        movePages(page,numberPage)
+        movePages(page,numberPage,id)
     });
     container.addHook('afterNextOnClick', function() {
         var page = container.pagination('getSelectedPageNum');
-        movePages(page,numberPage)
+        movePages(page,numberPage,id)
     });
     container.addHook('afterPreviousOnClick', function() {
         var page = container.pagination('getSelectedPageNum');
-        movePages(page,numberPage)
+        movePages(page,numberPage,id)
     });
+
 
 }

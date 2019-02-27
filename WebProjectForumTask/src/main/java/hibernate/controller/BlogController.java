@@ -109,6 +109,11 @@ public class BlogController {
         return crudService.searchLikeSubjectName(search);
     }
 
+    @RequestMapping(value = "/topics/subjects",params = {"search"},method = RequestMethod.GET)
+    public List<SubjectDTO> getLikeSubjectName(@RequestParam("search") String search) {
+        return crudService.searchLikeSubjectName(search);
+    }
+
     @RequestMapping(value = "/topics/subjects",params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
     public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
