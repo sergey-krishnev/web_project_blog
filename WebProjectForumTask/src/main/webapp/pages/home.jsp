@@ -36,6 +36,10 @@
 
 <body>
 <a type="hidden" id="default-path" href="topics"></a>
+<a type="hidden" id="subject-all-path" href="/blog/topics/subjects"></a>
+<a type="hidden" id="subject-id-path" href="/blog/topics/id/subjects"></a>
+<a type="hidden" id="home-path" href="/blog/all"></a>
+<a type="hidden" id="home-id-path" href="/blog/id"></a>
 <input type="hidden" id ="lang" value="${pageContext.response.locale}"/>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -102,14 +106,14 @@
 
             <ul id="paginate-example" class="pagination"></ul>
 
-            <ul class="pagination justify-content-center mb-4">
-                <li class="page-item" id="older-page">
-                    <a class="page-link user-button-older" href="#" onclick="olderPage()">&larr; Older</a>
-                </li>
-                <li class="page-item" id="newer-page">
-                    <a class="page-link user-button-newer" href="#" onclick="newerPage()">Newer &rarr;</a>
-                </li>
-            </ul>
+            <%--<ul class="pagination justify-content-center mb-4">--%>
+                <%--<li class="page-item" id="older-page">--%>
+                    <%--<a class="page-link user-button-older" href="#" onclick="olderPage()">&larr; Older</a>--%>
+                <%--</li>--%>
+                <%--<li class="page-item" id="newer-page">--%>
+                    <%--<a class="page-link user-button-newer" href="#" onclick="newerPage()">Newer &rarr;</a>--%>
+                <%--</li>--%>
+            <%--</ul>--%>
 
         </div>
 
@@ -201,7 +205,7 @@
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
 <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
-<script src="<c:url value="/resources/vendor/simplePagination/js/jquery.simplePagination.js" />"></script>
+<%--<script src="<c:url value="/resources/vendor/simplePagination/js/jquery.simplePagination.js" />"></script>--%>
 <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>--%>
 <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>

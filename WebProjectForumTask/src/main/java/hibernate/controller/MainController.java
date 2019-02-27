@@ -25,6 +25,16 @@ public class MainController {
     @Autowired
     private MessageSource messageSource;
 
+    @RequestMapping(value = "/blog/all/page{numberPage}", method = RequestMethod.GET)
+    public String home(@PathVariable int numberPage) {
+        return "home";
+    }
+
+    @RequestMapping(value = "/blog/{topicId}/page{numberPage}",method = RequestMethod.GET)
+    public String topic(@PathVariable int topicId, @PathVariable int numberPage) {
+        return "home";
+    }
+
     @RequestMapping(value = "/blog/all", method = RequestMethod.GET)
     public String home() {
         return "home";
