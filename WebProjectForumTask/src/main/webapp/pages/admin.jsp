@@ -827,7 +827,7 @@
     <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
     <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>--%>
     <%--<script src="<c:url value="/resources/vendor/bootstrap/js/pagination.js" />"></script>--%>
-    <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
+    <%--<script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>--%>
     <!-- Core plugin JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />"></script>
 

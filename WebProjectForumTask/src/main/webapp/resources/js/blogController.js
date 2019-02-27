@@ -103,3 +103,41 @@ function changeTopicNameToSearch(onlySearch,count) {
         $(".topicName").text('No results with word "'+ newWord +'"');
     }
 }
+
+function paginate() {
+    var path = $('#default-path').attr("href");
+    var pathname = path.toString().replace("admin/", "").toString();
+    if (search !== undefined) {
+        path = path + "?search=" + search;
+    }
+    $("#" + pathname + "-body").empty();
+    var idDispl = "#display-" + pathname + "-table";
+    $(idDispl).css("display", "block");
+    $('#paginate-' + pathname).pagination({
+        dataSource: function(done) {
+            $.ajax({
+                type: 'GET',
+                url: path,
+                success: function(response) {
+                    done(response);
+                }
+            });
+        },
+        pageSize: 5,
+        showNavigator: true,
+        formatNavigator: '<span class="admin-format-navigator-showing">Showing</span> <%= currentPage %> <span class="admin-format-navigator-page">page</span>,' +
+            ' <%= totalPage %> <span class="admin-format-navigator-pages">pages</span>, <%= totalNumber %> <span class="admin-format-navigator-entries">entries</span>',
+        position: 'top',
+        callback: function (data) {
+            if (pathname === "subjects") {
+                $.each(data, function (key, value) {
+                    value.text = value.text.split(".")[0] + ".";
+                });
+            }
+            $("#" + pathname + "-body").empty();
+            $("#" + pathname + "-template").tmpl(data).appendTo("#" + pathname + "-body");
+            moveFormatNavigator();
+            internationalization();
+        }
+    })
+}

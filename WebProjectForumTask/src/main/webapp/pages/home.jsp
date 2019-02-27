@@ -28,6 +28,10 @@
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/css/sb-admin.css" />" rel="stylesheet">
 
+    <link href="<c:url value="/resources/vendor/bootstrap/css/pagination.css" />" rel="stylesheet">
+
+    <%--<link href="<c:url value="/resources/vendor/simplePagination/css/simplePagination.css" />" rel="stylesheet" type="text/css">--%>
+
 </head>
 
 <body>
@@ -95,6 +99,9 @@
 
 
             <!-- Pagination -->
+
+            <ul id="paginate-example" class="pagination"></ul>
+
             <ul class="pagination justify-content-center mb-4">
                 <li class="page-item" id="older-page">
                     <a class="page-link user-button-older" href="#" onclick="olderPage()">&larr; Older</a>
@@ -194,7 +201,8 @@
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
 <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>
+<script src="<c:url value="/resources/vendor/simplePagination/js/jquery.simplePagination.js" />"></script>
+<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>--%>
 <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 <script src="<c:url value="/resources/js/blogController.js" />"></script>

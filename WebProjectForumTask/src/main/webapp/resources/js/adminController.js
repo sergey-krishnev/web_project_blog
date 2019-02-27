@@ -1,13 +1,9 @@
 $(document).ready(function () {
     switchDashboard();
-    //buildTable("?page=1&&size=5");
-    // buildShowingNumberInfo(1,5);
-    // buildShowingNumberButtons();
     removeModal();
     addModal();
     updateModal();
     read();
-    // switchNumberPage();
     pastePagination();
     buildTable();
     internationalization();
