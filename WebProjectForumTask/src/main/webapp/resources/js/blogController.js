@@ -35,16 +35,24 @@ function internationalization() {
                 $("." + index).html(value);
             });
             $(".admin-search").attr("placeholder",$.i18n.prop("admin-search"));
+            $(".first").find(".page-link").text($.i18n.prop("user-pagination-first"));
+            $(".prev").find(".page-link").text($.i18n.prop("user-pagination-previous"));
+            $(".next").find(".page-link").text($.i18n.prop("user-pagination-next"));
+            $(".last").find(".page-link").text($.i18n.prop("user-pagination-last"));
+            if ($(".topicName").text() === "All Subjects") {
+                $(".topicName").text($.i18n.prop("user-subtitle-all-subject"));
+            }
+
         }
     })
 }
 
-function changeTopicName(subjectsPath) {
-    subjectsPath = subjectsPath.replace("/subjects","");
-    $.getJSON(subjectsPath, function (data) {
-        $(".topicName").text(data.topicName);
-    })
-}
+// function changeTopicName(subjectsPath) {
+//     subjectsPath = subjectsPath.replace("/subjects","");
+//     $.getJSON(subjectsPath, function (data) {
+//         $(".topicName").text(data.topicName);
+//     })
+// }
 
 function searchPage() {
     var search = $("#search-subjects").val();
@@ -52,14 +60,14 @@ function searchPage() {
 }
 
 function movePages(page,numberPage,id) {
-
     if (page === 1) {
         window.location.href = window.location.href.replace("&search","?search").replace("?page="+numberPage,"");
     } else {
         window.location.href = window.location.href.replace("page=" + numberPage, "page=" + page);
     }
     if (numberPage === 1) {
-        window.location.href = window.location.href.replace("?search","&search").replace(id,id+"?page="+page);
+        window.location.href = window.location.href.replace("?search","&search").replace(id,id+"?page="+page)
+            .replace("?lang=ru","").replace("?lang=en_US","");
     }
 }
 
@@ -93,6 +101,7 @@ function paginate(id) {
             if (currentPage !== buttonPage) {
                 movePages(buttonPage,currentPage,id);
             }
+            internationalization();
         }
     });
     // var currentPage = getParameterByName('page');

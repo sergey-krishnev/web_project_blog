@@ -97,7 +97,7 @@
 
             <!-- Subject add form -->
             <div class="subject-add-form" style="display: none">
-                <h1>New subject</h1>
+                <h1 class="admin-card-body-add-subject">Add new subject</h1>
                 <div class="form-group">
                 <label for="subject-name-add-form" class="admin-data-table-head-subject">Subject name</label>
             <input name="subjectName" class="form-control form-control-lg subject-add" id="subject-name-add-form" type="text" placeholder="Subject name">
@@ -159,7 +159,7 @@
             <div class="error NotEmpty-commentDTO-message"></div>
             <div class="error BadWords-commentDTO-message"></div>
             <div class="card my-4 comment-form">
-                <h5 class="card-header">Leave a Comment:</h5>
+                <h5 class="card-header post-comment-head-leave-the-comment">Leave a Comment:</h5>
                 <div class="card-body">
                     <form>
                         <div class="form-group">
@@ -185,7 +185,7 @@
                 <h5 class="card-header user-card-head-search">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" id="search-subjects" class="form-control" placeholder="Search for...">
+                        <input type="text" id="search-subjects" class="form-control admin-search" placeholder="Search for...">
                         <span class="input-group-btn">
                   <button class="btn btn-secondary user-card-body-button-go" type="button" onclick="searchPage()">Go!</button>
                 </span>
@@ -236,7 +236,7 @@
            <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
-            <h5 class="mt-0">\${userName}<span class="small"> at \${date}</span></h5>
+            <h5 class="mt-0">\${userName}<span class="small"> <span class="post-comment-head-at">at</span> \${date}</span></h5>
             \${message}
             </div>
            </div>
@@ -244,9 +244,9 @@
 
 <script id="subjectTemplate" type="text/x-jQuery-tmpl">
     <h1 class="mt-4">\${subjectName}</h1>
-    <p class="lead">by <a href="#">\${userName}</a></h1>
+    <p class="lead"><span class="user-card-body-by">by</span> <a href="#">\${userName}</a></h1>
     <hr>
-    <p>Posted on \${date}</p>
+    <p><span class="user-card-body-posted-on">Posted on </span> \${date}</p>
     <hr>
     <p class="lead">\${text}</p>
 </script>

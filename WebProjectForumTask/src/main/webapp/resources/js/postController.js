@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     $.getJSON(subjectPath, function (data) {
         $("#subjectTemplate").tmpl(data).appendTo(".aggregate-post");
+        internationalization();
     });
     buildComments(subjectPath + "/comments");
     $.getJSON(subjectPath, function (data) {
@@ -30,6 +31,8 @@ function internationalization() {
                 $("." + index).text(value);
             });
             $(".admin-search").attr("placeholder",$.i18n.prop("admin-search"));
+            $("#subject-name-add-form").attr("placeholder",$.i18n.prop("admin-data-table-head-subject"));
+
         }
     })
 }
@@ -154,6 +157,7 @@ function buildComments(commentsPath) {
     $(".aggregate-comments").empty();
     $.getJSON(commentsPath, function (data) {
         $("#commentsTemplate").tmpl(data).appendTo(".aggregate-comments");
+        internationalization();
     })
 }
 
@@ -213,14 +217,24 @@ function addComment(topicName, subjectName, updateCommentsPath) {
 }
 
 function selectTopics() {
-    $.getJSON("/blog/topics", function (data) {
-        var topicDTO_data = '<option selected disabled>Select the topic</option>';
-        topicDTO_data += '';
-        $.each(data, function (key, value) {
-            topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
-        });
-        $(".topics-select-update").html(topicDTO_data);
-    });
+    var lang = $("#lang").val();
+    $.i18n.properties({
+        name: 'admin',
+        path: '/resources/bundle',
+        mode: 'both',
+        cache: true,
+        language: lang,
+        callback: function () {
+            $.getJSON("/blog/topics", function (data) {
+                var topicDTO_data = '<option selected disabled>'+ $.i18n.prop("admin-modal-select-topic") +'</option>';
+                topicDTO_data += '';
+                $.each(data, function (key, value) {
+                    topicDTO_data += '<option value="' + value.topicName + '">' + value.topicName + '</option>';
+                });
+                $(".topics-select-update").html(topicDTO_data);
+            });
+        }
+    })
 }
 
 function selectWithSelectedTopics(topic) {

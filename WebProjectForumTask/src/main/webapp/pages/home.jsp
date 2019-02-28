@@ -96,7 +96,7 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <div class="justify-content-between">
-                <h1 class="my-6 topicName"><c:out value="${title}"></c:out> </h1>
+                <h1 class="my-6 topicName"><c:out value="${title}"></c:out></h1>
             </div>
 
             <%--<div class="aggregate-subjects"></div>--%>
@@ -117,10 +117,10 @@
                         <h2 class = "card-title">${subject.subjectName}</h2>
                         <p class = "card-text">${subject.text}</p>
                         <sec:authorize access="isAuthenticated()">
-                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update" style = "display : none">Edit</a>
+                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update admin-data-table-body-update" style = "display : none">Update</a>
                         </sec:authorize>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update admin-update">Edit</a>
+                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update admin-update admin-data-table-body-update">Update</a>
                         </sec:authorize>
                         <a href="/post/${subject.id}" class = "btn btn-primary subject-read user-card-body-read-more">Read More &rarr;</a>
                     </div>
@@ -165,10 +165,10 @@
             </div>
             <sec:authorize access="isAuthenticated()">
             <div class="card my-4">
-                <h5 class="card-header">Add own subject</h5>
+                <h5 class="card-header user-card-head-add-own-subject">Add own subject</h5>
                 <div class="card-body">
-                    <p class="card-text">Click the button to add.</p>
-                    <a href="/post/add" class = "btn btn-primary">Add new subject</a>
+                    <p class="card-text user-card-body-click-to-add">Click the button to add.</p>
+                    <a href="/post/add" class = "btn btn-primary admin-card-body-add-subject">Add new subject</a>
                 </div>
             </div>
             </sec:authorize>
@@ -218,10 +218,10 @@
                 <h2 class = "card-title">\${subjectName}</h2>
                 <p class = "card-text">\${text}</p>
                 <sec:authorize access="isAuthenticated()">
-                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update" style = "display : none">Edit</a>
+                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-data-table-body-update" style = "display : none">Update</a>
                 </sec:authorize>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-update">Edit</a>
+                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-update admin-data-table-body-update">Update</a>
                 </sec:authorize>
                 <a href="/post/\${id}" class = "btn btn-primary subject-read user-card-body-read-more">Read More &rarr;</a>
                 </div>

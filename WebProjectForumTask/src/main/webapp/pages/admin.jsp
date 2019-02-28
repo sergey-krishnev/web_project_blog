@@ -83,7 +83,7 @@
                     <i class="fas fa-user-circle fa-fw"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item admin-dropdown-main-page" href="/blog/all?page=1">Main page</a>
+                    <a class="dropdown-item admin-dropdown-main-page" href="/blog/all">Main page</a>
                     <a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>
                     <a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>
                     <div class="dropdown-divider"></div>
