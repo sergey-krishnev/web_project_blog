@@ -353,6 +353,7 @@ function pastePagination() {
     var pathname = path.toString().replace("admin/", "").toString();
     var data ='<div id="format-navigator-'+ pathname +'"></div>';
     data +='<ul id="paginate-'+ pathname +'" class="pagination"></ul>';
+    // var data = '<ul id="pagination-demo-'+ pathname +'" class="pagination-sm justify-content-center"></ul>';
     $(".paginate-"+pathname).html(data);
 }
 
@@ -399,5 +400,6 @@ function buildTable(search) {
             moveFormatNavigator();
             internationalization();
         }
-    })
+    });
+
 }

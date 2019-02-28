@@ -31,18 +31,20 @@ public class AdminController {
         return crudService.searchAllComment();
     }
 
-    @RequestMapping(value = "/comments",params = {"page", "size"}, method = RequestMethod.GET)
-    @ResponseBody
-    public List<CommentDTO> getAllCommentDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-        if (page > 0 && size > 0) {
-            return crudService.searchAllCommentPaginated(page, size);
-        }
-        return crudService.searchAllComment();
-    }
-
-//    @RequestMapping(value = "/comments", params = {"search", "page", "size"}, method = RequestMethod.GET)
+//    @RequestMapping(value = "/comments",params = {"page", "size"}, method = RequestMethod.GET)
 //    @ResponseBody
-//    public List<CommentDTO> getSearchedComments(@RequestParam("search") String search, @RequestParam("page") int page, @RequestParam("size") int size) {
+//    public List<CommentDTO> getAllCommentDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+//        if (page > 0 && size > 0) {
+//            return crudService.searchAllCommentPaginated(page, size);
+//        }
+//        return crudService.searchAllComment();
+//    }
+
+//    @RequestMapping(value = "/comments", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<CommentDTO> getSearchedComments(@RequestParam(value = "page", defaultValue = "1") int page,
+//                                                @RequestParam(value = "size", defaultValue = "5") int size,
+//                                                @RequestParam(value = "search", defaultValue = "") String search) {
 //        if (page > 0 && size > 0) {
 //            return crudService.searchLikeCommentPaginated(page, size, search);
 //        }
@@ -88,18 +90,20 @@ public class AdminController {
         return crudService.searchAllSubject();
     }
 
-    @RequestMapping(value = "/subjects",params = {"page", "size"}, method = RequestMethod.GET)
-    @ResponseBody
-    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-        if (page > 0 && size > 0) {
-            return crudService.searchAllSubjectPaginated(page, size);
-        }
-        return crudService.searchAllSubject();
-    }
+//    @RequestMapping(value = "/subjects",params = {"page", "size"}, method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+//        if (page > 0 && size > 0) {
+//            return crudService.searchAllSubjectPaginated(page, size);
+//        }
+//        return crudService.searchAllSubject();
+//    }
 
 //    @RequestMapping(value = "/subjects", params = {"search", "page", "size"}, method = RequestMethod.GET)
 //    @ResponseBody
-//    public List<SubjectDTO> getSearchedSubjects(@RequestParam("search") String search, @RequestParam("page") int page, @RequestParam("size") int size) {
+//    public List<SubjectDTO> getSearchedSubjects(@RequestParam(value = "page", defaultValue = "1") int page,
+//                                                @RequestParam(value = "size", defaultValue = "3") int size,
+//                                                @RequestParam(value = "search", defaultValue = "") String search) {
 //        if (page > 0 && size > 0) {
 //            return crudService.searchLikeSubjectNamePaginated(page, size, search);
 //        }
@@ -144,18 +148,20 @@ public class AdminController {
         return crudService.searchAllTopic();
     }
 
-    @RequestMapping(value = "/topics", params = {"page", "size"},method = RequestMethod.GET)
-    @ResponseBody
-    public List<TopicDTO> getTopicsDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-        if (page > 0 && size > 0) {
-            return crudService.searchAllTopicPaginated(page, size);
-        }
-        return crudService.searchAllTopic();
-    }
+//    @RequestMapping(value = "/topics", params = {"page", "size"},method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<TopicDTO> getTopicsDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+//        if (page > 0 && size > 0) {
+//            return crudService.searchAllTopicPaginated(page, size);
+//        }
+//        return crudService.searchAllTopic();
+//    }
 
 //    @RequestMapping(value = "/topics", params = {"search", "page", "size"}, method = RequestMethod.GET)
 //    @ResponseBody
-//    public List<TopicDTO> getSearchedTopics(@RequestParam("search") String search, @RequestParam("page") int page, @RequestParam("size") int size) {
+//    public List<TopicDTO> getSearchedTopics(@RequestParam(value = "page", defaultValue = "1") int page,
+//                                            @RequestParam(value = "size", defaultValue = "3") int size,
+//                                            @RequestParam(value = "search", defaultValue = "") String search) {
 //        if (page > 0 && size > 0) {
 //            return crudService.searchLikeTopicPaginated(page, size, search);
 //        }
@@ -200,18 +206,20 @@ public class AdminController {
     public List<UsersDTO> getAllUsersDTO() { return crudService.searchAllUsers();
     }
 
-    @RequestMapping(value = "/users", params = {"page", "size"}, method = RequestMethod.GET)
-    @ResponseBody
-    public List<UsersDTO> getAllUsersDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-        if (page > 0 && size > 0) {
-            return crudService.searchAllUsersPaginated(page, size);
-        }
-        return crudService.searchAllUsers();
-    }
+//    @RequestMapping(value = "/users", params = {"page", "size"}, method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<UsersDTO> getAllUsersDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+//        if (page > 0 && size > 0) {
+//            return crudService.searchAllUsersPaginated(page, size);
+//        }
+//        return crudService.searchAllUsers();
+//    }
 
 //    @RequestMapping(value = "/users", params = {"search", "page", "size"}, method = RequestMethod.GET)
 //    @ResponseBody
-//    public List<UsersDTO> getSearchedUsers(@RequestParam("search") String search, @RequestParam("page") int page, @RequestParam("size") int size) {
+//    public List<UsersDTO> getSearchedUsers(@RequestParam(value = "page", defaultValue = "1") int page,
+//                                           @RequestParam(value = "size", defaultValue = "3") int size,
+//                                           @RequestParam(value = "search", defaultValue = "") String search) {
 //        if (page > 0 && size > 0) {
 //            return crudService.searchLikeUserPaginated(page, size, search);
 //        }
