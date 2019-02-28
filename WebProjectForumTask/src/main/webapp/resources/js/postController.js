@@ -239,5 +239,5 @@ function selectWithSelectedTopics(topic) {
 
 function searchPage() {
     var search = $("#search-subjects").val();
-    location.href = "/blog/all";
+    location.href = "/blog/all?search=" + search;
 }
