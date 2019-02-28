@@ -43,8 +43,8 @@ public class BlogController {
 
     @RequestMapping(value = "/topics/{topicId}/subjects",params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<SubjectDTO> getSubjectsByTopicId(@PathVariable int topicId,@RequestParam("page") int page,
-                                                 @RequestParam("size") int size) {
+    public List<SubjectDTO> getSubjectsByTopicId(@PathVariable int topicId,@RequestParam(value = "page", defaultValue = "1") int page,
+                                                 @RequestParam(value = "size", defaultValue = "3") int size) {
         TopicDTO topicDTO = crudService.searchTopicById(topicId);
         if (page > 0 && size > 0) {
             return crudService.searchSubjectByTopicPaginated(topicId,page,size);
@@ -101,7 +101,7 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/topics/subjects",params = {"search", "page", "size"},method = RequestMethod.GET)
-    public List<SubjectDTO> getLikeSubjectName(@RequestParam("page") int page, @RequestParam("size") int size,
+    public List<SubjectDTO> getLikeSubjectName(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "3") int size,
                                                @RequestParam("search") String search) {
         if (page > 0 && size > 0) {
             return crudService.searchLikeSubjectNamePaginated(page,size,search);
@@ -116,7 +116,7 @@ public class BlogController {
 
     @RequestMapping(value = "/topics/subjects",params = {"page", "size"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public List<SubjectDTO> getAllSubjectDTO(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "3") int size) {
         if (page > 0 && size > 0) {
             return crudService.searchAllSubjectPaginated(page, size);
         }

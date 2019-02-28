@@ -96,15 +96,46 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <div class="justify-content-between">
-                <h1 class="my-6 topicName user-all-subjects">All Subjects </h1>
+                <h1 class="my-6 topicName"><c:out value="${title}"></c:out> </h1>
             </div>
-            <div class="aggregate-subjects"></div>
 
+            <%--<div class="aggregate-subjects"></div>--%>
+
+            <c:forEach var="subject" items="${subjects}">
+                <%--<tr>--%>
+                    <%--<td>${subject.users.nickname}</td>--%>
+                    <%--<td>${subject.topic.name}</td>--%>
+                    <%--<td>${subject.name}</td>--%>
+                    <%--<td>${subject.message}</td>--%>
+                    <%--<td><fmt:formatDate pattern = "MM-dd-yyyy"--%>
+                                        <%--value = "${subject.dateSending}" /></td>--%>
+                    <%--<td><a href="editForm/<c:out value="${subject.id}"/>"></a></td>--%>
+                    <%--<td><a href="delete/<c:out value="${subject.id}"/>"></a></td>--%>
+                <%--</tr>--%>
+                <div class = "card mb-4">
+                    <div class = "card-body">
+                        <h2 class = "card-title">${subject.subjectName}</h2>
+                        <p class = "card-text">${subject.text}</p>
+                        <sec:authorize access="isAuthenticated()">
+                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update" style = "display : none">Edit</a>
+                        </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update admin-update">Edit</a>
+                        </sec:authorize>
+                        <a href="/post/${subject.id}" class = "btn btn-primary subject-read user-card-body-read-more">Read More &rarr;</a>
+                    </div>
+                    <div class="card-footer text-muted"><span class ="user-card-body-posted-on">Posted on</span> ${subject.date} <span class="user-card-body-by">by</span>
+                        <a href="#">${subject.userName}</a>
+                    </div>
+                </div>
+
+            </c:forEach>
 
 
             <!-- Pagination -->
 
-            <ul id="paginate-example" class="pagination"></ul>
+            <%--<ul id="paginate-example" data-length="<c:out value="${lengthSubjects}"></c:out>" class="pagination"></ul>--%>
+            <ul id="pagination-demo" data-length="<c:out value="${lengthSubjects}"></c:out>" class="pagination-sm justify-content-center"></ul>
 
             <%--<ul class="pagination justify-content-center mb-4">--%>
                 <%--<li class="page-item" id="older-page">--%>
@@ -192,9 +223,9 @@
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-update">Edit</a>
                 </sec:authorize>
-                <a href="/post/\${id}" class = "btn btn-primary subject-read">Read More &rarr;</a>
+                <a href="/post/\${id}" class = "btn btn-primary subject-read user-card-body-read-more">Read More &rarr;</a>
                 </div>
-                <div class="card-footer text-muted">Posted on \${date} by
+                <div class="card-footer text-muted"><span class ="user-card-body-posted-on">Posted on</span> \${date} <span class="user-card-body-by">by</span>
                 <a href="#">\${userName}</a>
                 </div></div>
 </script>
@@ -206,9 +237,9 @@
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
 <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
 <%--<script src="<c:url value="/resources/vendor/simplePagination/js/jquery.simplePagination.js" />"></script>--%>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>--%>
-<script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>
+<%--<script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>--%>
+<%--<script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>--%>
 <script src="<c:url value="/resources/js/blogController.js" />"></script>
 
 </body>

@@ -20,7 +20,7 @@ function internationalization() {
     var lang = $("#lang").val();
     $.i18n.properties({
         name: 'admin',
-        path: 'resources/bundle',
+        path: '/resources/bundle',
         mode: 'both',
         cache: true,
         language: lang,

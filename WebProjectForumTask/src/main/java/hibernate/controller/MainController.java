@@ -35,15 +35,15 @@ public class MainController {
         return "home";
     }
 
-    @RequestMapping(value = "/blog/all", method = RequestMethod.GET)
-    public String home() {
-        return "home";
-    }
+//    @RequestMapping(value = "/blog/all", method = RequestMethod.GET)
+//    public String home() {
+//        return "home";
+//    }
 
-    @RequestMapping(value = "/blog/{topicId}",method = RequestMethod.GET)
-    public String topic(@PathVariable int topicId) {
-        return "home";
-    }
+//    @RequestMapping(value = "/blog/{topicId}",method = RequestMethod.GET)
+//    public String topic(@PathVariable int topicId) {
+//        return "home";
+//    }
 
     @RequestMapping(value = "/post/{subjectId}", method = RequestMethod.GET)
     public String post(@PathVariable int subjectId) {
