@@ -1,15 +1,14 @@
 $(document).ready(function () {
 
-    // var pathname = window.location.pathname;
+    var pathname = window.location.pathname;
     // var searchPage = '';//decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
-    // pathname = pathname.replace("/blog/","");
-    // var id = pathname.substring(0,pathname.indexOf("/"));
+    var id = pathname.replace("/blog/","");
     // var numberPage = pathname.replace(id + "/page","");
     // if (pathname === numberPage) {
     //     id = pathname;
     //     numberPage = 1;
     // }
-    paginate();
+    paginate(id);
 });
 
 function getParameterByName(name, url) {
@@ -54,16 +53,16 @@ function changeTopicName(subjectsPath) {
 
 function movePages(page,numberPage,id) {
     if (page === 1) {
-        window.location.href = window.location.href.replace("/page"+numberPage,"");
+        window.location.href = window.location.href.replace("?page="+numberPage,"");
     } else {
-        window.location.href = window.location.href.replace("page" + numberPage, "page" + page);
+        window.location.href = window.location.href.replace("page=" + numberPage, "page=" + page);
     }
     if (numberPage === 1) {
-        window.location.href = window.location.href.replace(id,id+"/page"+page);
+        window.location.href = window.location.href.replace(id,id+"?page="+page);
     }
 }
 
-function paginate() {
+function paginate(id) {
     // var path;
     // var home;
     // if (search !== "") {
@@ -82,13 +81,17 @@ function paginate() {
     var pagination = $('#pagination-demo');
     var visiblePages = 3;
     var pages = Math.ceil(parseInt(pagination.attr("data-length"))/3);
+    var currentPage = parseInt(getParameterByName("page"));
+    if (isNaN(currentPage)) {currentPage = 1}
     pagination.twbsPagination({
         totalPages: pages,
         visiblePages: visiblePages,
+        startPage: currentPage,
         onPageClick: function (event,page) {
-            var currentPage = getParameterByName("page").toString();
-            var buttonPage = page.toString();
-
+            var buttonPage = parseInt(page);
+            if (currentPage !== buttonPage) {
+                movePages(buttonPage,currentPage,id);
+            }
         }
     });
     // var currentPage = getParameterByName('page');
