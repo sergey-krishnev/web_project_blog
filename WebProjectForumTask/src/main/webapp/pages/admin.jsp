@@ -837,12 +837,12 @@
     <script src="<c:url value="/resources/js/adminController.js" />"></script>
 
 
-    <!-- Page level plugin JavaScript-->
-    <script src="<c:url value="/resources/vendor/datatables/jquery.dataTables.js" />"></script>
-    <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.js" />"></script>
+    <%--<!-- Page level plugin JavaScript-->--%>
+    <%--<script src="<c:url value="/resources/vendor/datatables/jquery.dataTables.js" />"></script>--%>
+    <%--<script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.js" />"></script>--%>
 
-    <!-- Demo scripts for this page-->
-    <script src="<c:url value="/resources/js/demo/datatables-demo.js" />"></script>
+    <%--<!-- Demo scripts for this page-->--%>
+    <%--<script src="<c:url value="/resources/js/demo/datatables-demo.js" />"></script>--%>
 
 
 </body>

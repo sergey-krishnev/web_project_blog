@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <sec:csrfMetaTags />
+    <sec:csrfMetaTags/>
 
     <title>FOUR ROOM</title>
 
@@ -40,12 +40,14 @@
 <a type="hidden" id="subject-id-path" href="/blog/topics/id/subjects"></a>
 <a type="hidden" id="home-path" href="/blog/all"></a>
 <a type="hidden" id="home-id-path" href="/blog/id"></a>
-<input type="hidden" id ="lang" value="${pageContext.response.locale}"/>
+<input type="hidden" id="lang" value="${pageContext.response.locale}"/>
 <!-- Navigation -->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/blog/all">FOUR ROOM</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -55,35 +57,59 @@
         <a href="?lang=ru" class="admin-language-ru">Russian</a>
         </span>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                    <sec:authorize access="!isAuthenticated()">
-                <li class="nav-item">
-                        <a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>
-                </li>
-                    </sec:authorize>
-                    <sec:authorize access="isAuthenticated()">
-                        <sec:authentication property="principal.username" var="username" />
-                        <input type="hidden" id ="username" value="${username}"/>
-                <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ${username}
-                        <i class="fas fa-user-circle fa-fw"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">
-                        <sec:authorize access="hasRole('ADMIN')">
-                        <a class="dropdown-item admin-dropdown-admin-page" href="/admin">Admin panel</a>
-                        </sec:authorize>
-                        <a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>
-                        <a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-                    </div>
-                </li>
-                    </sec:authorize>
 
-            </ul>
-        </div>
+
+            <%--<ul class="navbar-nav ml-auto">--%>
+                <%--<sec:authorize access="!isAuthenticated()">--%>
+                    <%--<li class="nav-item">--%>
+                        <%--<a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>--%>
+                    <%--</li>--%>
+                <%--</sec:authorize>--%>
+                <%--<sec:authorize access="isAuthenticated()">--%>
+                    <%--<sec:authentication property="principal.username" var="username"/>--%>
+                    <%--<input type="hidden" id="username" value="${username}"/>--%>
+                    <%--<li class="nav-item dropdown no-arrow">--%>
+                        <%--<a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button"--%>
+                           <%--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+                                <%--${username}--%>
+                            <%--<i class="fas fa-user-circle fa-fw"></i>--%>
+                        <%--</a>--%>
+                        <%--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">--%>
+                            <%--<sec:authorize access="hasRole('ADMIN')">--%>
+                                <%--<a class="dropdown-item admin-dropdown-admin-page" href="/admin">Admin panel</a>--%>
+                            <%--</sec:authorize>--%>
+                            <%--<a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>--%>
+                            <%--<a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>--%>
+                            <%--<div class="dropdown-divider"></div>--%>
+                            <%--<a class="dropdown-item admin-dropdown-logout" href="#" data-toggle="modal"--%>
+                               <%--data-target="#logoutModal">Logout</a>--%>
+                        <%--</div>--%>
+                    <%--</li>--%>
+                <%--</sec:authorize>--%>
+            <%--</ul>--%>
+        <ul class="nav justify-content-end">
+        <sec:authorize access="!isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>
+            </li>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <sec:authentication property="principal.username" var="username" />
+            <input type="hidden" id ="username" value="${username}"/>
+            <li class="nav-item">
+                <a class="nav-link" href="/blog/all">${username}</a>
+            </li>
+            <sec:authorize access="hasRole('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link admin-dropdown-admin-page" href="/admin">Admin panel</a>
+                </li>
+            </sec:authorize>
+            <li class="nav-item">
+                <a class="nav-link admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            </li>
+        </sec:authorize>
+        </ul>
+
     </div>
 </nav>
 
@@ -103,28 +129,34 @@
 
             <c:forEach var="subject" items="${subjects}">
                 <%--<tr>--%>
-                    <%--<td>${subject.users.nickname}</td>--%>
-                    <%--<td>${subject.topic.name}</td>--%>
-                    <%--<td>${subject.name}</td>--%>
-                    <%--<td>${subject.message}</td>--%>
-                    <%--<td><fmt:formatDate pattern = "MM-dd-yyyy"--%>
-                                        <%--value = "${subject.dateSending}" /></td>--%>
-                    <%--<td><a href="editForm/<c:out value="${subject.id}"/>"></a></td>--%>
-                    <%--<td><a href="delete/<c:out value="${subject.id}"/>"></a></td>--%>
+                <%--<td>${subject.users.nickname}</td>--%>
+                <%--<td>${subject.topic.name}</td>--%>
+                <%--<td>${subject.name}</td>--%>
+                <%--<td>${subject.message}</td>--%>
+                <%--<td><fmt:formatDate pattern = "MM-dd-yyyy"--%>
+                <%--value = "${subject.dateSending}" /></td>--%>
+                <%--<td><a href="editForm/<c:out value="${subject.id}"/>"></a></td>--%>
+                <%--<td><a href="delete/<c:out value="${subject.id}"/>"></a></td>--%>
                 <%--</tr>--%>
-                <div class = "card mb-4">
-                    <div class = "card-body">
-                        <h2 class = "card-title">${subject.subjectName}</h2>
-                        <p class = "card-text">${subject.text}</p>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">${subject.subjectName}</h2>
+                        <p class="card-text">${subject.text}</p>
                         <sec:authorize access="isAuthenticated()">
-                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update admin-data-table-body-update" style = "display : none">Update</a>
+                            <a href="/post/${subject.id}/update" name="${subject.userName}"
+                               class="btn btn-primary subject-update admin-data-table-body-update"
+                               style="display : none">Update</a>
                         </sec:authorize>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                            <a href="/post/${subject.id}/update" name = "${subject.userName}" class = "btn btn-primary subject-update admin-update admin-data-table-body-update">Update</a>
+                            <a href="/post/${subject.id}/update" name="${subject.userName}"
+                               class="btn btn-primary subject-update admin-update admin-data-table-body-update">Update</a>
                         </sec:authorize>
-                        <a href="/post/${subject.id}" class = "btn btn-primary subject-read user-card-body-read-more">Read More &rarr;</a>
+                        <a href="/post/${subject.id}" class="btn btn-primary subject-read user-card-body-read-more">Read
+                            More &rarr;</a>
                     </div>
-                    <div class="card-footer text-muted"><span class ="user-card-body-posted-on">Posted on</span> ${subject.date} <span class="user-card-body-by">by</span>
+                    <div class="card-footer text-muted"><span
+                            class="user-card-body-posted-on">Posted on</span> ${subject.date} <span
+                            class="user-card-body-by">by</span>
                         <a href="#">${subject.userName}</a>
                     </div>
                 </div>
@@ -135,15 +167,16 @@
             <!-- Pagination -->
 
             <%--<ul id="paginate-example" data-length="<c:out value="${lengthSubjects}"></c:out>" class="pagination"></ul>--%>
-            <ul id="pagination-demo" data-length="<c:out value="${lengthSubjects}"></c:out>" class="pagination-sm justify-content-center"></ul>
+            <ul id="pagination-demo" data-length="<c:out value="${lengthSubjects}"></c:out>"
+                class="pagination-sm justify-content-center"></ul>
 
             <%--<ul class="pagination justify-content-center mb-4">--%>
-                <%--<li class="page-item" id="older-page">--%>
-                    <%--<a class="page-link user-button-older" href="#" onclick="olderPage()">&larr; Older</a>--%>
-                <%--</li>--%>
-                <%--<li class="page-item" id="newer-page">--%>
-                    <%--<a class="page-link user-button-newer" href="#" onclick="newerPage()">Newer &rarr;</a>--%>
-                <%--</li>--%>
+            <%--<li class="page-item" id="older-page">--%>
+            <%--<a class="page-link user-button-older" href="#" onclick="olderPage()">&larr; Older</a>--%>
+            <%--</li>--%>
+            <%--<li class="page-item" id="newer-page">--%>
+            <%--<a class="page-link user-button-newer" href="#" onclick="newerPage()">Newer &rarr;</a>--%>
+            <%--</li>--%>
             <%--</ul>--%>
 
         </div>
@@ -156,25 +189,27 @@
                 <h5 class="card-header user-card-head-search">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" id="search-subjects" class="form-control admin-search" placeholder="Search for...">
+                        <input type="text" id="search-subjects" class="form-control admin-search"
+                               placeholder="Search for...">
                         <span class="input-group-btn">
-                  <button class="btn btn-secondary user-card-body-button-go" type="button" onclick="searchPage()">Go!</button>
+                  <button class="btn btn-secondary user-card-body-button-go" type="button"
+                          onclick="searchPage()">Go!</button>
                 </span>
                     </div>
                 </div>
             </div>
             <sec:authorize access="isAuthenticated()">
-            <div class="card my-4">
-                <h5 class="card-header user-card-head-add-own-subject">Add own subject</h5>
-                <div class="card-body">
-                    <p class="card-text user-card-body-click-to-add">Click the button to add.</p>
-                    <a href="/post/add" class = "btn btn-primary admin-card-body-add-subject">Add new subject</a>
+                <div class="card my-4">
+                    <h5 class="card-header user-card-head-add-own-subject">Add own subject</h5>
+                    <div class="card-body">
+                        <p class="card-text user-card-body-click-to-add">Click the button to add.</p>
+                        <a href="/post/add" class="btn btn-primary admin-card-body-add-subject">Add new subject</a>
+                    </div>
                 </div>
-            </div>
             </sec:authorize>
 
             <!-- Categories Widget -->
-            <jsp:include page="topic.jsp" />
+            <jsp:include page="topic.jsp"/>
 
         </div>
 
@@ -185,7 +220,8 @@
 <!-- /.container -->
 
 <%--Logout Modal--%>
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -218,24 +254,26 @@
                 <h2 class = "card-title">\${subjectName}</h2>
                 <p class = "card-text">\${text}</p>
                 <sec:authorize access="isAuthenticated()">
-                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-data-table-body-update" style = "display : none">Update</a>
-                </sec:authorize>
+    <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-data-table-body-update" style = "display : none">Update</a>
+</sec:authorize>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-update admin-data-table-body-update">Update</a>
-                </sec:authorize>
+    <a href="/post/\${id}/update" name = "\${userName}" class = "btn btn-primary subject-update admin-update admin-data-table-body-update">Update</a>
+</sec:authorize>
                 <a href="/post/\${id}" class = "btn btn-primary subject-read user-card-body-read-more">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted"><span class ="user-card-body-posted-on">Posted on</span> \${date} <span class="user-card-body-by">by</span>
                 <a href="#">\${userName}</a>
                 </div></div>
+
 </script>
 
 
 <!-- Bootstrap core JavaScript-->
 <script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>
-<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.js" />"></script>
 <script src="<c:url value="/resources/vendor/jquery-i18n-properties/jquery.i18n.properties.js" />"></script>
+
 <%--<script src="<c:url value="/resources/vendor/simplePagination/js/jquery.simplePagination.js" />"></script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>
 <%--<script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>--%>

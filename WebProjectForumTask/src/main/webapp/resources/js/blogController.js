@@ -136,7 +136,4 @@ function paginate(id) {
     //     var page = container.pagination('getSelectedPageNum');
     //     movePages(page,numberPage,id)
     // });
-
-
-
 }

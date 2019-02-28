@@ -54,34 +54,59 @@
         <a href="?lang=ru" class="admin-language-ru">Russian</a>
         </span>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <sec:authorize access="!isAuthenticated()">
+        <%--<div class="collapse navbar-collapse" id="navbarResponsive">--%>
+            <%--<ul class="navbar-nav ml-auto">--%>
+                <%--<sec:authorize access="!isAuthenticated()">--%>
+                    <%--<li class="nav-item">--%>
+                        <%--<a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>--%>
+                    <%--</li>--%>
+                <%--</sec:authorize>--%>
+                <%--<sec:authorize access="isAuthenticated()">--%>
+                    <%--<sec:authentication property="principal.username" var="username" />--%>
+                    <%--<input type="hidden" id ="username" value="${username}"/>--%>
+                    <%--<li class="nav-item dropdown no-arrow">--%>
+                        <%--<a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+                                <%--${username}--%>
+                            <%--<i class="fas fa-user-circle fa-fw"></i>--%>
+                        <%--</a>--%>
+                        <%--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">--%>
+                            <%--<sec:authorize access="hasRole('ADMIN')">--%>
+                                <%--<a class="dropdown-item admin-dropdown-admin-page" href="/admin">Admin panel</a>--%>
+                            <%--</sec:authorize>--%>
+                            <%--<a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>--%>
+                            <%--<a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>--%>
+                            <%--<div class="dropdown-divider"></div>--%>
+                            <%--<a class="dropdown-item admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>--%>
+                        <%--</div>--%>
+                    <%--</li>--%>
+                <%--</sec:authorize>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+
+        <ul class="nav justify-content-end">
+            <sec:authorize access="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <sec:authentication property="principal.username" var="username" />
+                <input type="hidden" id ="username" value="${username}"/>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog/all">${username}</a>
+                </li>
+                <sec:authorize access="hasRole('ADMIN')">
                     <li class="nav-item">
-                        <a class="nav-link admin-login" href="${pageContext.request.contextPath}/login">Login</a>
+                        <a class="nav-link admin-dropdown-admin-page" href="/admin">Admin panel</a>
                     </li>
                 </sec:authorize>
-                <sec:authorize access="isAuthenticated()">
-                    <sec:authentication property="principal.username" var="username" />
-                    <input type="hidden" id ="username" value="${username}"/>
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                ${username}
-                            <i class="fas fa-user-circle fa-fw"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="subjectDropdown">
-                            <sec:authorize access="hasRole('ADMIN')">
-                                <a class="dropdown-item admin-dropdown-admin-page" href="/admin">Admin panel</a>
-                            </sec:authorize>
-                            <a class="dropdown-item admin-dropdown-settings" href="#">Settings</a>
-                            <a class="dropdown-item admin-dropdown-activity-log" href="#">Activity Log</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-                        </div>
-                    </li>
-                </sec:authorize>
-            </ul>
-        </div>
+                <li class="nav-item">
+                    <a class="nav-link admin-dropdown-logout" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                </li>
+            </sec:authorize>
+        </ul>
+
+
     </div>
 </nav>
 
