@@ -2,6 +2,8 @@ package hibernate.controller;
 
 import hibernate.dto.SubjectDTO;
 import hibernate.dto.TopicDTO;
+import hibernate.service.implementations.SubjectServiceImpl;
+import hibernate.service.implementations.TopicServiceImpl;
 import hibernate.service.interfaces.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -19,7 +21,10 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private CRUDService crudService;
+    private SubjectServiceImpl subjectService;
+
+    @Autowired
+    private TopicServiceImpl topicService;
 
     @Autowired
     private MessageSource messageSource;
@@ -28,11 +33,11 @@ public class HomeController {
     public String homeAll(@RequestParam(value = "page", defaultValue = "1") int page,
                        @RequestParam(value = "size", defaultValue = "3") int size,
                        @RequestParam(value = "search", defaultValue = "") String search, Model model) {
-        List<SubjectDTO> subjects = crudService.searchLikeSubjectNamePaginated(page,size,search);
+        List<SubjectDTO> subjects = subjectService.getLikeNamePaginated(page,size,search);
         for (SubjectDTO subjectDTO : subjects) {
             subjectDTO.setText(subjectDTO.getText().split("\\.")[0] + ".");
         }
-        int length = crudService.searchLikeSubjectName(search).size();
+        int length = subjectService.getLikeName(search).size();
         model.addAttribute("title","All Subjects");
         model.addAttribute("subjects", subjects);
         model.addAttribute("lengthSubjects",length);
@@ -43,11 +48,11 @@ public class HomeController {
     public String homeById(@PathVariable int topicId, @RequestParam(value = "page", defaultValue = "1") int page,
                            @RequestParam(value = "size", defaultValue = "3") int size,
                            @RequestParam(value = "search", defaultValue = "") String search, Model model) {
-        List<SubjectDTO> subjects = crudService.searchSubjectByTopicPaginated(topicId,page,size);
+        List<SubjectDTO> subjects = crudService.searchSubjectByTopicPaginated(topicId,page,size); //add in service search subjects by Topic
         for (SubjectDTO subjectDTO : subjects) {
             subjectDTO.setText(subjectDTO.getText().split("\\.")[0] + ".");
         }
-        TopicDTO topicDTO = crudService.searchTopicById(topicId);
+        TopicDTO topicDTO = topicService.getById(topicId);
         int length = topicDTO.getSubjects().size();
         String title = topicDTO.getTopicName();
         model.addAttribute("title",title);

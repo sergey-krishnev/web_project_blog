@@ -4,6 +4,10 @@ import hibernate.dto.CommentDTO;
 import hibernate.dto.SubjectDTO;
 import hibernate.dto.TopicDTO;
 import hibernate.dto.UsersDTO;
+import hibernate.service.implementations.CommentServiceImpl;
+import hibernate.service.implementations.SubjectServiceImpl;
+import hibernate.service.implementations.TopicServiceImpl;
+import hibernate.service.implementations.UsersServiceImpl;
 import hibernate.service.interfaces.CRUDService;
 import hibernate.validation.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,45 +25,34 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private CRUDService crudService;
+    private CommentServiceImpl commentService;
+
+    @Autowired
+    private SubjectServiceImpl subjectService;
+
+    @Autowired
+    private UsersServiceImpl usersService;
+
+    @Autowired
+    private TopicServiceImpl topicService;
 
     @Autowired
     private MessageSource messageSource;
 
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
     public List<CommentDTO> getAllCommentDTO() {
-        return crudService.searchAllComment();
+        return commentService.getAll();
     }
-
-//    @RequestMapping(value = "/comments",params = {"page", "size"}, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<CommentDTO> getAllCommentDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchAllCommentPaginated(page, size);
-//        }
-//        return crudService.searchAllComment();
-//    }
-
-//    @RequestMapping(value = "/comments", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<CommentDTO> getSearchedComments(@RequestParam(value = "page", defaultValue = "1") int page,
-//                                                @RequestParam(value = "size", defaultValue = "5") int size,
-//                                                @RequestParam(value = "search", defaultValue = "") String search) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchLikeCommentPaginated(page, size, search);
-//        }
-//            return crudService.searchLikeComment(search);
-//    }
 
     @RequestMapping(value = "/comments", params = {"search"}, method = RequestMethod.GET)
     @ResponseBody
     public List<CommentDTO> getSearchedComments(@RequestParam("search") String search) {
-            return crudService.searchLikeComment(search);
+            return commentService.getLikeName(search);
     }
 
     @RequestMapping(value = "/comments/{commentId}", method = RequestMethod.GET)
     public CommentDTO getCommentDTO(@PathVariable int commentId) {
-        return crudService.searchCommentById(commentId);
+        return commentService.getById(commentId);
     }
 
     @RequestMapping(value = "/comments", method = RequestMethod.POST)
@@ -67,7 +60,7 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.insertComment(commentDTO);
+        commentService.add(commentDTO);
         return ResponseEntity.ok(commentDTO);
     }
 
@@ -76,48 +69,29 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.updateComment(commentId, commentDTO);
+        commentService.update(commentId, commentDTO);
         return ResponseEntity.ok(commentDTO);
     }
 
     @RequestMapping(value = "/comments/{commentId}", method = RequestMethod.DELETE)
     public void deleteCommentDTO(@PathVariable int commentId) {
-        crudService.deleteComment(commentId);
+        commentService.delete(commentId);
     }
 
     @RequestMapping(value = "/subjects", method = RequestMethod.GET)
     public List<SubjectDTO> getAllSubjectDTO() {
-        return crudService.searchAllSubject();
+        return subjectService.getAll();
     }
 
-//    @RequestMapping(value = "/subjects",params = {"page", "size"}, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<SubjectDTO> getAllSubjectDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchAllSubjectPaginated(page, size);
-//        }
-//        return crudService.searchAllSubject();
-//    }
-
-//    @RequestMapping(value = "/subjects", params = {"search", "page", "size"}, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<SubjectDTO> getSearchedSubjects(@RequestParam(value = "page", defaultValue = "1") int page,
-//                                                @RequestParam(value = "size", defaultValue = "3") int size,
-//                                                @RequestParam(value = "search", defaultValue = "") String search) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchLikeSubjectNamePaginated(page, size, search);
-//        }
-//        return crudService.searchLikeSubjectName(search);
-//    }
     @RequestMapping(value = "/subjects", params = {"search"}, method = RequestMethod.GET)
     @ResponseBody
     public List<SubjectDTO> getSearchedSubjects(@RequestParam("search") String search) {
-    return crudService.searchLikeSubjectName(search);
+    return subjectService.getLikeName(search);
     }
 
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.GET)
     public SubjectDTO getSubjectDTO(@PathVariable int subjectId) {
-        return crudService.searchSubjectById(subjectId);
+        return subjectService.getById(subjectId);
     }
 
     @RequestMapping(value = "/subjects", method = RequestMethod.POST)
@@ -125,7 +99,7 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.insertSubject(subjectDTO);
+        subjectService.add(subjectDTO);
         return ResponseEntity.ok(subjectDTO);
     }
 
@@ -134,49 +108,29 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.updateSubject(subjectId, subjectDTO);
+        subjectService.update(subjectId, subjectDTO);
         return ResponseEntity.ok(subjectDTO);
     }
 
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.DELETE)
     public void deleteSubjectDTO(@PathVariable int subjectId) {
-        crudService.deleteSubject(subjectId);
+        subjectService.delete(subjectId);
     }
 
     @RequestMapping(value = "/topics",method = RequestMethod.GET)
     public List<TopicDTO> getTopicsDTO() {
-        return crudService.searchAllTopic();
+        return topicService.getAll();
     }
-
-//    @RequestMapping(value = "/topics", params = {"page", "size"},method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<TopicDTO> getTopicsDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchAllTopicPaginated(page, size);
-//        }
-//        return crudService.searchAllTopic();
-//    }
-
-//    @RequestMapping(value = "/topics", params = {"search", "page", "size"}, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<TopicDTO> getSearchedTopics(@RequestParam(value = "page", defaultValue = "1") int page,
-//                                            @RequestParam(value = "size", defaultValue = "3") int size,
-//                                            @RequestParam(value = "search", defaultValue = "") String search) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchLikeTopicPaginated(page, size, search);
-//        }
-//        return crudService.searchLikeTopicName(search);
-//    }
 
     @RequestMapping(value = "/topics", params = {"search"}, method = RequestMethod.GET)
     @ResponseBody
     public List<TopicDTO> getSearchedTopics(@RequestParam("search") String search) {
-        return crudService.searchLikeTopicName(search);
+        return topicService.getLikeName(search);
     }
 
     @RequestMapping(value = "/topics/{topicId}", method = RequestMethod.GET)
     public TopicDTO getTopicDTO(@PathVariable int topicId) {
-        return crudService.searchTopicById(topicId);
+        return topicService.getById(topicId);
     }
 
     @RequestMapping(value = "/topics", method = RequestMethod.POST)
@@ -184,7 +138,7 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.insertTopic(topicDTO);
+        topicService.add(topicDTO);
         return ResponseEntity.ok(topicDTO);
     }
 
@@ -193,49 +147,29 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.updateTopic(topicId,topicDTO);
+        topicService.update(topicId,topicDTO);
         return ResponseEntity.ok(topicDTO);
     }
 
     @RequestMapping(value = "/topics/{topicId}", method = RequestMethod.DELETE)
     public void deleteTopicDTO(@PathVariable int topicId) {
-        crudService.deleteTopic(topicId);
+        topicService.delete(topicId);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public List<UsersDTO> getAllUsersDTO() { return crudService.searchAllUsers();
+    public List<UsersDTO> getAllUsersDTO() { return usersService.getAll();
     }
-
-//    @RequestMapping(value = "/users", params = {"page", "size"}, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<UsersDTO> getAllUsersDTO(@RequestParam("page") int page, @RequestParam("size") int size) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchAllUsersPaginated(page, size);
-//        }
-//        return crudService.searchAllUsers();
-//    }
-
-//    @RequestMapping(value = "/users", params = {"search", "page", "size"}, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<UsersDTO> getSearchedUsers(@RequestParam(value = "page", defaultValue = "1") int page,
-//                                           @RequestParam(value = "size", defaultValue = "3") int size,
-//                                           @RequestParam(value = "search", defaultValue = "") String search) {
-//        if (page > 0 && size > 0) {
-//            return crudService.searchLikeUserPaginated(page, size, search);
-//        }
-//        return crudService.searchLikeUserName(search);
-//    }
 
     @RequestMapping(value = "/users", params = {"search"}, method = RequestMethod.GET)
     @ResponseBody
     public List<UsersDTO> getSearchedUsers(@RequestParam("search") String search) {
-        return crudService.searchLikeUserName(search);
+        return usersService.getLikeName(search);
     }
 
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
     public UsersDTO getUsersDTO(@PathVariable int userId) {
-        return crudService.searchUserById(userId);
+        return usersService.getById(userId);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
@@ -243,7 +177,7 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.insertUsers(usersDTO);
+        usersService.add(usersDTO);
         return ResponseEntity.ok(usersDTO);
     }
 
@@ -252,13 +186,13 @@ public class AdminController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.updateUsers(userId, usersDTO);
+        usersService.update(userId, usersDTO);
         return ResponseEntity.ok(usersDTO);
     }
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
     public void deleteUsersDTO(@PathVariable int userId) {
-        crudService.deleteUsers(userId);
+        usersService.delete(userId);
     }
 
 }

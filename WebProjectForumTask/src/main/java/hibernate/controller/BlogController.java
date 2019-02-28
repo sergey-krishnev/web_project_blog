@@ -3,6 +3,9 @@ package hibernate.controller;
 import hibernate.dto.CommentDTO;
 import hibernate.dto.SubjectDTO;
 import hibernate.dto.TopicDTO;
+import hibernate.service.implementations.CommentServiceImpl;
+import hibernate.service.implementations.SubjectServiceImpl;
+import hibernate.service.implementations.TopicServiceImpl;
 import hibernate.service.interfaces.CRUDService;
 import hibernate.validation.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,41 +23,36 @@ import java.util.List;
 public class BlogController {
 
     @Autowired
-    private CRUDService crudService;
+    private CommentServiceImpl commentService;
+
+    @Autowired
+    private SubjectServiceImpl subjectService;
+
+    @Autowired
+    private TopicServiceImpl topicService;
 
     @Autowired
     private MessageSource messageSource;
 
     @RequestMapping(value = "/topics", method = RequestMethod.GET)
     public List<TopicDTO> getAllTopicsDTO() {
-        return crudService.searchAllTopic();
+        return topicService.getAll();
     }
 
     @RequestMapping(value = "/topics/{topicId}", method = RequestMethod.GET)
     public TopicDTO getTopicId(@PathVariable int topicId) {
-        return crudService.searchTopicById(topicId);
+        return topicService.getById(topicId);
     }
 
     @RequestMapping(value = "/topics/{topicId}/subjects", method = RequestMethod.GET)
     public List<SubjectDTO> getSubjectsByTopicId(@PathVariable int topicId) {
-        TopicDTO topicDTO = crudService.searchTopicById(topicId);
-        return topicDTO.getSubjects();
-    }
-
-    @RequestMapping(value = "/topics/{topicId}/subjects",params = {"page", "size"}, method = RequestMethod.GET)
-    @ResponseBody
-    public List<SubjectDTO> getSubjectsByTopicId(@PathVariable int topicId,@RequestParam(value = "page", defaultValue = "1") int page,
-                                                 @RequestParam(value = "size", defaultValue = "3") int size) {
-        TopicDTO topicDTO = crudService.searchTopicById(topicId);
-        if (page > 0 && size > 0) {
-            return crudService.searchSubjectByTopicPaginated(topicId,page,size);
-        }
+        TopicDTO topicDTO = topicService.getById(topicId);
         return topicDTO.getSubjects();
     }
 
     @RequestMapping(value = "/subjects/{subjectId}", method = RequestMethod.GET)
     public SubjectDTO getSubjectDTO(@PathVariable int subjectId) {
-        return crudService.searchSubjectById(subjectId);
+        return subjectService.getById(subjectId);
     }
 
     @RequestMapping(value = "/topics/subjects", method = RequestMethod.POST)
@@ -62,7 +60,7 @@ public class BlogController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.insertSubject(subjectDTO);
+        subjectService.add(subjectDTO);
         return ResponseEntity.ok(subjectDTO);
     }
 
@@ -71,18 +69,18 @@ public class BlogController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.updateSubject(subjectId, subjectDTO);
+        subjectService.update(subjectId, subjectDTO);
         return ResponseEntity.ok(subjectDTO);
     }
 
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
     public List<CommentDTO> getAllCommentDTO() {
-        return crudService.searchAllComment();
+        return commentService.getAll();
     }
 
     @RequestMapping(value = "/subjects/{subjectId}/comments", method = RequestMethod.GET)
     public List<CommentDTO> getCommentsDTO(@PathVariable int subjectId) {
-        SubjectDTO subjectDTO = crudService.searchSubjectById(subjectId);
+        SubjectDTO subjectDTO = subjectService.getById(subjectId);
         return subjectDTO.getComments();
     }
 
@@ -91,35 +89,12 @@ public class BlogController {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorBuilder.fromBindingErrors(errors));
         }
-        crudService.insertComment(commentDTO);
+        commentService.add(commentDTO);
         return ResponseEntity.ok(commentDTO);
     }
 
     @RequestMapping(value = "/topics/subjects", method = RequestMethod.GET)
     public List<SubjectDTO> getAllSubjectsDTO() {
-        return crudService.searchAllSubject();
-    }
-
-    @RequestMapping(value = "/topics/subjects",params = {"search", "page", "size"},method = RequestMethod.GET)
-    public List<SubjectDTO> getLikeSubjectName(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "3") int size,
-                                               @RequestParam("search") String search) {
-        if (page > 0 && size > 0) {
-            return crudService.searchLikeSubjectNamePaginated(page,size,search);
-        }
-        return crudService.searchLikeSubjectName(search);
-    }
-
-    @RequestMapping(value = "/topics/subjects",params = {"search"},method = RequestMethod.GET)
-    public List<SubjectDTO> getLikeSubjectName(@RequestParam("search") String search) {
-        return crudService.searchLikeSubjectName(search);
-    }
-
-    @RequestMapping(value = "/topics/subjects",params = {"page", "size"}, method = RequestMethod.GET)
-    @ResponseBody
-    public List<SubjectDTO> getAllSubjectDTO(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "3") int size) {
-        if (page > 0 && size > 0) {
-            return crudService.searchAllSubjectPaginated(page, size);
-        }
-        return crudService.searchAllSubject();
+        return subjectService.getAll();
     }
 }

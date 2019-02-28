@@ -1,6 +1,6 @@
 package hibernate.service.implementations;
 
-import hibernate.dao.interfaces.CRUDDao;
+import hibernate.dao.implementations.SubjectDaoImpl;
 import hibernate.model.Subject;
 import hibernate.service.interfaces.SecurityUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class SecurityUserServiceImpl implements SecurityUserService {
 
     @Autowired
-    private CRUDDao crudDao;
+    private SubjectDaoImpl usersDao;
 
-    public void setCrudDao(CRUDDao crudDao) {
-        this.crudDao = crudDao;
+    public void setUsersDao(SubjectDaoImpl usersDao) {
+        this.usersDao = usersDao;
     }
 
     @Transactional(readOnly = true)
     @Override
     public Boolean canAccessUser(int subjectId, String username) {
-        Subject subject = crudDao.searchSubjectById(subjectId);
+        Subject subject = usersDao.getById(subjectId);
         return subject.getUsers().getNickname().equals(username);
     }
 }

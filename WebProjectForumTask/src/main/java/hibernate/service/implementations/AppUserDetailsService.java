@@ -1,6 +1,7 @@
 package hibernate.service.implementations;
 
 import hibernate.dao.implementations.AppUserPrincipal;
+import hibernate.dao.implementations.UsersDaoImpl;
 import hibernate.dao.interfaces.CRUDDao;
 import hibernate.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class AppUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private CRUDDao crudDao;
+    private UsersDaoImpl usersDao;
 
-    public void setCrudDao(CRUDDao crudDao) {
-        this.crudDao = crudDao;
+    public void setUsersDao(UsersDaoImpl usersDao) {
+        this.usersDao = usersDao;
     }
 
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String userName) {
-        Users users = crudDao.searchByUserName(userName);
+        Users users = usersDao.getByName(userName);
         if (users == null) {
             throw new UsernameNotFoundException(userName);
         }
