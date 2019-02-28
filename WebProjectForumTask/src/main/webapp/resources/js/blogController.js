@@ -46,19 +46,20 @@ function changeTopicName(subjectsPath) {
     })
 }
 
-// function searchPage() {
-//     var search = $("#search-subjects").val();
-//     window.location.href = window.location.href + "?search=" + search;
-// }
+function searchPage() {
+    var search = $("#search-subjects").val();
+    window.location.href = window.location.href.split('?', 1)[0] + "?search=" + search;
+}
 
 function movePages(page,numberPage,id) {
+
     if (page === 1) {
-        window.location.href = window.location.href.replace("?page="+numberPage,"");
+        window.location.href = window.location.href.replace("&search","?search").replace("?page="+numberPage,"");
     } else {
         window.location.href = window.location.href.replace("page=" + numberPage, "page=" + page);
     }
     if (numberPage === 1) {
-        window.location.href = window.location.href.replace(id,id+"?page="+page);
+        window.location.href = window.location.href.replace("?search","&search").replace(id,id+"?page="+page);
     }
 }
 

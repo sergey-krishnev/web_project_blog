@@ -28,11 +28,11 @@ public class HomeController {
     public String homeAll(@RequestParam(value = "page", defaultValue = "1") int page,
                        @RequestParam(value = "size", defaultValue = "3") int size,
                        @RequestParam(value = "search", defaultValue = "") String search, Model model) {
-        List<SubjectDTO> subjects = crudService.searchAllSubjectPaginated(page,size);
+        List<SubjectDTO> subjects = crudService.searchLikeSubjectNamePaginated(page,size,search);
         for (SubjectDTO subjectDTO : subjects) {
             subjectDTO.setText(subjectDTO.getText().split("\\.")[0] + ".");
         }
-        int length = crudService.searchAllSubject().size();
+        int length = crudService.searchLikeSubjectName(search).size();
         model.addAttribute("title","All Subjects");
         model.addAttribute("subjects", subjects);
         model.addAttribute("lengthSubjects",length);
