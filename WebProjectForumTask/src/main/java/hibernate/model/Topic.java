@@ -11,6 +11,8 @@ import java.util.List;
 public class Topic implements Serializable {
 
     @Id
+    @GeneratedValue(generator = "topic_id__generator", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="topic_id__generator", sequenceName = "forum_schema.forum_id_topic_seq", allocationSize=1)
     @Column(name = "id", unique = true)
     private int id;
 

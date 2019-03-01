@@ -1,6 +1,7 @@
 package hibernate.service.implementations;
 
 import hibernate.dao.implementations.TopicDaoImpl;
+import hibernate.dao.interfaces.BasicDao;
 import hibernate.dto.CommentDTO;
 import hibernate.dto.SubjectDTO;
 import hibernate.dto.TopicDTO;
@@ -9,17 +10,19 @@ import hibernate.model.Subject;
 import hibernate.model.Topic;
 import hibernate.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("topicService")
 public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
 
     @Autowired
-    private TopicDaoImpl topicDao;
+    @Qualifier("topicDao")
+    private BasicDao topicDao;
 
     @Transactional(readOnly = true)
     @Override
@@ -33,7 +36,7 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
     @Transactional(readOnly = true)
     @Override
     public TopicDTO getById(int id) {
-        Topic topic = topicDao.getById(id);
+        Topic topic = (Topic) topicDao.getById(id);
         TopicDTO topicDTO = new TopicDTO();
         List<Subject> subjectList = topic.getSubjects();
         List<SubjectDTO> subjects = new ArrayList<>();
@@ -42,6 +45,11 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
         topicDTO.setTopicName(topic.getName());
         topicDTO.setSubjects(subjects);
         return topicDTO;
+    }
+
+    @Override
+    public boolean getByName(String name) {
+        return false;
     }
 
     @Transactional(readOnly = true)
@@ -66,6 +74,12 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
         if (page-1 == div) return topics.subList(start,start + mod);
         if (start + size > topics.size()) return new ArrayList<>();
         return topics.subList(start, start + size);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<TopicDTO> getCustomLikeNamePaginated(int page, int size, String s, int id) {
+        return null;
     }
 
     @Transactional

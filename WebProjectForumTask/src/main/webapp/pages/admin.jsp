@@ -43,7 +43,7 @@
 <body id="page-top">
 
 <a hidden name="url" id="url" href="${pageContext.request.contextPath}/"></a>
-<a type="hidden" id="default-path" href="admin/comments"></a>
+<a type="hidden" id="default-path" href="/comments"></a>
 <a type="hidden" id="search-path" data-id=""></a>
 <input type="hidden" id ="lang" value="${pageContext.response.locale}"/>
 
@@ -100,22 +100,22 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item">
-                <a class="nav-link entities-link" data-url="admin/comments" href="#">
+                <a class="nav-link entities-link" data-url="/comments" href="#">
                     <i class="fas fa-fw fa-comments"></i>
                     <span class="admin-sidebar-comments">Comments</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link entities-link" data-url="admin/subjects" href="#">
+                <a class="nav-link entities-link" data-url="/subjects" href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span class="admin-sidebar-subjects">Subjects</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link entities-link" data-url="admin/users" href="#">
+                <a class="nav-link entities-link" data-url="/users/admin" href="#">
                     <i class="fas fa-fw fa-users"></i>
                     <span class="admin-sidebar-users">Users</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link entities-link" data-url="admin/topics"  href="#">
+                <a class="nav-link entities-link" data-url="/topics"  href="#">
                     <i class="fas fa-fw fa-list"></i>
                     <span class="admin-sidebar-topics">Topics</span></a>
             </li>
@@ -169,7 +169,7 @@
                                 <div class="d-flex justify-content-between paginate-comments">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-comment" id="add-comments"
-                                        data-url="/admin/comments" onclick="addModal()" data-toggle="modal"
+                                        data-url="/comments" onclick="addModal()" data-toggle="modal"
                                         data-target="#add-comments-modal">Add new comment
                                 </button>
                             </div>
@@ -200,7 +200,7 @@
                                 <div class="d-flex justify-content-between paginate-subjects">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-subject" id="add-subjects"
-                                        data-url="/admin/subjects" onclick="addModal()" data-toggle="modal"
+                                        data-url="/subjects" onclick="addModal()" data-toggle="modal"
                                         data-target="#add-subjects-modal">Add new subject
                                 </button>
                                 </div>
@@ -231,7 +231,7 @@
                                 <div class="d-flex justify-content-between paginate-users">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-user" id="add-users"
-                                        data-url="/admin/users" onclick="addModal()" data-toggle="modal"
+                                        data-url="/users/admin" onclick="addModal()" data-toggle="modal"
                                         data-target="#add-users-modal">Add new user
                                 </button>
                             </div>
@@ -258,7 +258,7 @@
                                 <div class="d-flex justify-content-between paginate-topics">
                                 </div>
                                 <button type="button" class="btn btn-info admin-card-body-add-topic" id="add-topics"
-                                        data-url="/admin/topics" onclick="addModal()" data-toggle="modal"
+                                        data-url="/topics" onclick="addModal()" data-toggle="modal"
                                         data-target="#add-topics-modal">Add new topic
                                 </button>
                             </div>
@@ -728,7 +728,7 @@
                     <div class="form-group">
                         <label for="topicName-update-topics-modal" class="admin-data-table-head-topic">Topic name:</label>
                         <input name="topicName" id="topicName-update-topics-modal" type="text"
-                               class="form-control update-topics-fata" value="" placeholder="Topic name"/>
+                               class="form-control update-topics-data" value="" placeholder="Topic name"/>
                         <div class="error NotEmpty-topicDTO-topicName"></div>
                         <div class="error BadWords-topicDTO-topicName"></div>
                     </div>
@@ -778,8 +778,8 @@
             <td>\${topicName}</td>
             <td>\${subjectName}</td>
             <td>\${date}</td>
-            <td><button type="button" class = "btn btn-primary update-comments admin-data-table-body-update" data-url ="/admin/comments/\${id} "id ="\${id}" data-toggle="modal" data-target="#update-comments-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-comments admin-data-table-body-delete" data-url ="/admin/comments/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-comments-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-comments admin-data-table-body-update" data-url ="/comments/\${id}/admin "id ="\${id}" data-toggle="modal" data-target="#update-comments-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-comments admin-data-table-body-delete" data-url ="/comments/\${id}/admin" data-id ="\${id}" data-toggle="modal" data-target="#delete-comments-modal">Delete</button></td>
         </tr>
 
     </script>
@@ -791,9 +791,9 @@
             <td>\${userName}</td>
             <td>\${topicName}</td>
             <td>\${date}</td>
-            <td><button type="button" class = "btn btn-success read-subjects admin-data-table-body-read" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#read-subjects-modal">Read</button></td>
-            <td><button type="button" class = "btn btn-primary update-subjects admin-data-table-body-update" data-url ="/admin/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-subjects-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-subjects admin-data-table-body-delete" data-url ="/admin/subjects/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-subjects-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-success read-subjects admin-data-table-body-read" data-url ="/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#read-subjects-modal">Read</button></td>
+            <td><button type="button" class = "btn btn-primary update-subjects admin-data-table-body-update" data-url ="/subjects/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-subjects-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-subjects admin-data-table-body-delete" data-url ="/subjects/\${id}/admin" data-id ="\${id}" data-toggle="modal" data-target="#delete-subjects-modal">Delete</button></td>
         </tr>
 
     </script>
@@ -805,8 +805,8 @@
             <td>\${email}</td>
             <td>\${firstName}</td>
             <td>\${lastName}</td>
-            <td><button type="button" class = "btn btn-primary update-users admin-data-table-body-update" data-url ="/admin/users/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-users-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-users admin-data-table-body-delete" data-url ="/admin/users/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-users-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-users admin-data-table-body-update" data-url ="/users/\${id}/admin" id ="\${id}" data-toggle="modal" data-target="#update-users-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-users admin-data-table-body-delete" data-url ="/users/\${id}/admin" data-id ="\${id}" data-toggle="modal" data-target="#delete-users-modal">Delete</button></td>
         </tr>
 
     </script>
@@ -814,8 +814,8 @@
     <script id="topics-template" type="text/x-jQuery-tmpl">
         <tr id = "column\${id}">
             <td>\${topicName}</td>
-            <td><button type="button" class = "btn btn-primary update-topics admin-data-table-body-update" data-url ="/admin/topics/\${id}" id ="\${id}" data-toggle="modal" data-target="#update-topics-modal">Update</button></td>
-            <td><button type="button" class = "btn btn-danger delete-topics admin-data-table-body-delete" data-url ="/admin/topics/\${id}" data-id ="\${id}" data-toggle="modal" data-target="#delete-topics-modal">Delete</button></td>
+            <td><button type="button" class = "btn btn-primary update-topics admin-data-table-body-update" data-url ="/topics/\${id}/admin" id ="\${id}" data-toggle="modal" data-target="#update-topics-modal">Update</button></td>
+            <td><button type="button" class = "btn btn-danger delete-topics admin-data-table-body-delete" data-url ="/topics/\${id}/admin" data-id ="\${id}" data-toggle="modal" data-target="#delete-topics-modal">Delete</button></td>
         </tr>
 
     </script>

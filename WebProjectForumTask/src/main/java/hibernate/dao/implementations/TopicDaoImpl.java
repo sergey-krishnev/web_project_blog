@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("topicDao")
 public class TopicDaoImpl<T> implements BasicDao<Topic> {
 
     @Autowired

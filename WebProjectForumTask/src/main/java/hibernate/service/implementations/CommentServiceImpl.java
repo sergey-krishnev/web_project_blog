@@ -3,10 +3,14 @@ package hibernate.service.implementations;
 import hibernate.dao.implementations.CommentDaoImpl;
 import hibernate.dao.implementations.SubjectDaoImpl;
 import hibernate.dao.implementations.UsersDaoImpl;
+import hibernate.dao.interfaces.BasicDao;
 import hibernate.dto.CommentDTO;
 import hibernate.model.Comment;
+import hibernate.model.Subject;
+import hibernate.model.Users;
 import hibernate.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,17 +19,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("commentService")
 public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
 
     @Autowired
-    private CommentDaoImpl commentDao;
+    @Qualifier("commentDao")
+    private BasicDao commentDao;
 
     @Autowired
-    private SubjectDaoImpl subjectDao;
+    @Qualifier("subjectDao")
+    private BasicDao subjectDao;
 
     @Autowired
-    private UsersDaoImpl usersDao;
+    @Qualifier("usersDao")
+    private BasicDao usersDao;
 
     @Transactional(readOnly = true)
     @Override
@@ -39,7 +46,7 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
     @Transactional(readOnly = true)
     @Override
     public CommentDTO getById(int id) {
-        Comment comment = commentDao.getById(id);
+        Comment comment = (Comment) commentDao.getById(id);
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setUserName(comment.getUsers().getNickname());
@@ -48,6 +55,17 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
         commentDTO.setMessage(comment.getMessage());
         commentDTO.setDate(comment.getFormattedDateSending());
         return commentDTO;
+    }
+
+    @Override
+    public boolean getByName(String name) {
+        List<Subject> subjects = subjectDao.getAll();
+        for (Subject subject : subjects) {
+            if (name.equals(subject.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Transactional(readOnly = true)
@@ -74,14 +92,20 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
         return comments.subList(start, start + size);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<CommentDTO> getCustomLikeNamePaginated(int page, int size, String s, int id) {
+        return null;
+    }
+
     @Transactional
     @Override
     public void add(CommentDTO modelDTO) {
         Comment model = new Comment();
         model.setMessage(modelDTO.getMessage());
         model.setDate(stringAsDate(modelDTO.getDate()));
-        model.setUsers(usersDao.getByName(modelDTO.getUserName()));
-        model.setSubject(subjectDao.getByName(modelDTO.getSubjectName()));
+        model.setUsers((Users) usersDao.getByName(modelDTO.getUserName()));
+        model.setSubject((Subject) subjectDao.getByName(modelDTO.getSubjectName()));
         commentDao.add(model);
     }
 
@@ -91,8 +115,8 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
         Comment model = new Comment();
         model.setMessage(modelDTO.getMessage());
         model.setDate(stringAsDate(modelDTO.getDate()));
-        model.setUsers(usersDao.getByName(modelDTO.getUserName()));
-        model.setSubject(subjectDao.getByName(modelDTO.getSubjectName()));
+        model.setUsers((Users) usersDao.getByName(modelDTO.getUserName()));
+        model.setSubject((Subject) subjectDao.getByName(modelDTO.getSubjectName()));
         commentDao.update(id, model);
     }
 

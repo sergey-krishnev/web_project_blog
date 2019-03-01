@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var path = "/blog/topics";
+    var path = "/topics";
     buildTopics(path);
 
     function buildTopics(path) {

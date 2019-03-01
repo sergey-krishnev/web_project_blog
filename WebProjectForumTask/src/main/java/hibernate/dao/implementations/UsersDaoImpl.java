@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("usersDao")
 public class UsersDaoImpl<T> implements BasicDao<Users> {
 
     @Autowired

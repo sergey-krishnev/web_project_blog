@@ -8,9 +8,13 @@ public interface BasicService<T> {
 
     T getById(int id);
 
+    boolean getByName(String name);
+
     List<T> getLikeName(String s);
 
     List<T> getLikeNamePaginated(int page, int size, String s);
+
+    List<T> getCustomLikeNamePaginated(int page, int size, String s, int id);
 
     void add(T modelDTO);
 

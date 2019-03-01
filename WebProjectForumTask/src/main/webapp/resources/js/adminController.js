@@ -41,25 +41,25 @@ function internationalization() {
 
 function removeModal() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     $('#delete-' + pathname + '-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var pathDelete = button.data('url');
         $("#delete-" + pathname + "-modal-button").attr("data-url", pathDelete);
     });
-}
+} //work
 
 function switchDashboard() {
     $(document).on('click','.entities-link',function (event) {
         event.preventDefault();
         var oldPath = $('#default-path').attr("href");
-        var oldPathname = oldPath.toString().replace("admin/", "");
+        var oldPathname = oldPath.toString().replace("/admin", "").replace("/","").toString();
         $(".paginate-"+oldPathname).empty();
         $('#word-search').val("");
         $('#search-path').attr("data-id","");
         $('#default-path').attr("href",$(this).attr("data-url"));
         var path = $(this).attr("data-url");
-        var pathname = path.toString().replace("admin/", "");
+        var pathname = path.toString().replace("/admin", "").replace("/","").toString();
         $(".display-tables").css("display", "none");
         $("#" + pathname + "-body").empty();
         removeModal();
@@ -69,7 +69,7 @@ function switchDashboard() {
         pastePagination();
         buildTable();
     });
-}
+} //work
 
 function removeSubmit(value) {
     var pathDelete = $(value).attr("data-url");
@@ -86,21 +86,21 @@ function removeSubmit(value) {
             alert('Error in Operation');
         }
     })
-}
+} //work
 
 function addModal() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     $(".error").text("");
     $(".add-" + pathname + "-data").val("");
     selectSubjects();
     selectUsers();
     selectTopics();
-}
+} //work
 
 function addSubmit() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/","").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     $(".error").text("");
     var dateTime = getCurrentDate();
     $("#date-add-" + pathname + "-modal").val(dateTime);
@@ -142,11 +142,11 @@ function addSubmit() {
             })
         }
     });
-}
+} //work
 
 function updateModal() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/", "").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     $('#update-' + pathname + '-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var pathUpdate = button.data('url');
@@ -155,6 +155,7 @@ function updateModal() {
         var selectedSubject;
         var selectedUser;
         var selectedTopic;
+
         $.getJSON(pathUpdate, function (data) {
             selectedSubject = data.subjectName;
             selectedUser = data.userName;
@@ -167,11 +168,11 @@ function updateModal() {
             selectWithSelectedTopics(selectedTopic);
         });
     });
-}
+} //work
 
 function updateSubmit(value) {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/", "").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     var pathUpdate = $(value).attr("data-url");
     $(".error").text("");
     var dateTime = getCurrentDate();
@@ -217,7 +218,7 @@ function updateSubmit(value) {
 
 function read() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/", "").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     $('#read-' + pathname + '-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var pathRead = button.data('url');
@@ -238,7 +239,7 @@ function selectSubjects() {
         cache: true,
         language: lang,
         callback: function () {
-            $.getJSON("/admin/subjects", function (data) {
+            $.getJSON("/subjects", function (data) {
                 var subjectDTO_data = '';
                 subjectDTO_data += '<option selected disabled>' + $.i18n.prop("admin-modal-select-subject") + '</option>';
                 $.each(data, function (key, value) {
@@ -259,7 +260,7 @@ function selectTopics() {
         cache: true,
         language: lang,
         callback: function () {
-            $.getJSON("/admin/topics", function (data) {
+            $.getJSON("/topics", function (data) {
                 var topicDTO_data = '<option selected disabled>' + $.i18n.prop("admin-modal-select-topic") + '</option>';
                 topicDTO_data += '';
                 $.each(data, function (key, value) {
@@ -280,7 +281,7 @@ function selectUsers() {
         cache: true,
         language: lang,
         callback: function () {
-            $.getJSON("/admin/users", function (data) {
+            $.getJSON("/users/admin", function (data) {
                 var userDTO_data = '<option selected disabled>' + $.i18n.prop("admin-modal-select-user") + '</option>';
                 userDTO_data += '';
                 $.each(data, function (key, value) {
@@ -293,7 +294,7 @@ function selectUsers() {
 }
 
 function selectWithSelectedSubjects(subject) {
-    $.getJSON("admin/subjects", function (data) {
+    $.getJSON("/subjects", function (data) {
         var subjectDTO_data = '';
         $.each(data, function (key, value) {
             if (value.subjectName === subject) {
@@ -308,7 +309,7 @@ function selectWithSelectedSubjects(subject) {
 }
 
 function selectWithSelectedTopics(topic) {
-    $.getJSON("admin/topics", function (data) {
+    $.getJSON("/topics", function (data) {
         var topicDTO_data = '';
         $.each(data, function (key, value) {
             if (value.topicName === topic) {
@@ -322,7 +323,7 @@ function selectWithSelectedTopics(topic) {
 }
 
 function selectWithSelectedUsers(user) {
-    $.getJSON("admin/users", function (data) {
+    $.getJSON("/users/admin", function (data) {
         var userDTO_data = '';
         $.each(data, function (key, value) {
             if (value.userName === user) {
@@ -350,7 +351,7 @@ function searchPagination() {
 
 function pastePagination() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/", "").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     var data ='<div id="format-navigator-'+ pathname +'"></div>';
     data +='<ul id="paginate-'+ pathname +'" class="pagination"></ul>';
     // var data = '<ul id="pagination-demo-'+ pathname +'" class="pagination-sm justify-content-center"></ul>';
@@ -359,7 +360,7 @@ function pastePagination() {
 
 function moveFormatNavigator() {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/", "").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     var navPagination = $(".paginationjs-nav");
     $("#format-navigator-" + pathname).html(navPagination.html());
     navPagination.hide();
@@ -367,7 +368,7 @@ function moveFormatNavigator() {
 
 function buildTable(search) {
     var path = $('#default-path').attr("href");
-    var pathname = path.toString().replace("admin/", "").toString();
+    var pathname = path.toString().replace("/admin", "").replace("/","").toString();
     if (search !== undefined) {
         path = path + "?search=" + search;
     }

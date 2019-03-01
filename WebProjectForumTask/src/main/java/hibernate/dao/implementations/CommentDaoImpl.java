@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("commentDao")
 public class CommentDaoImpl<T> implements BasicDao<Comment> {
 
     @Autowired

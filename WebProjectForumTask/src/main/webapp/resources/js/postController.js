@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var pathname = window.location.pathname;
     pathname = pathname.replace("/post/","");
-    var subjectPath = "/blog/subjects/" + pathname;
+    var subjectPath = "/subjects/" + pathname;
 
     $.getJSON(subjectPath, function (data) {
         $("#subjectTemplate").tmpl(data).appendTo(".aggregate-post");
@@ -59,7 +59,7 @@ function addSubjectSubmit() {
 
     $.ajax({
         type: "POST",
-        url: "/blog/topics/subjects",
+        url: "/subjects",
         headers : {
             "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
         },
@@ -89,19 +89,19 @@ function addSubjectSubmit() {
             })
         }
     })
-}
+} //work
 
 function updateSubjectForm(pathname) {
     if (pathname.includes("update")) {
         $(".comment-form").css("display", "none");
         $(".subject-update-form").css("display", "block");
         pathname = pathname.replace("/update","");
-        $.getJSON("/blog/subjects/" + pathname, function (data) {
+        $.getJSON("/subjects/" + pathname, function (data) {
             selectWithSelectedTopics(data.topicName);
             $.each(data, function (key, value) {
                 $("#" + key.toString() + "-update-form").val(value);
             });
-            $(".update-subject-submit").attr("data-url","/blog/subjects/" + data.id);
+            $(".update-subject-submit").attr("data-url","/subjects/" + data.id);
         });
 
     }
@@ -178,7 +178,7 @@ function addComment(topicName, subjectName, updateCommentsPath) {
 
         $.ajax({
             type: "POST",
-            url: "/blog/comments",
+            url: "/comments",
             headers : {
                 "X-CSRF-Token" : $('meta[name="_csrf"]').attr('content')
             },
@@ -214,7 +214,7 @@ function addComment(topicName, subjectName, updateCommentsPath) {
             }
         })
     })
-}
+} //work
 
 function selectTopics() {
     var lang = $("#lang").val();
@@ -225,7 +225,7 @@ function selectTopics() {
         cache: true,
         language: lang,
         callback: function () {
-            $.getJSON("/blog/topics", function (data) {
+            $.getJSON("/topics", function (data) {
                 var topicDTO_data = '<option selected disabled>'+ $.i18n.prop("admin-modal-select-topic") +'</option>';
                 topicDTO_data += '';
                 $.each(data, function (key, value) {
@@ -235,10 +235,10 @@ function selectTopics() {
             });
         }
     })
-}
+} //work
 
 function selectWithSelectedTopics(topic) {
-    $.getJSON("/blog/topics", function (data) {
+    $.getJSON("/topics", function (data) {
         var topicDTO_data = '';
         $.each(data, function (key, value) {
             if (value.topicName === topic) {
@@ -249,9 +249,9 @@ function selectWithSelectedTopics(topic) {
         });
         $(".topics-select-update").html(topicDTO_data);
     });
-}
+} //work
 
 function searchPage() {
     var search = $("#search-subjects").val();
     location.href = "/blog/all?search=" + search;
-}
+} //work

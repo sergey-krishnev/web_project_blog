@@ -1,21 +1,24 @@
 package hibernate.service.implementations;
 
 import hibernate.dao.implementations.UsersDaoImpl;
+import hibernate.dao.interfaces.BasicDao;
 import hibernate.dto.UsersDTO;
 import hibernate.model.Users;
 import hibernate.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("usersService")
 public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
 
     @Autowired
-    private UsersDaoImpl usersDao;
+    @Qualifier("usersDao")
+    private BasicDao usersDao;
 
     @Transactional(readOnly = true)
     @Override
@@ -29,7 +32,7 @@ public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
     @Transactional(readOnly = true)
     @Override
     public UsersDTO getById(int id) {
-        Users users = usersDao.getById(id);
+        Users users = (Users) usersDao.getById(id);
         UsersDTO usersDTO = new UsersDTO();
         usersDTO.setId(users.getId());
         usersDTO.setUserName(users.getNickname());
@@ -38,6 +41,18 @@ public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
         usersDTO.setFirstName(users.getFirstName());
         usersDTO.setLastName(users.getLastName());
         return usersDTO;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public boolean getByName(String name) {
+        List<Users> users = usersDao.getAll();
+        for (Users user : users) {
+            if (name.equals(user.getNickname())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Transactional(readOnly = true)
@@ -62,6 +77,12 @@ public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
         if (page-1 == div) return users.subList(start,start + mod);
         if (start + size > users.size()) return new ArrayList<>();
         return users.subList(start, start + size);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UsersDTO> getCustomLikeNamePaginated(int page, int size, String s, int id) {
+        return null;
     }
 
     @Transactional
