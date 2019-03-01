@@ -1,7 +1,6 @@
 package hibernate.validation.annotationsImpl;
 
 import hibernate.service.interfaces.BasicService;
-import hibernate.service.interfaces.CRUDService;
 import hibernate.validation.annotations.SameUserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
