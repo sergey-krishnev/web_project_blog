@@ -1,13 +1,7 @@
 $(document).ready(function () {
 
     var pathname = window.location.pathname;
-    // var searchPage = '';//decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
     var id = pathname.replace("/blog/","");
-    // var numberPage = pathname.replace(id + "/page","");
-    // if (pathname === numberPage) {
-    //     id = pathname;
-    //     numberPage = 1;
-    // }
     paginate(id);
 });
 
@@ -47,12 +41,6 @@ function internationalization() {
     })
 }
 
-// function changeTopicName(subjectsPath) {
-//     subjectsPath = subjectsPath.replace("/subjects","");
-//     $.getJSON(subjectsPath, function (data) {
-//         $(".topicName").text(data.topicName);
-//     })
-// }
 
 function searchPage() {
     var search = $("#search-subjects").val();

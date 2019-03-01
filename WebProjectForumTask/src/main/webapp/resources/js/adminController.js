@@ -47,7 +47,7 @@ function removeModal() {
         var pathDelete = button.data('url');
         $("#delete-" + pathname + "-modal-button").attr("data-url", pathDelete);
     });
-} //work
+}
 
 function switchDashboard() {
     $(document).on('click','.entities-link',function (event) {
@@ -69,7 +69,7 @@ function switchDashboard() {
         pastePagination();
         buildTable();
     });
-} //work
+}
 
 function removeSubmit(value) {
     var pathDelete = $(value).attr("data-url");
@@ -86,7 +86,7 @@ function removeSubmit(value) {
             alert('Error in Operation');
         }
     })
-} //work
+}
 
 function addModal() {
     var path = $('#default-path').attr("href");
@@ -96,7 +96,7 @@ function addModal() {
     selectSubjects();
     selectUsers();
     selectTopics();
-} //work
+}
 
 function addSubmit() {
     var path = $('#default-path').attr("href");
@@ -142,7 +142,7 @@ function addSubmit() {
             })
         }
     });
-} //work
+}
 
 function updateModal() {
     var path = $('#default-path').attr("href");
@@ -168,7 +168,7 @@ function updateModal() {
             selectWithSelectedTopics(selectedTopic);
         });
     });
-} //work
+}
 
 function updateSubmit(value) {
     var path = $('#default-path').attr("href");

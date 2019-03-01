@@ -89,7 +89,7 @@ function addSubjectSubmit() {
             })
         }
     })
-} //work
+}
 
 function updateSubjectForm(pathname) {
     if (pathname.includes("update")) {
@@ -214,7 +214,7 @@ function addComment(topicName, subjectName, updateCommentsPath) {
             }
         })
     })
-} //work
+}
 
 function selectTopics() {
     var lang = $("#lang").val();
@@ -235,7 +235,7 @@ function selectTopics() {
             });
         }
     })
-} //work
+}
 
 function selectWithSelectedTopics(topic) {
     $.getJSON("/topics", function (data) {
@@ -249,9 +249,9 @@ function selectWithSelectedTopics(topic) {
         });
         $(".topics-select-update").html(topicDTO_data);
     });
-} //work
+}
 
 function searchPage() {
     var search = $("#search-subjects").val();
     location.href = "/blog/all?search=" + search;
-} //work
+}
