@@ -1,5 +1,6 @@
 package hibernate.service.implementations;
 
+import hibernate.converter.DTOHelper;
 import hibernate.dao.implementations.CommentDaoImpl;
 import hibernate.dao.implementations.SubjectDaoImpl;
 import hibernate.dao.implementations.UsersDaoImpl;
@@ -39,7 +40,7 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
     public List<CommentDTO> getAll() {
         List<Comment> commentList = commentDao.getAll();
         List<CommentDTO> comments = new ArrayList<>();
-        commentToCommentDTO(commentList, comments);
+        DTOHelper.commentToCommentDTO(commentList, comments);
         return comments;
     }
 
@@ -73,7 +74,7 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
     public List<CommentDTO> getLikeName(String s) {
         List<Comment> commentList = commentDao.getLikeName(s);
         List<CommentDTO> comments = new ArrayList<>();
-        commentToCommentDTO(commentList, comments);
+        DTOHelper.commentToCommentDTO(commentList, comments);
         return comments;
     }
 
@@ -82,7 +83,7 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
     public List<CommentDTO> getLikeNamePaginated(int page, int size, String s) {
         List<Comment> commentList = commentDao.getLikeName(s);
         List<CommentDTO> comments = new ArrayList<>();
-        commentToCommentDTO(commentList, comments);
+        DTOHelper.commentToCommentDTO(commentList, comments);
         int start = 0;
         start += (page-1) * size;
         int div = comments.size()/size;
@@ -124,19 +125,6 @@ public class CommentServiceImpl<T> implements BasicService<CommentDTO> {
     @Override
     public void delete(int id) {
         commentDao.delete(id);
-    }
-
-    private void commentToCommentDTO(List<Comment> commentList, List<CommentDTO> comments) {
-        for (Comment comment : commentList) {
-            CommentDTO commentDTO = new CommentDTO();
-            commentDTO.setId(comment.getId());
-            commentDTO.setUserName(comment.getUsers().getNickname());
-            commentDTO.setSubjectName(comment.getSubject().getName());
-            commentDTO.setTopicName(comment.getSubject().getTopic().getName());
-            commentDTO.setMessage(comment.getMessage());
-            commentDTO.setDate(comment.getFormattedDateSending());
-            comments.add(commentDTO);
-        }
     }
 
     private static java.sql.Date stringAsDate(String s) {

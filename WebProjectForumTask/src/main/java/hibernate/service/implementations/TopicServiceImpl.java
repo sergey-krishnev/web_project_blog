@@ -1,11 +1,9 @@
 package hibernate.service.implementations;
 
-import hibernate.dao.implementations.TopicDaoImpl;
+import hibernate.converter.DTOHelper;
 import hibernate.dao.interfaces.BasicDao;
-import hibernate.dto.CommentDTO;
 import hibernate.dto.SubjectDTO;
-import hibernate.dto.TopicDTO;
-import hibernate.model.Comment;
+import hibernate.dto.TopicDTO;;
 import hibernate.model.Subject;
 import hibernate.model.Topic;
 import hibernate.service.interfaces.BasicService;
@@ -29,7 +27,7 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
     public List<TopicDTO> getAll() {
         List<Topic> topicList = topicDao.getAll();
         List<TopicDTO> topics = new ArrayList<>();
-        topicToTopicDTO(topicList, topics);
+        DTOHelper.topicToTopicDTO(topicList, topics);
         return topics;
     }
 
@@ -40,7 +38,7 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
         TopicDTO topicDTO = new TopicDTO();
         List<Subject> subjectList = topic.getSubjects();
         List<SubjectDTO> subjects = new ArrayList<>();
-        subjectToSubjectDTO(subjectList,subjects);
+        DTOHelper.subjectToSubjectDTO(subjectList,subjects);
         topicDTO.setId(topic.getId());
         topicDTO.setTopicName(topic.getName());
         topicDTO.setSubjects(subjects);
@@ -57,7 +55,7 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
     public List<TopicDTO> getLikeName(String s) {
         List<Topic> topics = topicDao.getLikeName(s);
         List<TopicDTO> topicDTOList = new ArrayList<>();
-        topicToTopicDTO(topics, topicDTOList);
+        DTOHelper.topicToTopicDTO(topics, topicDTOList);
         return topicDTOList;
     }
 
@@ -66,7 +64,7 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
     public List<TopicDTO> getLikeNamePaginated(int page, int size, String s) {
         List<Topic> topicList = topicDao.getLikeName(s);
         List<TopicDTO> topics = new ArrayList<>();
-        topicToTopicDTO(topicList, topics);
+        DTOHelper.topicToTopicDTO(topicList, topics);
         int start = 0;
         start += (page-1) * size;
         int div = topics.size()/size;
@@ -102,49 +100,6 @@ public class TopicServiceImpl<T> implements BasicService<TopicDTO> {
     @Override
     public void delete(int id) {
         topicDao.delete(id);
-    }
-
-    private void topicToTopicDTO(List<Topic> topicList, List<TopicDTO> topics) {
-        for (Topic topic : topicList) {
-            TopicDTO topicDTO = new TopicDTO();
-            List<Subject> subjectList = topic.getSubjects();
-            List<SubjectDTO> subjects = new ArrayList<>();
-            subjectToSubjectDTO(subjectList,subjects);
-            topicDTO.setId(topic.getId());
-            topicDTO.setTopicName(topic.getName());
-            topicDTO.setSubjects(subjects);
-            topics.add(topicDTO);
-        }
-    }
-
-    private void subjectToSubjectDTO(List<Subject> subjects, List<SubjectDTO> subjectDTOList) {
-        for (Subject subject : subjects) {
-            SubjectDTO subjectDTO = new SubjectDTO();
-            List<Comment> commentList = subject.getComments();
-            List<CommentDTO> comments = new ArrayList<>();
-            commentToCommentDTO(commentList,comments);
-            subjectDTO.setId(subject.getId());
-            subjectDTO.setUserName(subject.getUsers().getNickname());
-            subjectDTO.setSubjectName(subject.getName());
-            subjectDTO.setTopicName(subject.getTopic().getName());
-            subjectDTO.setDate(subject.getFormattedDateSending());
-            subjectDTO.setText(subject.getText());
-            subjectDTO.setComments(comments);
-            subjectDTOList.add(subjectDTO);
-        }
-    }
-
-    private void commentToCommentDTO(List<Comment> commentList, List<CommentDTO> comments) {
-        for (Comment comment : commentList) {
-            CommentDTO commentDTO = new CommentDTO();
-            commentDTO.setId(comment.getId());
-            commentDTO.setUserName(comment.getUsers().getNickname());
-            commentDTO.setSubjectName(comment.getSubject().getName());
-            commentDTO.setTopicName(comment.getSubject().getTopic().getName());
-            commentDTO.setMessage(comment.getMessage());
-            commentDTO.setDate(comment.getFormattedDateSending());
-            comments.add(commentDTO);
-        }
     }
 
 

@@ -1,5 +1,6 @@
 package hibernate.service.implementations;
 
+import hibernate.converter.DTOHelper;
 import hibernate.dao.implementations.UsersDaoImpl;
 import hibernate.dao.interfaces.BasicDao;
 import hibernate.dto.UsersDTO;
@@ -25,7 +26,7 @@ public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
     public List<UsersDTO> getAll() {
         List<Users> usersList = usersDao.getAll();
         List<UsersDTO> users = new ArrayList<>();
-        userToUserDTO(usersList, users);
+        DTOHelper.userToUserDTO(usersList, users);
         return users;
     }
 
@@ -60,7 +61,7 @@ public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
     public List<UsersDTO> getLikeName(String s) {
         List<Users> usersList = usersDao.getLikeName(s);
         List<UsersDTO> users = new ArrayList<>();
-        userToUserDTO(usersList, users);
+        DTOHelper.userToUserDTO(usersList, users);
         return users;
     }
 
@@ -69,7 +70,7 @@ public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
     public List<UsersDTO> getLikeNamePaginated(int page, int size, String s) {
         List<Users> usersList = usersDao.getLikeName(s);
         List<UsersDTO> users = new ArrayList<>();
-        userToUserDTO(usersList, users);
+        DTOHelper.userToUserDTO(usersList, users);
         int start = 0;
         start += (page-1) * size;
         int div = users.size()/size;
@@ -115,16 +116,4 @@ public class UsersServiceImpl<T> implements BasicService<UsersDTO> {
         usersDao.delete(id);
     }
 
-    private void userToUserDTO(List<Users> usersList, List<UsersDTO> users) {
-        for (Users user : usersList) {
-            UsersDTO usersDTO = new UsersDTO();
-            usersDTO.setId(user.getId());
-            usersDTO.setUserName(user.getNickname());
-            usersDTO.setPassword(user.getPassword());
-            usersDTO.setEmail(user.getEmail());
-            usersDTO.setFirstName(user.getFirstName());
-            usersDTO.setLastName(user.getLastName());
-            users.add(usersDTO);
-        }
-    }
 }
